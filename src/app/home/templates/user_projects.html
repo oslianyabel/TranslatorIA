@@ -1,0 +1,592 @@
+{% load i18n %} 
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="keywords" content="Inteligencia Artificial, IA, traductor, video editor, editor de video, Translator">    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>YML-Multilanguage </title>
+    <script>
+      // PAblo   ,   Añado controlde Nombre de proyecto 
+      window.addEventListener('load', function() {
+        document.getElementById("upload_video_btn_id").disabled = true;
+        
+        const texto_proyecto=document.getElementById("id_transl_name");   
+        texto_proyecto.addEventListener("keyup", (event) => {
+         
+          document.getElementById("upload_video_btn_id").disabled=texto_proyecto.value=="";
+        });
+      });
+      // ---End pablo
+     
+        
+    </script> 
+    <!-- Icono en la pestaña del navegador -->    
+    <link rel="icon" type="image/x-icon" href="/static/assets/img/ico-blanco_02.png">
+    <!-- /Icono en la pestaña del navegador -->
+    
+    <!-- Fuentes-íconos -->   
+    <!-- Font Awesome -->
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <!-- /Fuentes-íconos -->
+     
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    
+    <!-- Material Design Bootstrap -->
+    <link href="/static/assets/css/mdb.min.css" rel="stylesheet">
+    <!-- Bootstrap core CSS -->
+    <link href="/static/assets/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Your custom styles (optional) -->
+    <link href="/static/assets/user_projects/css/user_projects.css" rel="stylesheet">
+</head>
+
+<body>
+
+<!-- Start your project here -->
+<!-- Main navigation -->
+<header>
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container-fluid">
+      
+      <a class="navbar-brand" href="{% url 'landing' %}">
+        <img src="/static/assets/user_projects/img/ico-blanco_01.png" alt="Logo"  height="40" class="d-inline-block align-text-top  pe-2">
+      </a>
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a href="{% url 'voice-generation' %}" class="btn btn_header"><i class="bi bi-mic"></i>{% trans "Voice Generation" %}</a>  
+        </li>
+      </ul>
+      <!-- to the right -->
+      <ul class="navbar-nav d-flex flex-row me-1">
+        <li class="nav-item me-lg-0">
+          <a class="nav-link text-white" href="{% url 'activate_language' language_code="es" %}"> ESP</a>
+        </li>
+        <li class="nav-item"> <a class="nav-link text-white" > /</a> </li>
+        <li class="nav-item me-lg-0">
+          <a class="nav-link text-white" href="{% url 'activate_language' language_code="en" %}"> ENG</a>
+        </li>
+        
+          {% comment %} <div class="col-1" style="">  TODO there's a need to set a profile pic?? 
+          <img src="/static/assets/user_projects/img/avatar1.jpg" alt="Logo"  height="45" class="float-end avatar" style="">       {% endcomment %}
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle text-white" href="{% url 'user_projects' %}" id="navbarDropdownProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="bi bi-person-fill" style="height: 45px;"></i>
+            {% trans "Account" %}
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownProfile">
+            <li>
+              <a class="dropdown-item" href="{% url 'user_projects' %}">{% trans "Projects" %}</a>
+            </li>
+            <li><hr class="dropdown-divider" /></li>
+            <li>
+              <a class="dropdown-item" href="{% url 'change_password' %}">{% trans "Change Password" %}</a>
+            </li>
+            <li><hr class="dropdown-divider" /></li>
+            <li>
+              <a class="dropdown-item" href="{% url 'logout' %}" >{% trans "Log out" %}</a>
+            </li>
+          </ul>
+        </li>
+      </ul>      
+    </div>
+  </nav>
+</header>
+
+<body>
+  {% for message in messages %}
+    <div class="row" id="messages-container" style="margin: auto; width: 500px;">
+      {% if message.tags == 'success' %}
+          <div class="alert alert-success alert-dismissible" role="alert">
+              <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+              {{ message|safe|escape }}
+          </div>
+      {% elif message.tags == 'error' %}
+          <div class="alert alert-danger alert-dismissible" role="alert">
+              <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+              {{ message|safe }}
+          </div>
+      {% elif message.tags == 'info' %}
+          <div class="alert alert-info alert-dismissible" role="alert">
+              <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+              {{ message|safe|escape }}
+          </div>
+      {% elif message.tags == 'warning' %}
+          <div class="alert alert-warning alert-dismissible" role="alert">
+              <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+              {{ message|safe|escape }}
+          </div>
+      {% endif %}
+    </div>
+  {% endfor %}
+  <div class="row mx-5">
+    {% comment %} <div class="col-lg-4 col-md-7 col-sm-12 col-xs-12 float-end">
+      <button class="btn btn_newFolder" name="new_folder" href="#" type="submit" id="new_folder" disabled>
+        <i class="bi bi-folder-plus me-2 icon_new_folder"></i> {% trans "New Folder" %}
+      </button>
+    </div> {% endcomment %}
+    <div class="col-auto">
+      <div class="card_upload_limit row" style="">
+        <div class="col-lg-auto col-md-auto col-sm-auto "> 
+          <div class="row"> 
+            <div class="percent col-2 mx-0 px-1">
+              <round-progress _ngcontent-sro-c120="" role="progressbar" _nghost-sro-c119="" aria-valuemin="0" aria-valuemax="{{ max_duration }}" aria-valuenow="{{ time_used }}" class="responsive" style="padding-bottom: 100%;">
+              <svg _ngcontent-sro-c119="" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 250">
+                  <circle _ngcontent-sro-c119="" fill="none" cx="125" cy="125" r="113" style="stroke: rgb(221, 222, 231); stroke-width: 24;"></circle>
+                  <path _ngcontent-sro-c119="" fill="none" style="stroke-width: 24; stroke: rgb(237, 0, 52); stroke-linecap: round;" d="M 136.81171308021482 12.619025479796264 A 113 113 0 0 0 125 12"></path>
+              </svg>
+              </round-progress>  
+            </div>
+            <div class="col-lg-auto col-md-auto col-sm-auto pt-3"> <!-- TODO -->
+                {% comment %} <h5 class="font-weight-bold" style="color: #ED0034; margin: 0;">{% trans "Free Upload Limit" %}</h5> {% endcomment %}
+                <h6 style="font-size: 14px; color: #BCBCBC">{% trans "Time used" %}: {{ time_used }} {% trans "seconds" %}</h6>
+                <h6 style="font-size: 14px; color: #BCBCBC">{% trans "Time left" %}: {{ time_left_today }} {% trans "seconds" %}</h6>
+            </div>
+          </div>
+          <div class="row"> 
+            <div class="percent col-2 mx-0 px-1">
+              <round-progress _ngcontent-sro-c120="" role="progressbar" _nghost-sro-c119="" aria-valuemin="0" aria-valuemax="{{ max_storage }}" aria-valuenow="{{ storage_used }}" class="responsive" style="padding-bottom: 100%;">
+              <svg _ngcontent-sro-c119="" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 250">
+                  <circle _ngcontent-sro-c119="" fill="none" cx="125" cy="125" r="113" style="stroke: rgb(221, 222, 231); stroke-width: 24;"></circle>
+                  <path _ngcontent-sro-c119="" fill="none" style="stroke-width: 24; stroke: rgb(237, 0, 52); stroke-linecap: round;" d="M 136.81171308021482 12.619025479796264 A 113 113 0 0 0 125 12"></path>
+              </svg>
+              </round-progress>  
+            </div>
+            <div class="col-lg-auto col-md-auto col-sm-auto pt-3"> 
+              <h6 style="font-size: 14px; color: #BCBCBC">{% trans "Storage used" %}: {{ storage_used }} MB</h6>
+              <h6 style="font-size: 14px; color: #BCBCBC">{% trans "Storage left" %}: {{ storage_left }} MB</h6>
+            </div>
+          </div>
+          {% comment %} <div class="col-6 percent"> <!-- TODO -->
+              <h5 class="font-weight-bold" style="color: #ED0034; margin: 0;">{% trans "Free Upload Limit" %}</h5> 
+              <h6 style="font-size: 14px; color: #BCBCBC">{% trans "Storage used" %}: {{ storage_used }} MB</h6>
+              <h6 style="font-size: 14px; color: #BCBCBC">{% trans "Storage left" %}: {{ storage_left }} MB</h6>
+              <h6 style="font-size: 14px; color: #BCBCBC">{% trans "Time used" %}: {{ time_used }} {% trans "seconds" %}</h6>
+              <h6 style="font-size: 14px; color: #BCBCBC">{% trans "Time left" %}: {{ time_left_today }} {% trans "seconds" %}</h6>
+          </div> {% endcomment %}
+          <div class="row"> 
+          </div> 
+        </div> 
+        <div class="col-lg-auto col-md-auto col-sm-auto my-auto"> 
+          <button class="btn btn_Upgrade m-0 p-1" name="Upgrade" href="#" type="submit" id="Upgrade" disabled>{% trans "Upgrade" %}</button>
+        </div>    
+      </div> 
+    </div>
+  </div>
+  <div class="row">
+    <div class="col mx-3">
+      {% comment %} <section class="section_my_projects container-fluid" style=""> {% endcomment %}
+        <div class="row my_projects" id="my_projects" style="">
+          {% comment %} <div class="col-lg-6 col-md-6 col-sm-7 col-xs-12 me-5"> {% endcomment %}
+            <h2 class="font-weight-bold text-uppercase" style="">{% trans "My projects" %}</h2>
+            <h6>{% trans "Welcome to your workspace!" %}</h6>
+            <hr class="hr-dark mt-4 me-5">
+          {% comment %} </div> {% endcomment %}
+        </div>
+      {% comment %} </section> {% endcomment %}
+      <!-- TODO dynamic grid for projects -->
+      <div class="projectsGrid">
+          
+          <div class="col">
+            <div class="add_projects pt-3 pb-3" style="text-align: center" id="new-project" data-backdrop="static" data-toggle="modal" data-target="#upload_modal">
+              
+              <i class="bi bi-plus-lg " style="font-size: 40px;"></i>
+              <div class="text-center">
+                <h6 id="h6_add" style="font-size:20px;color:#ffffff"> {% trans "New Project" %} </h6>
+              </div>
+            </div>
+              <form id="new-project-form" onsubmit="return validateForm()" action="{% url 'user_projects'  %}" method="post" enctype="multipart/form-data">
+              <div class="modal fade" id="upload_modal" > 
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" >
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h4 class="modal-title" style="color:#969696;">{% trans "Upload a video and continue to edit it"  %}</h4>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    
+                      {% csrf_token %}
+                    <div class="modal-body">
+                      <div class="form-check form-switch ms-3">
+                        <input class="form-check-input" type="checkbox" id="auto-detect-voices_switch" name="auto-detect-voices_switch" checked>
+                        <label class="form-check-label" for="auto-detect-voices_switch">{% trans "Use the voices from the video" %}</label>
+                        <p style="font-size:14px;color:#969696;display:block;" id="auto-detect-voices_switch-off">{% trans "Switch on to use the voices from the video." %}</p>
+                        <p style="font-size:14px;color:#969696;display:none;" id="auto-detect-voices_switch-on">{% trans "Switch off to select another voice." %}</p>
+                      </div>
+                      <div class="row">
+                        {% comment %} <div class="dropzone mx-2" id="dropBox">
+                          <p style="text-align: center; vertical-align: middle; line-height: 100px; font-size: 24px; color: gray;">{% trans "Drag & Drop to Upload File" %}</p>
+                        </div> {% endcomment %}
+                        <div class="drop-box" id="dropBox" style="margin: auto; width: 90%; height: 200px; border: 4px dashed gray; text-align:center;" >
+                          <p style="text-align: center; vertical-align: middle; line-height: 190px; font-size: 24px; color: gray;">
+                            <i class="bi bi-file-earmark-arrow-up" aria-hidden="true"></i>
+                            {% trans "Drag & Drop to Upload File" %}</p>
+                        </div> 
+                        <p class="pt-10 mb-0" style="text-align: center; color: gray; ">or</p>
+                        <div class="form-group">
+                          <label for="fileupload"><i class="bi bi-cloud-upload"></i> 
+                            {% trans "Choose video" %}
+                          </label>
+                          <input type="file" class="form-control" name="file" id="fileupload" accept="video/mp4">
+                        </div>
+                      </div>                    
+                      <div id="uploaded_files"></div>
+                      <hr class="hr-dark my-2">
+                      <div class="row"> <!-- Project name -->
+                        <div class="col-lg-5 col-md-5 col-sm-5 pe-0">
+                          <p class="py-2" style="margin: auto; color:Black;line-height:24px">{% trans "Project Name" %} <span style="color:red;font-size:24px "> * </span></p>
+                          <!--Obligatorio para aceptar -->
+                          
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 ps-1">
+                          <input type="text" name="transl_name" class="form-control" id="id_transl_name" required>
+                        </div>
+                      </div>
+                      <hr class="hr-dark my-2">
+                      <div class="row">  <!-- Language select -->
+                        <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                          <div class="text-center">
+                            <label for="s_languages"> {% trans "Language of the video" %}:</label> 
+                          </div> 
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6"> 
+                          <div class="text-center">
+                            <label for="t_languages">{% trans "Language for the translation" %}:</label> 
+                          </div>
+                        </div>
+                        </div>
+                        <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                          <div class="text-center">            
+                            <div class="select">          
+                              <select class="mx-3 p-2"  style="width:180px;" name="source_lang" id="s_languages" required>
+                                {% for l, il in source_languages %}
+                                <option value={{l}} {% if l == selected_lang_source %} selected {% endif %} >{{il}}</option>
+                                {% endfor %}
+                              </select></div>
+                          </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6"> 
+                          <div class="text-center">                        
+                            <div class="select" >          
+                              <select class="mx-3 p-2" style="width:180px;" name="dest_lang" id="t_languages" required>
+                                {% for l, il in tts_languages %}
+                                <!-- TODO If auto voices is on, show only the languages supported by clone -->
+                                <option value={{l}} {% if l == selected_lang_dest %} selected {% endif %} >{{il}}</option>
+                                {% endfor %}
+                              </select> 
+                            </div>
+                          </div>
+                        </div>
+                        </div>
+                      </div>
+                      <div class="row" id="voice_selection" style="display:none;">
+                        <hr class="hr-dark my-2">
+                        <div class="row" > <!-- voice selection-->
+                          <div class="row" >
+                            <div class="col-lg-6 col-md-6 col-sm-6" >
+                              <div class="text-center">
+                              <label id="voice_gender-label" for="voice_gender"> {% trans "Voice gender" %}</label> 
+                              </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6" >
+                              <div class="text-center">
+                                <label for="voice"> {% trans "Select the voice" %} </label> 
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row" > <!-- voice selection-->
+                            <div class="col-lg-5 col-md-5 col-sm-5" style="margin:auto" >
+                              <div class="form-check">
+                                <input class="form-check-input" type="radio" name="voice_gender" id="voice_gender_female" value="female">
+                                <label class="form-check-label" for="voice_gender_female">
+                                  {% trans "FEMALE" %}
+                                </label>
+                              </div>
+                              <div class="form-check">
+                                <input class="form-check-input" type="radio" name="voice_gender" id="voice_gender_male" value="male">
+                                <label class="form-check-label" for="voice_gender_male">
+                                  {% trans "MALE" %}
+                                </label>
+                              </div>
+                              <div class="form-check">
+                                <input class="form-check-input" type="radio" name="voice_gender" id="voice_gender_clone" value="clone" checked>
+                                <label class="form-check-label" for="voice_gender_clone">
+                                  {% trans "Custom voices" %}
+                                </label>
+                              </div>
+                            </div>
+                            {% for lang, voices_dict in voices_by_lang.items %}
+                            <div class="col-lg-6 col-md-6 col-sm-6" style="display:none" id="{{lang}}_voices">
+      
+                              <div class="row" id="voice_gender-{{ lang }}-F" style="display: none;"> 
+                                <div class="text-center">
+                                <div class="select">          
+                                  <select class="mx-3 p-2" style="width:180px;" name="voice-{{ lang }}-F" id="voice" required>
+                                  {% for v in voices_dict.voices_f %}
+                                  <option value={{v}}>{{v}}</option>
+                                  {% endfor %}
+                                  </select>  
+                                </div>
+                                </div>
+                              </div>                       
+                              <div class="row" id="voice_gender-{{ lang }}-M" style="display: none;"> 
+                                <div class="text-center">
+                                <div class="select">          
+                                  <select class="mx-3 p-2" style="width:180px;" name="voice-{{ lang }}-M" id="voice" required>
+                                  {% for v in voices_dict.voices_m %}
+                                  <option value={{v}}>{{v}}</option>
+                                  {% endfor %}
+                                  </select>  
+                                </div>
+                                </div>
+                              </div> 
+                              <div class="row" id="voice_gender-{{ lang }}-clone" style="display: none;"> 
+                                <div class="text-center">
+                                <div class="select">          
+                                    <select class="mx-3 p-2"  style="width:180px;" name="voice-{{ lang }}-clone" id="voice" required>
+                                    {% for v in voices_dict.voices_clone %}
+                                    <option value={{v}}>{{v}}</option>
+                                    {% endfor %}
+                                    </select>  
+                                </div>
+                                </div>
+                              </div> 
+                            </div>
+                            {% endfor %} 
+                          </div> 
+                        </div>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <div class="col-lg-3 col-md-3 col-sm-3"> </div>
+                      <div class="col-lg-4 col-md-4 col-sm-4"> 
+                        <button name="upload_video_btn" id="upload_video_btn_id" type="submit" class="btn btn_Upgrade" onclick="document.forms['new-project-form'].submit();"> {% trans "Continue"  %}</button>
+                      </div>
+                      <div class="col-lg-4 col-md-4 col-sm-4"> 
+                        <button type="button" class="btn btn_Upgrade" data-dismiss="modal"> {% trans "Cancel"  %}</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              </form> 
+          </div>
+          {% if translations != 'None' %}
+            {% for tr in translations %}
+            <div class="col">
+              <a href="{% url 'translation' tr.pk %}">
+                <div class="add_projects pt-3 pb-3" style="text-align: center">  {% comment %} TODO name="addP_2"  id="addP_2" {% endcomment %} 
+                  <img src="/static/assets/user_projects/img/play-YML.png" alt="Logo"  height="45" class="float-center m-3" style="">  
+                  <div id="text_video">
+                      <h6 id="h6_add" style="color:#ffffff"> {{ tr.transl_name }} </h6>
+                      {% if tr.source_language_sel.1 != None and tr.translated_language_sel.1  != None %}
+                        <p class="mb-0" style="color:#ffffff"> {{ tr.source_language_sel.1 }} : {{ tr.translated_language_sel.1 }} </p>
+                      {% else %} 
+                        {% if tr_source_language_sel != None %}
+                          <p class="mb-0" style="color:#ffffff"> {{ tr.source_language_sel.1 }} : -- </p>
+                        {% else %}
+                          <p class="mb-0" style="color:#ffffff"> --  </p>                      
+                        {% endif %}
+                      {% endif %}
+                      <p class="mb-0 pt-1" style="color:#ffffff"> {{ tr.date_modified }} </p>
+                  </div>      
+                </div> 
+              </a>   
+              <button class="btn btn_base" type="button" data-backdrop="static" data-bs-toggle="modal" data-bs-target="#del_trans_modal{{ tr.pk }}"> 
+                <i class="bi bi-trash"></i>
+              </button>
+                
+              <form method="post">
+                {% csrf_token %}
+                <div class="modal fade" id="del_trans_modal{{ tr.pk }}" > 
+                  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" >
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" style="color:#969696;"> {% trans "Confirm Delete" %}</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <p>{% trans "Project : "%} "{{ tr.transl_name }}"</p>
+                        <p>{% trans "Are you sure you want to delete the project?" %}</p>
+                        <input type="hidden" name="translation_id" value="{{ tr.pk }}">
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn_Upgrade" data-bs-dismiss="modal" style="width:20%;">{% trans "NO"  %}</button>
+                        <button name="delete_translation" type="submit" class="btn btn_Upgrade" style="width:20%;"> {% trans "YES"  %}</button>
+                      </div>
+                    </div>
+                  </div>
+                  </div>
+                </div>
+              </form>   
+              
+            </div> 
+            {% endfor %}
+          {% endif %}
+          
+          </div>
+    </div>
+   
+    <div class="col-3 me-2">
+      <section class="section_my_projects container-fluid" style="">
+        <div class="row my_projects" id="my_projects" style="">
+          <h2 class="font-weight-bold text-uppercase" style="">{% trans "My voices" %}</h2>
+          <a href="{% url 'voice-generation' %}"><h6>{% trans "Create new voices" %}</h6></a>
+          <hr class="hr-dark mt-4 me-5">
+        </div>
+      </section>
+      {% if cloned_voices != 'None' %}
+      <section class="section_add_projects container-fluid row">
+          {% comment %} <div class="row mx-3 p-2"> {% endcomment %}
+            {% comment %} <div class="col-lg-3 col-md-4 col-sm-4">  {% endcomment %}
+              {% comment %} <h3> Cloned voices </h3> {% endcomment %}
+              <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">{% trans "Name" %}</th>
+                  {% comment %} <th scope="col">{% trans "Language" %}</th> {% endcomment %}
+                </tr>
+              </thead>
+              <tbody>
+                {% for voice_name in cloned_voices %}
+                <tr>
+                  <td>{{ voice_name.name }}</td>
+                  {% comment %} <td>{{ language }}</td> {% endcomment %}
+                  <td>
+                    <form method="post">
+                      {% csrf_token %}
+                      <button class="btn btn_base" type="button" data-backdrop="static" data-bs-toggle="modal" data-bs-target="#del_voice_modal{{ voice_name.id }}"> 
+                        <i class="bi bi-trash"></i> {% comment %} <i class="bi bi-x-circle-fill"></i> {% endcomment %}
+                      </button>
+                      <input type="hidden" name="voice_id" value="{{ voice_name.id }}">
+                      <div class="modal fade" id="del_voice_modal{{ voice_name.id }}" > 
+                        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" >
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" style="color:#969696;"> {% trans "Confirm Delete" %}</h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                              <p>{% trans "Voice : "%} "{{ voice_name.name }}"</p>
+                              <p>{% trans "Are you sure you want to delete the voice?" %}</p>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn_Upgrade" data-bs-dismiss="modal" style="width:20%;">{% trans "NO"  %}</button>
+                              <button name="delete_voice" type="submit" class="btn btn_Upgrade" style="width:20%;"> {% trans "YES"  %}</button>
+                            </div>
+                          </div>
+                        </div>
+                        </div>
+                      </div>
+                    </form>  
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+            {% comment %} </div> {% endcomment %}
+          {% comment %} </div> {% endcomment %}
+      </section>
+      {% endif %}
+    </div>
+  </div>
+         
+<!-- /Start your project here--------------------------------------------------------------------------->
+
+<!-- JQuery -->
+    <script type="text/javascript" src="/static/assets/user_projects/js/jquery-3.2.1.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="/static/assets/user_projects/js/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="/static/assets/user_projects/js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="/static/assets/user_projects/js/mdb.min.js"></script>
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <!-- /Fuentes-íconos -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    
+    <script src="/static/assets/user_projects/js/dragdrop_progressbar.js"></script>
+    <script src="/static/assets/user_projects/js/user_projects.js"></script>
+
+    <script>
+      // Animations initialization
+      new WOW().init();
+    </script> 
+
+    <script>
+      $('#auto-detect-voices_switch').change(function(event) {
+        const select_t = document.getElementById("t_languages");        
+        select_t.innerHTML = '';
+        if(event.target.checked) {
+          // use clone_languages
+          {% for l, il in clone_languages %}
+            select.innerHTML += <option value={{l}} {% if l == selected_lang_dest %} selected {% endif %}>{{il}}</option> ;
+          {% endfor %}
+          /*$("#t_languages").html("");
+          {% for l, il in languages1 %}
+          $("#t_languages").append("<option value={{l}}>{% autoescape off %}{{ il }}{% endautoescape %}</option>");
+          {% endfor %}
+          */
+        } 
+        else{    
+          // tts_languages
+          {% for l, il in tts_languages %}
+            select.innerHTML += <option value={{l}} {% if l == selected_lang_dest %} selected {% endif %}>{{il}}</option> ;
+          {% endfor %}
+        }
+      });
+    </script> 
+
+    <script>
+      function display_voices(voice_l) { 
+        let gender;
+        if(document.getElementById('voice_gender_clone').checked) {
+          gender = "clone";
+        }
+        else if(document.getElementById('voice_gender_female').checked) {
+          gender = "female";
+        }
+        else if(document.getElementById('voice_gender_male').checked) {
+          gender = "male";
+        }
+        {% for lang, voices_dict in voices_by_lang.items %}                      
+        document.querySelector("#voice_gender-{{ lang }}-F").style.display = gender === 'female' ? 'block' : 'none';
+        document.querySelector("#voice_gender-{{ lang }}-M").style.display = gender === 'male' ? 'block' : 'none';
+        document.querySelector("#voice_gender-{{ lang }}-clone").style.display = gender === 'clone' ? 'block' : 'none';
+        document.querySelector("#{{ lang }}_voices").style.display = voice_l === "{{ lang }}" ? "block" : "none";
+        {% endfor %}
+      }
+      
+    </script>
+
+    <script>
+      // Add JavaScript to handle alert dismissal
+      document.addEventListener('DOMContentLoaded', function() {
+          var closeButtons = document.querySelectorAll('.alert .close');
+          closeButtons.forEach(function(button) {
+              button.addEventListener('click', function() {
+                  this.parentElement.style.display = 'none';
+              });
+          });
+      });
+    </script>
+</body>
+
+</html>

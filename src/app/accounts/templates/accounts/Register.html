@@ -1,0 +1,199 @@
+{% load i18n %} 
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="keywords" content="Inteligencia Artificial, IA, traductor, video editor, editor de video, Translator">    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>YML-Multilanguage </title>
+    
+    <!-- Icono en la pestaña del navegador -->    
+    <link rel="icon" type="image/x-icon" href="/static/assets/accounts/img/ico-negro_02.png">
+    <!-- /Icono en la pestaña del navegador -->
+    
+    <!-- Fuentes-íconos -->   
+    <!-- Font Awesome -->
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <!-- /Fuentes-íconos -->
+     
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    
+    <!-- Material Design Bootstrap -->
+    <link href="/static/assets/css/mdb.min.css" rel="stylesheet">
+    
+    <!-- Your custom styles (optional) -->
+    <link href="/static/assets/accounts/style.css" rel="stylesheet">
+</head>
+
+<body>
+
+<!-- Start your project -REGISTER -->
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+      <div class="container-fluid">
+          <a class="navbar-brand" href="{% url 'landing' %}">
+            <img src="/static/assets/img/ico-blanco_01.png" alt="Logo"  height="40" class="d-inline-block align-text-top  pe-2">
+          </a>
+
+          <ul class="navbar-nav d-flex flex-row me-1">
+              <li class="nav-item">
+                  <a class="nav-link menu_header text-white" href="{% url 'activate_language' language_code="es" %}"> ESP</a>
+              </li>
+              <li class="nav-item"> <a class="nav-link menu_header text-white" > /</a> </li>
+              <li class="nav-item">
+                  <a class="nav-link menu_header text-white" href="{% url 'activate_language' language_code="en" %}"> ENG</a>
+              </li>
+              {% comment %} <form action="{% url 'set_language' %}" method="post">
+                {% csrf_token %}
+                <input name="next" type="hidden" value="{{ redirect_to }}" />
+                <select name="language">
+                    <option value="en">English</option>
+                    <option value="es">Español</option>
+                </select>
+                <button class="btn" name="set_language" type="submit" >{% trans "Change" %}</button>  
+              </form> {% endcomment %}
+            
+          </ul> 
+    </nav>
+</header>
+
+{% for message in messages %}
+  <div class="row" id="messages-container" style="margin: auto; width: 500px;">
+    {% if message.tags == 'success' %}
+        <div class="alert alert-success alert-dismissible" role="alert">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            {{ message|safe|escape }}
+        </div>
+    {% elif message.tags == 'error' %}
+        <div class="alert alert-danger alert-dismissible" role="alert">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            {{ message|safe }}
+        </div>
+    {% elif message.tags == 'info' %}
+        <div class="alert alert-info alert-dismissible" role="alert">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            {{ message|safe|escape }}
+        </div>
+    {% elif message.tags == 'warning' %}
+        <div class="alert alert-warning alert-dismissible" role="alert">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            {{ message|safe|escape }}
+        </div>
+    {% endif %}
+  </div>
+{% endfor %}
+
+
+<div class="login_traslator">
+    <form method="post" > 
+        {% csrf_token %}
+        <div id="logo" class="container">
+            <img  src="/static/assets/accounts/img/ico-blanco_01.png" alt="" width="130px">
+        </div>
+    
+        <h1>{% trans "AI TRANSLATOR" %}</h1>
+        <h4>{% trans "Create an account" %}</h4> 
+
+        <label class="bmd-label-floating" style="font-weight:bold;">{% trans "First Name" %}</label>
+        <div class="input-box">
+            <input type="text" name="firstname" class="form-control" id="id_firstname" required>
+            <i class="bi bi-person-fill"></i>
+        </div>
+        {% comment %} <span class="helptext">{{ form.firstname.errors }}</span> {% endcomment %}
+
+        <label class="bmd-label-floating" style="font-weight:bold;">{% trans "Last Name" %}</label>
+        <div class="input-box">
+            <input type="text" name="lastname" class="form-control" id="id_lastname" required>
+            <i class="bi bi-person-fill"></i>
+        </div>
+        {% comment %} <span class="helptext">{{ form.lastname.errors }}</span> {% endcomment %}
+
+        <label class="bmd-label-floating" style="font-weight:bold;">{% trans "E-Mail Address" %}</label>
+        <div class="input-box">
+            <input type="email" name="email" class="form-control" maxlength="320" id="id_email" required>
+            <i class="bi bi-envelope-fill"></i>
+        </div>
+        {% comment %} <span class="helptext">{{ form.email.errors }}</span> {% endcomment %}
+
+        <label class="bmd-label-floating" style="font-weight:bold;">{% trans "Referral token (Optional)" %}</label>
+        <div class="input-box">
+            <input type="text" name="referral" class="form-control" id="id_referral"> <!-- required -->
+            <i class="bi bi-people-fill"></i>
+        </div>                      
+        {% comment %} <span class="helptext">{{ form.referral.errors }}</span>  {% endcomment %}
+
+        <span class="helptext" style="color: black; font-weight: bold; font-size: 13px;">
+            <ul><li>{% trans "Your password can't be too similar to your other personal information." %}</li>
+                <li>{% trans "Your password must contain at least 8 characters." %}</li>
+                <li>{% trans "Your password can't be a commonly used password." %}</li>
+                <li>{% trans "Your password can't be entirely numeric." %}</li></ul>
+        </span>
+        <label class="bmd-label-floating" style="font-weight:bold;">{% trans "Password" %}</label>
+        <div class="input-box">
+            <input type="password" name="password1" class="form-control" id="id_password1" required>
+            <i class="bi bi-lock-fill"></i>
+        </div>
+        {% comment %} <span class="helptext">{{ form.password1.errors }}</span> {% endcomment %}
+
+        <label class="bmd-label-floating" style="font-weight:bold;">{% trans "Password check" %}</label>
+        <div class="input-box">
+            <input type="password" name="password2" class="form-control" id="id_password2" required>
+            <i class="bi bi-lock-fill"></i>
+        </div>
+        {% comment %} <span class="helptext">{{ form.password2.errors }}</span> {% endcomment %}
+        
+        <button type="submit" class="btn" name="register">{% trans "REGISTER" %}</button>
+        
+        {% comment %} <h6 id="sign_with">{% trans "Sign in with" %}</h6> {% endcomment %}
+        
+    </form>
+    <h4>{% trans "Sign Up with" %} :
+    <a href="{% url 'social:begin' 'google-oauth2' %}">
+        <img src="/static/assets/accounts/img/blanco-google.png" alt="" width="40px">  
+    </a>
+    {% comment %} <button type="submit" class="btn_google" name="google_register">
+        <i class="bi bi-google" id="ico_google"></i> 
+        {% trans "Continue with Google" %}        
+    </button>   {% endcomment %}
+        
+    <div class="register-link">
+        <p id="register"><b>{% trans "Do you already have an account?" %} <a href="{% url 'login' %}">{% trans "Login" %}</a></b></p>
+    </div>
+</div>
+
+<!-- /Start your project -REGISTER ->
+
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <!-- /Fuentes-íconos -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+    
+    <script>
+     // Animations initialization
+    new WOW().init();
+    </script> 
+
+
+    <script>
+        // Add JavaScript to handle alert dismissal
+        document.addEventListener('DOMContentLoaded', function() {
+            var closeButtons = document.querySelectorAll('.alert .close');
+            closeButtons.forEach(function(button) {
+                button.addEventListener('click', function() {
+                    this.parentElement.style.display = 'none';
+                });
+            });
+        });
+    </script>
+
+</body>
+
+</html>

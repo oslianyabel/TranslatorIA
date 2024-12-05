@@ -1,0 +1,565 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Translation {% endblock %} 
+
+{% load static %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %} 
+  <style>
+    select {
+      /* Reset Select */
+      appearance: none;
+      outline: 10px red;
+      /* Personalize */
+      flex: 1;
+      background-image: none;
+      cursor: pointer;
+
+      padding: 0.5rem 0;
+      margin: 0.125rem 0 0;
+      font-size: 1rem;
+      color: #212529;
+      text-align: left;
+      list-style: none;
+      background-color: #ffffff;
+      background-clip: padding-box;
+      border: 1px solid rgba(0, 0, 0, 0.15);
+      border-radius: 0.25rem;
+      box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12); 
+    }
+    /* Remove IE arrow */
+    select::-ms-expand {
+      display: none;
+    }
+    /* Custom Select wrapper */
+    .select {
+      position: relative;
+      display: flex;
+      min-width: 10rem;
+      border-radius: .25em;
+      overflow: hidden;
+    }
+
+    /* Transition */
+    .select:hover::after {
+      color: #16181b;
+    }
+    
+    /* Other styles*/
+    body {
+      color: #212529;
+      background-color: transparent;
+    }
+  </style> 
+{% endblock stylesheets %}
+
+{% block content %}
+<body>  
+  
+  <!-- row of uploaded video -->
+  <div class="row my-5">
+
+    <div class="col-lg-3 col-md-3 col-sm-3"> </div>
+    <div class="col-lg-6 col-md-6 col-sm-6">
+      <video class="embed-responsive-item" controls width='100%' height='400px'> 
+        <source src={% static video_path %} type="video/mp4"> </source>
+        Your browser does not support the video tag.
+      </video>
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-3"> </div>
+  </div>
+
+  <hr/>
+  <!-- row of extracted text and translation -->
+  <div class="row">
+
+    <!-- column of source text -->
+    <div class="col-lg-5 col-md-5 col-sm-5">
+      <div class="row ">
+        <label for="s_languages"> Language of the video:</label> 
+      </div>
+      <div class="row ">        
+        <form method="post" >
+          {% csrf_token %}
+          <div class="select">          
+            <select class="mx-3 p-2"  name="source_lang" id="s_languages" required>
+              {% for l in source_languages %}
+              <option value={{l}} {% if l == default_lang_source %} selected {% endif %} >{{l}}</option>
+              {% endfor %}
+            </select>
+            <button name="gen_text" type="submit" class="btn btn-outline-dark mx-3 p-2 ">Generate text</button>
+          </div>
+        
+        </form>
+      </div>
+
+      {% if source_text == 'default-auto'%}
+      <div class="row">
+        <div class="card card-primary">
+          <div class="card-header">
+            <h3 class="card-title"> Extracted Text</h3>            
+          </div>
+          <div class="card-body">
+            <p> <i>Select the language of the video to generate the text </i> </p>
+          </div>
+        </div>
+
+      </div>
+      {% else %} 
+        <!-- rows of phrases -->
+        {% for id, phr, spk_color, speaker, editModal in source_text_color %}
+          <div class="row">
+            <div class="col-lg-1 col-md-1 col-sm-1">
+              <div class="text-center">
+              <p style="font-size:18px;margin:8px;color:#000000"><b> {{id}} </b></p>
+              </div>
+            </div>
+
+            <div class="col-lg-9 col-md-9 col-sm-9">
+              <p style="font-size:18px;margin:8px;color:{{spk_color}}"><b> Speaker {{speaker}} :</b></p>
+              <p> {{phr.text}} </p>
+            </div>
+
+            <div class="col-lg-1 col-md-1 col-sm-1">
+              
+              <!-- Button trigger modal -->
+              <button name="edit_phrase" type="button" rel="tooltip" title="Edit text" class="btn btn-outline-dark btn-link btn-sm" data-toggle="modal" data-target="#{{editModal}}">
+                <i class="material-icons" style="font-size: 30px;"> edit_note </i>
+              </button>
+              <!-- Modal -->
+              <form method="post" >
+              {% csrf_token %}
+                <div class="modal fade" id={{editModal}} > 
+                  <div class="modal-dialog" > <!-- modal-lg  modal-dialog-centered role="document" -->
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title">Edit the text of the phrase {{id}}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+
+                        <div class="form-group"> <!--  w-75 mb-4 -->
+                          <!-- style="border: 1px solid #ba68c8" -->
+                          <textarea class="form-control" name={{editModal}} id="textArea" rows="8" >{{phr.text}}</textarea>
+                        </div> 
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button name="edit_source_text" type="submit" class="btn btn-primary"> Apply </button>
+                        <button name="restore_source_text" type="submit" rel="tooltip" title="Restore text" class="btn btn-outline-dark btn-link btn-sm">
+                          <i class="material-icons" style="font-size: 50px;"> restore </i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+              
+            </div>
+          </div>
+          <hr/>
+           
+        {% endfor %}
+      {% endif %}
+    </div>
+
+    <!-- column of translated text -->
+    <div class="col-lg-7 col-md-7 col-sm-7">
+      
+        <div class="row ">
+          <label for="t_languages"> Language for the translation :</label> 
+        </div>
+        <div class="row ">        
+          <form method="post" >
+            {% csrf_token %}
+            <div class="select">          
+              <select class="mx-3 p-2"  name="dest_lang" id="t_languages" required>
+                {% for l in tts_languages %}
+                <option value={{l}} {% if l == default_lang_dest %} selected {% endif %} >{{l}}</option>
+                {% endfor %}
+              </select>
+              <button name="transl_text" type="submit" class="btn btn-outline-dark mx-3 p-2 ">Translate text</button>
+            </div>
+          </form>
+        </div>
+        
+        {% if dest_text == 'default-auto'%}
+          <div class="col-lg-9 col-md-9 col-sm-9">
+            <div class="row">
+              <div class="card card-primary">
+                <div class="card-header">
+                  <h3 class="card-title">Translated Text</h3>
+                  
+                </div>
+                <div class="card-body">
+                  <p> <i>Select a language to generate translation </i> </p>
+                </div>
+              </div>
+            </div>      
+          </div>             
+        {% else %}
+          <!-- rows of phrases -->
+          {% for id, phr, spk_color, speaker, editModal, speed, volume, phrModal, phr_vol_name, phr_vol_name2, phr_spd_name, phr_spd_name2 in dest_text_color %}
+          
+            <div class="row">
+              <div class="col-lg-9 col-md-9 col-sm-9">
+                <div class="row">
+                  <div class="col-lg-1 col-md-1 col-sm-1">
+                    <div class="text-center">
+                    <p style="font-size:18px;margin:8px;color:#000000"><b> {{id}} </b></p>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-9 col-md-9 col-sm-9">
+                    <p style="font-size:18px;margin:8px;color:{{spk_color}}"><b> Speaker {{speaker}} :</b></p>
+                    <p> {{phr.text}} </p>
+                  </div>
+
+                  <div class="col-lg-1 col-md-1 col-sm-1">              
+                    <!-- Button trigger modal -->
+                    <button name="edit_phrase" type="button" rel="tooltip" title="Edit text" class="btn btn-outline-dark btn-link btn-sm" data-toggle="modal" data-target="#{{editModal}}">
+                      <i class="material-icons" style="font-size: 30px;"> edit_note </i>
+                    </button>
+                    <!-- Modal -->
+                    <form method="post" >
+                      {% csrf_token %}
+                      <div class="modal fade" id={{editModal}} > 
+                        <div class="modal-dialog" > <!-- modal-lg  modal-dialog-centered role="document" -->
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title">Edit the translated text of the phrase {{id}}</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+      
+                              <div class="form-group"> <!--  w-75 mb-4 -->
+                                <!-- style="border: 1px solid #ba68c8" -->
+                                <textarea  class="form-control" name={{editModal}} id="textArea" rows="8" >{{phr.text}}</textarea>
+                              </div> 
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                              <button name="edit_transl_text" type="submit" class="btn btn-primary"> Apply </button>
+                              <button name="restore_transl_text" type="submit" rel="tooltip" title="Restore text" class="btn btn-outline-dark btn-link btn-sm">
+                                <i class="material-icons" style="font-size: 50px;"> restore </i>
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                    
+                  </div>
+                </div>
+                <hr/>
+              </div>
+               
+              <div class="col-lg-3 col-md-3 col-sm-3">    
+                {% if gen_video != 'None' %}    
+                <div class="row ">
+                  <p> <b>Phrase {{ id }}</b> settings</p>
+                </div>
+                <div class="row ">
+                  <!-- Button trigger modal -->
+                  <button name="phr_settings" type="button" rel="tooltip" title="Modify" class="btn btn-outline-dark btn-link btn-sm" data-toggle="modal" data-target="#{{phrModal}}">
+                    <i class="material-icons" style="font-size: 50px;"> settings_suggest </i>
+                  </button>
+                  <!-- Modal -->
+                  <form method="post" >
+                    {% csrf_token %}
+                    <div class="modal fade" id={{ phrModal }} > 
+                      <div class="modal-dialog" > <!-- modal-lg  modal-dialog-centered role="document" -->
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title">Settings for the audio of this phrase</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <div class="row">
+                              <label for="volumeBar" style="color:black;padding-right:8px;margin-left:8px"><b>Adjust volume for the phrase {{ id }}</b></label>
+                              <input type="range" id="volumeBar" name={{phr_vol_name2}} min="-50" max="50" value={{volume}} step="5" oninput="this.form.{{phr_vol_name}}.value=this.value">
+                              <input type="number" style="width:4em;margin-left:10px" name={{phr_vol_name}} min="-50" max="50" value={{volume}} step="5" oninput="this.form.{{phr_vol_name2}}.value=this.value" />  
+                              
+                            </div>
+                            <div class="row">
+                              <p style="font-size:14px;margin:8px"><i> The volume of the audio goes up or down equal to the numeric value selected. On zero the volume is the original. </i></p>
+                            </div>
+                            <div class="row">
+                              <label for="speed" style="color:black;padding-top:16px;margin-left:8px"><b>Adjust audio speed for the phrase {{ id }}</b></label>
+                            </div>
+
+                            <input type="range" style="margin-left:32px;margin-right:16px" id="speedBar" name={{phr_spd_name2}} min="0.50" max="2.00" value={{speed}} step="0.10" oninput="this.form.{{phr_spd_name}}.value=this.value">
+                            <input type="number" style="width:5em;margin-right:20px;margin-left:20px" name={{phr_spd_name}} min="0.50" max="2.00" value={{speed}} step="0.10" oninput="this.form.{{phr_spd_name2}}.value=this.value" />  
+          
+                            <div class="row">
+                              <p style="font-size:14px;margin:8px"><i> The audio is faster for values > 1.00 and slower for values < 1.00. On 1.00 the speed is the original. </i></p>
+                            </div>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button name="apply_sett_phr" type="submit" class="btn btn-primary">Apply changes</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+                {% endif %}
+              </div>
+              
+            </div>
+          {% endfor %}
+          {% comment %} {% if gen_video != 'None' %}  
+          
+            <div class="text-center">
+            <button name="apply_sett_phr" type="submit" class="btn btn-primary mx-3 my-3 p-24 ">Apply settings by phrase</button>
+            </div>
+          </form>
+          {% endif %} {% endcomment %}
+
+        {% endif %}
+    </div>
+  </div>
+
+  <hr/>
+  <!-- row of generated video -->
+  <div class="row my-5">
+
+    <div class="col-lg-3 col-md-3 col-sm-3">
+      {% if dest_text != 'default-auto'%}{% comment %} {% if gen_video != 'None' %}     {% endcomment %}
+      
+      <div class="text-center">
+        <p style="font-size:18px;margin:8px"> To configure the volume and speed for all the phrases of a speaker simultaneously, modify the values in the next button, and apply changes.</p>
+      
+      <!-- Button trigger modal -->
+      <button name="speakers_settings_1" type="button" class="btn btn-outline-dark mx-1 my-3 p-16" data-toggle="modal" data-target="#speakers_Modal1">
+        General Configurations
+      </button>
+      </div>  
+        <!-- Modal -->
+        <div class="modal fade" id="speakers_Modal1" > 
+          <div class="modal-dialog" > <!-- modal-lg  modal-dialog-centered role="document" -->
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Configurations by speakers</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+
+                <p style="font-size:18px;margin:8px;color:red"><b>Warning!!</b></p>
+                <p style="font-size:14px;margin:8px"> If you set a configuration for a speaker here, and apply changes; the configuration for all the phrases of said speaker will be overwritten. </p>
+                <hr/>
+                <form method="post">
+                {% csrf_token %}
+                {% for spk, spk_vol_name,spk_vol_name2, spk_spd_name,spk_spd_name2  in speaker_list %}
+                  <div class="row">
+                    <div class="col-lg-1 col-md-1 col-sm-1"> </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4">
+                      <h3 style="font-size:24px;"><b>Speaker {{spk}}  </b></h3>
+                    
+                    </div>
+                    <!-- <div class="col-lg-1 col-md-1 col-sm-1"> </div> -->
+                    <div class="col-lg-5 col-md-5 col-sm-5">
+                      <div class="row">
+                        
+                          <label for="volumeBar" style="color:black;padding-top:16px;margin-left:8px"><b>Adjust audio volume for the speaker {{spk}}</b></label>
+                          <input type="range" id="volumeBar" name={{spk_vol_name2}} min="-50" max="50" value="0" step="5" oninput="this.form.{{spk_vol_name}}.value=this.value">
+                          <input type="number" style="width:4em;margin-left:10px" name={{spk_vol_name}} min="-50" max="50" value="0" step="5" oninput="this.form.{{spk_vol_name2}}.value=this.value" />  
+                        
+                      </div>
+                      <div class="row">
+                          <label for="speedBar" style="color:black;padding-top:16px;margin-left:8px"><b>Adjust audio speed for the speaker {{spk}}</b></label> 
+                          <input type="range" id="speedBar" name={{spk_spd_name2}} min="0.50" max="2.00" value="1.00" step="0.10" oninput="this.form.{{spk_spd_name}}.value=this.value">
+                          <input type="number" style="width:5em;margin-left:10px" name={{spk_spd_name}} min="0.50" max="2.00" value="1.00" step="0.10" oninput="this.form.{{spk_spd_name2}}.value=this.value" />             
+                      </div>
+                    </div>
+                    <div class="col-lg-1 col-md-1 col-sm-1"> </div>
+                  </div>
+                  <hr/>
+                {% endfor %}
+                <p>Apply volume and speed changes</p>
+                  
+                <div class="text-center">
+                <button name="spk_sett_1" type="submit" class="btn btn-light mx-3 my-3 p-16 " > Apply </button>
+                </div>
+                </form>
+                
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>              
+              </div>
+            </div>
+          </div>
+        </div>  
+        <hr/>
+        <div class="text-center">
+          <p style="font-size:18px;margin:8px"> To change the voice for each speaker, modify the values in the next button, and apply changes.</p>
+        
+        <!-- Button trigger modal -->
+        <button name="speakers_settings_2" type="button" class="btn btn-outline-dark mx-1 my-3 p-16" data-toggle="modal" data-target="#voices_Modal">
+          Voices Configurations
+        </button>
+      </div>
+      <!-- Modal -->
+      <div class="modal fade" id="voices_Modal" > 
+        <div class="modal-dialog" > <!-- modal-lg  modal-dialog-centered role="document" -->
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Voices by speakers</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              
+              <p style="font-size:18px;margin:8px;color:red"><b>Warning!!</b></p>
+              <p style="font-size:14px;margin:8px"> If you set a configuration for a speaker here, and apply changes; the configuration for all the phrases of said speaker will be overwritten. </p>
+              <hr/>
+              <form method="post" >
+                {% csrf_token %}
+                  {% for spk, spk_vol_name,spk_vol_name2, spk_spd_name,spk_spd_name2  in speaker_list %}
+                  <div class="row">
+                    <div class="col-lg-1 col-md-1 col-sm-1"> </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4">
+                      <h3 style="font-size:24px;"><b>Speaker {{spk}}  </b></h3>
+                    
+                    </div>
+                    <!-- <div class="col-lg-1 col-md-1 col-sm-1"> </div> -->
+                    <div class="col-lg-5 col-md-5 col-sm-5">
+                      
+                      <div class="row">
+                        <label for="voice_gender-{{ spk }}"> Voice gender</label> 
+                        <div class="select">          
+                          <select class="mx-3 p-2"  name="voice_gender-{{ spk }}" id="voice_gender-{{ spk }}" required>
+                            <option disabled selected value style="display:none"></option>
+                            <option value="female"> FEMALE </option>
+                            <option value="male"> MALE </option>
+                            <option value="cloned"> Custom voices </option>
+                          </select>  
+                        </div>
+                      </div>
+                      
+                      <div class="row" id="voice_gender-{{ spk }}-F" style="display: none;"> 
+                        <label for="voice"> Select the voice for the speaker {{spk}}</label> 
+                        <div class="select">          
+                          <select class="mx-3 p-2"  name="voice-{{ spk }}-F" id="voice" required>
+                            {% for v in voices_f %}
+                            <option value={{v}}>{{v}}</option>
+                            {% endfor %}
+                          </select>  
+                        </div>
+                      </div> 
+
+                      <div class="row" id="voice_gender-{{ spk }}-M" style="display: none;"> 
+                        <label for="voice"> Select the voice for the speaker {{spk}}</label> 
+                        <div class="select">          
+                          <select class="mx-3 p-2"  name="voice-{{ spk }}-M" id="voice" required>
+                            {% for v in voices_m %}
+                            <option value={{v}}>{{v}}</option>
+                            {% endfor %}
+                          </select>  
+                        </div>
+                      </div> 
+
+                      <div class="row" id="voice_gender-{{ spk }}-clone" style="display: none;"> 
+                        <label for="voice"> Select the voice for the speaker {{spk}}</label> 
+                        <div class="select">          
+                          <select class="mx-3 p-2"  name="voice-{{ spk }}-clone" id="voice" required>
+                            {% for v in voices_clone %}
+                            <option value={{v}}>{{v}}</option>
+                            {% endfor %}
+                          </select>  
+                        </div>
+                      </div> 
+
+                    </div>
+
+                    <div class="col-lg-1 col-md-1 col-sm-1"> </div>
+                  </div>
+                  <hr/>
+                {% endfor %}
+
+                <script>
+                  {% for spk, spk_vol_name,spk_vol_name2, spk_spd_name,spk_spd_name2  in speaker_list %}
+                    document.querySelector('#voice_gender-{{ spk }}').addEventListener('change', function() {
+                      var gender = this.value;
+                      document.querySelector('#voice_gender-{{ spk }}-F').style.display = gender === 'female' ? 'block' : 'none';
+                      document.querySelector('#voice_gender-{{ spk }}-M').style.display = gender === 'male' ? 'block' : 'none';
+                      document.querySelector('#voice_gender-{{ spk }}-clone').style.display = gender === 'cloned' ? 'block' : 'none';
+                    });
+                  {% endfor %}
+                </script>
+
+                <p>Apply voices changes</p>
+                <div class="text-center">
+                <button name="spk_sett_2" type="submit" class="btn btn-light mx-3 my-3 p-16 "> Apply </button>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>              
+            </div>
+          </div>
+        </div>
+      </div>  
+
+      {% endif %}
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-6">
+      
+      <form method="post" >
+        {% csrf_token %}
+        <div class="text-center">
+        <button name="generate_video" type="submit" class="btn btn-outline-dark mx-3 my-3 p-24 ">Generate video from the text</button>
+        </div>
+      </form>
+      {% if gen_video == 'None' %}
+      <div class="text-center">
+      <h3>Click the button to generate video, and wait patiently</h3>
+      </div>
+      {% else %}
+      
+        <video class="embed-responsive-item" controls width='100%' height='400px'> 
+          <source src={% static gen_video %} type="video/{{video_extension}}"></source>
+          Your browser does not support the video tag.
+        </video>
+      
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-3"> 
+      <div class="text-center">
+        <form method="post" >
+          {% csrf_token %}
+          <button name="download_video" type="submit" class="btn btn-success mx-3 my-3 p-24 ">Download your new video</button>
+        </form>
+          
+        {% if not request.user.is_free %}
+        <form method="post" >
+          {% csrf_token %}
+          <input type="text" name="transl_name" {% if using_storage %} value="{{ transl_name }}" {% endif %} class="form-control" id="id_transl_name" required>
+          <button name="save_translation" type="submit" class="btn btn-info mx-3 my-3 p-24 ">Save the translation workflow</button>
+        </form>
+        {% endif %}
+
+      </div>
+    </div>
+    {% endif %}
+
+  </div>
+
+</body>
+  {% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+
+{% endblock javascripts %}

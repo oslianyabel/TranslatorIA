@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Capa_2" data-name="Capa 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28.12 30.94">
+  <defs>
+    <style>
+      .cls-1 {
+        font-family: MyriadPro-Regular, 'Myriad Pro';
+        font-size: 27.44px;
+      }
+
+      .cls-2 {
+        fill: none;
+        stroke: #000;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 2px;
+      }
+    </style>
+  </defs>
+  <g id="Icons">
+    <path class="cls-2" d="m10.42,28.44l-7.3,1.5,1.5-7.3L20.72,6.44c.8-.8,2.1-.8,2.9,0l2.9,2.9c.8.8.8,2.1,0,2.9L10.42,28.44Z"/>
+    <line class="cls-2" x1="17.82" y1="15.24" x2="9.02" y2="24.04"/>
+    <text class="cls-1" transform="translate(0 22.96)"><tspan x="0" y="0">*</tspan></text>
+  </g>
+</svg>

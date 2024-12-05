@@ -1,0 +1,1200 @@
+{% load i18n %} 
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="keywords" content="Inteligencia Artificial, IA, traductor, video editor, editor de video, Translator">    
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>YML-Multilanguage </title>
+  
+  <!-- Icono en la pestaña del navegador -->    
+  <link rel="icon" type="image/x-icon" href="/static/assets/img/ico-blanco_02.png">
+  <!-- /Icono en la pestaña del navegador -->
+  
+  <!-- Fuentes-íconos -->   
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <!-- /Fuentes-íconos -->
+    
+  <!-- Bootstrap core CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  
+  <!-- Material Design Bootstrap -->
+  <link href="/static/assets/css/mdb.min.css" rel="stylesheet">
+  <!-- Bootstrap core CSS -->
+  <link href="/static/assets/css/bootstrap.min.css" rel="stylesheet">
+  
+  <!-- Your custom styles (optional) -->
+  <link href="/static/assets/translation/css/translation.css" rel="stylesheet">
+</head>
+{% comment %} <style>
+    *{/**** estilos generales******/
+        margin: 0;
+        text-decoration: none;
+        list-style: none;
+        box-sizing: border-box; /****los elementos no se salen del conteneror******/
+    }  
+    
+    body{ 
+        background: #000;
+        height: 100vh;  
+        margin: auto;      
+    }
+    .body{
+        /* padding: 0; */
+        height: 100%;       
+        margin: auto;
+    }
+    
+    .body_traslate{
+        width: 95%;
+        height: 90%;
+        margin-top: 75px; 
+        margin-right: auto;
+        margin-bottom: 10px; 
+        margin-left: auto; 
+        /*overflow: auto;*/
+        background: #fff;
+        border-radius: 20px;
+        box-sizing: border-box;
+    }
+    .body_editable{
+        /*display: flex; */
+        height:100%;  
+    }
+    nav ul{/*float: right;  */
+        margin-right: 20px;}    
+    nav ul li{
+        display: inline-block;
+        padding-top: 0;
+    /*    line-height: 70px;*/
+    }       
+    nav ul i{font-size: 18px; padding-right: 0;}
+    
+    .btn_body{
+        color:#000;
+        padding: 7px 10px;
+        margin: auto;
+    }
+    .btn_body:hover{
+        background: rgb(192,0,41, 0.1);
+        border-radius: 40px;
+        color: #000;
+        padding: 7px 10px;
+        cursor: pointer;
+        transition: .3s; 
+        text-decoration: none;
+    }
+    .btn_body:active{transform: scale(0.9);}
+
+    .time-input {
+        display: inline-flex;
+        align-items: center;
+    }
+    
+    .time-input input {
+        width: 25px;
+        margin: 0;
+    }
+    
+    .time-input span {
+        margin: 0;
+    }
+
+    /* For Webkit Browsers (Chrome, Safari, Edge, Opera) */
+    input[type=number]::-webkit-inner-spin-button, 
+    input[type=number]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+    /* For Firefox */
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
+
+    .time-display {
+        display: inline-flex;
+        align-items: center;
+        /*font-size: 24px;  Adjust font size as needed */
+    }
+    
+    .time-display span {
+        margin: 0 5px;
+    }
+</style> {% endcomment %}
+<body > <!-- style="margin:auto;height:100hv;" -->
+  {% load static %}
+
+<header>
+  {% comment %} <nav class="header">
+      <input type="checkbox" id="check">
+      <label for="check" class="check_btn">
+          <i class="bi bi-list"></i>
+      </label>  {% endcomment %}
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top scrolling-navbar"style="background-color:#c00029;background:#c00029;">
+    <div class="container-fluid"style="background-color:#c00029;background:#c00029;">
+      
+      <a class="navbar-brand" href="{% url 'landing' %}">
+        <img src="/static/assets/translation/img/ico-blanco_01.png" alt="" class="logo_yml">
+      </a>
+      <span class="navbar-text"style="font-size:28px;color:#ffffff">
+        {% if transl_name %} {{ transl_name }} {% else %} {% trans "Project Name" %} {% endif %}
+      </span>
+      
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="main-navbar">
+        <ul class="navbar-nav d-flex flex-row me-1">
+          <li class="nav-item">
+            <a href="{% url 'user_projects' %}" class="menu_header"><i class="bi bi-folder"></i>{% trans "My Projects" %}</a>
+          </li>
+          <li class="nav-item me-3 me-lg-0">
+            <a href="#" class="menu_header"  disabled><i class="bi bi-people"></i>{% trans "Invite" %}</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link menu_header text-white" href="{% url 'activate_language' language_code="es" %}"> ESP</a>
+          </li>
+          <li class="nav-item"> <a class="nav-link menu_header text-white" > /</a> </li>
+          <li class="nav-item">
+            <a class="nav-link menu_header text-white" href="{% url 'activate_language' language_code="en" %}"> ENG</a>
+          </li>
+          {% comment %} <form action="{% url 'set_language' %}" method="post">
+          {% csrf_token %}
+          <input name="next" type="hidden" value="{{ redirect_to }}" />
+          <select name="language">
+              <option value="en">English</option>
+              <option value="es">Español</option>
+          </select>
+          <button class="btn" name="set_language" type="submit" >{% trans "Change" %}</button>  
+          </form> {% endcomment %}
+      
+          {% comment %} <div class="col-1" style="">  TODO there's a need to set a profile pic?? 
+          <img src="/static/assets/user_projects/img/avatar1.jpg" alt="Logo"  height="45" class="float-end avatar" style="">       {% endcomment %}
+          <li class="nav-item dropdown me-6 me-lg-0">
+            <a class="nav-link dropdown-toggle text-white" href="{% url 'user_projects' %}" id="navbarDropdownProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="bi bi-person-fill" style="height: 45px;"></i>
+            {% trans "Account" %}
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownProfile">
+              <li>
+                  <a class="dropdown-item" href="{% url 'user_projects' %}">{% trans "Projects" %}</a>
+              </li>
+              <li><hr class="dropdown-divider" /></li>
+              <li>
+              <a class="dropdown-item" href="{% url 'change_password' %}">{% trans "Change Password" %}</a>
+              </li>
+              <li><hr class="dropdown-divider" /></li>
+              <li>
+                  <a class="dropdown-item" href="{% url 'logout' %}" >{% trans "Log out" %}</a>
+              </li>
+            </ul>
+          </li>
+        </ul>    
+      </div>  
+    </div>
+  </nav> 
+
+</header>
+
+{% comment %} <body> {% endcomment %}
+<!-- CUERPO-->
+{% if messages %} 
+  <div class="container-fluid" style="margin-top:70px;">
+  {% for message in messages %}
+  <div class="row" id="messages-container" style="margin: auto; width: 500px;">
+    {% if message.tags == 'success' %}
+      <div class="alert alert-success alert-dismissible" role="alert">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        {{ message|safe|escape }}
+      </div>
+    {% elif message.tags == 'error' %}
+      <div class="alert alert-danger alert-dismissible" role="alert">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        {{ message|safe }}
+      </div>
+    {% elif message.tags == 'info' %}
+      <div class="alert alert-info alert-dismissible" role="alert">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        {{ message|safe|escape }}
+      </div>
+    {% elif message.tags == 'warning' %}
+      <div class="alert alert-warning alert-dismissible" role="alert">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        {{ message|safe|escape }}
+      </div>
+    {% endif %}
+  </div>
+  {% endfor %}
+  </div>
+{% endif %}
+  
+<section class="container-fluid body" style="display: flex;">
+  {% comment %} <div class="" id="menu_lateral" style="display: none; width: 55px;" > <!-- style="display: flex;" -->
+      <input type="checkbox" id="check_templates"> 
+      <input type="checkbox" id="check_templates"> 
+      <input type="checkbox" id="check_subtitle"> 
+      <input type="checkbox" id="check_translator">   
+      <input type="checkbox" id="check_quickactions"> 
+      <div class="menu">
+          <li class="clips">
+              <label for="check_clips" class="check_clips">
+                  <i class="bi bi-bookmarks"></i>
+              </label>
+          </li>
+          <li class="templates">
+              <label for="check_templates" class="check_templates">
+                  <i class="bi bi-columns-gap"></i>
+              </label>
+          </li>
+          <li class="subtitle">
+              <label for="check_subtitle" class="check_subtitle">
+                  <i class="bi bi-filter-square"></i>
+              </label>
+          </li>
+          <li class="translator">
+              <label for="check_translator" class="check_translator">
+                  <i class="bi bi-translate"></i>
+              </label>
+          </li>
+          <li class="quickactions">
+              <label for="check_quickactions" class="check_quickactions">
+                  <i class="bi bi-lightning-charge"></i>
+              </label>
+          </li>
+      </div>
+  </div> {% endcomment %}
+  <div class="body_traslate">
+    <nav class="navbar navbar-light"style="background-color:#ffffff;background:#ffffff;" id="body_nav_btns">
+      <div class="container-fluid"style="background-color:#ffffff;background:#ffffff;">
+        <ul class="navbar-nav d-flex flex-row me-1">
+          {% if not using_storage  %}
+          <span class="navbar-text"style="font-size:13px;color:#969696">
+            {% trans "not saved!" %}
+          </span>
+          {% endif %} 
+          <li class="nav-item me-3 me-lg-0">
+            <form method="post" > <!-- temporarily for setting the name of the project, before saving it -->
+              {% csrf_token %}
+              <li><input type="text" name="transl_name" {% if transl_name %} value="{{ transl_name }}" {% endif %} class="form-control" id="id_transl_name" required></li>
+              <li><button name="save_translation" type="submit" class="btn btn_export"><i class="bi bi-folder-check"></i> {% trans "Save Project" %} </button></li>
+            </form>
+          </li>
+          <li class="nav-item mx-5 me-lg-0">
+            <form method="post" > <!-- Download/Export button -->
+              {% csrf_token %}
+              <li><button name="download_video" type="submit" class="btn btn_export"><i class="bi bi-download"></i> {% trans "Export" %} </button></li>
+              <!-- <li><a href="#" class="btn btn_export"><i class="bi bi-download pe-2"></i>Export</a></li> -->
+            </form>
+          </li>
+          {% comment %} <li><form method="post">     
+              {% csrf_token %}   
+              <div class="form-check form-switch">
+                  <button name="transl_switch_btn" type="submit" class="btn btn_body m-0 px-3 py-1"><i class="bi bi-translate"></i> {% trans "Translation" %} </button>
+                  <input class="form-check-input mx-3 p-2" name="transl_switch" type="checkbox" role="switch" id="transl_switch_id" {% if active_transl %}checked{% endif %}>
+                  <label class="form-check-label" for="transl_switch_id"></label>
+      
+              </div>
+          </form></li> {% endcomment %}
+        </ul>    
+      </div>
+    </nav> 
+    <div class="body_editable container-fluid" id="body_edit_btns" > <!-- style="display: none;" -->
+      <div class="text-center" id="loading-area" style="width:100px; margin:auto; height:20%; display: block;">
+        <div class="spinner-border" role="status">
+        </div>
+        <span >{% trans "Loading..." %}</span> <!-- class="visually-hidden"-->
+      </div>
+      <div class="editable_text col-8 px-1" id="text_div" style="display: none;">
+        {% comment %} <p style="font-size: 15px; color:#969696;"><i class="bi bi-plus" style="padding-right: 5px; color: #4a4a4a; font-size: 17px;"></i>Add introduction</p>
+        <div class="h-full w-full flex items-center opacity-90"><hr _ngcontent-sro-c186=""></div>
+        
+        <div class="text_edit">
+            Add Text here
+        </div>            
+        
+        <p style="font-size: 15px; color:#969696;"><i class="bi bi-plus" style="padding-right: 5px; color: #4a4a4a; font-size: 17px;"></i>Add End</p> {% endcomment %}
+        <div class="scroll">
+          <div class="row">
+            {% comment %} <div class="col-1"></div> {% endcomment %}
+            <div class="col">
+              <h3 style="color:#969696;" > {% trans "Extracted Text" %}</h3>  
+            </div>
+            <div class="col">                        
+              <h3 style="color:#969696;" > {% trans "Translated Text" %}</h3>                  
+            </div>
+          </div>
+            {% if source_text == 'default-auto' %} 
+              <div class="row">
+                <div class="col">
+                  <p style="font-size: 17px; color:#969696;"><i>{% trans "Select the language of the video to generate the text" %}</i></p>
+                </div>
+                <div class="col">
+                  <p style="font-size: 17px; color:#969696;"><i>{% trans "Select a language to generate translation" %}</i></p>
+                </div>
+              </div>
+            {% else %}
+              {% for phr_dict in phrases_dict %}
+                <div class="row justify-content-md-center">
+                  <div class="col-2"></div>
+                  <div class="col-md-auto">
+                    <div class="text-center" style="display: inline-flex;">
+                      <p style="font-size:18px;margin:3px;color:#000000"><b> {% trans "Phrase" %} {{ phr_dict.id }} : </b></p>
+                      <p style="font-size:18px;margin:3px;color:{{ phr_dict.color }}"><b> {% trans "Speaker" %} {{ phr_dict.speaker }}</b></p>
+                    </div>
+                  </div>
+                  <div class="col-2"></div>
+                </div>
+                <div class="row ">
+                  <div class="col"> <!-- source text -->
+                    <div class="row">
+                      <div class="col-lg-10 col-md-10 col-sm-10 p-0">
+                        <p> {{ phr_dict.source_text }} </p>                                            
+                      </div>            
+                      <div class="col-1">                        
+                        <!-- Button trigger modal -->
+                        <button name="edit_phrase" type="button" rel="tooltip" title="{% trans "Edit text" %}" 
+                            class="btn btn_body" data-backdrop="static" data-toggle="modal" data-target="#{{ phr_dict.source_editModal }}">
+                          <i class="bi bi-pencil"></i>
+                        </button>
+                        <!-- Modal -->
+                        <form method="post" >
+                        {% csrf_token %}
+                          <div class="modal fade" id="{{ phr_dict.source_editModal }}" > 
+                            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" > 
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title"> {% trans "Edit the text of the phrase" %} {{ phr_dict.id }}</h5>
+                                    <button type="button" class="close" data-dismiss="modal">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+
+                                <div class="form-group">
+                                  <!-- style="border: 1px solid #ba68c8" -->
+                                  <textarea class="form-control" name="{{ phr_dict.source_editModal }}" id="textArea" rows="8" >{{ phr_dict.source_text }}</textarea>
+                                </div> 
+                                </div>
+                                <div class="modal-footer">
+                                  <button name="edit_source_text" type="submit" class="btn confirm p-2"> {% trans "Apply" %} </button>
+                                  <button name="restore_source_text" type="submit" rel="tooltip"  class="btn confirm p-2"> 
+                                    <i class="bi bi-clock-history"></i> {% trans "Restore" %} 
+                                  </button>
+                                  <button type="button" class="btn confirm p-2" data-dismiss="modal">{% trans "Close" %}</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </form>                          
+                      </div> 
+                    </div>
+                  </div>
+                  <hr style="border:none; border-left:2px solid hsla(200, 1%, 10%,100); height:100%; width:2px;color:black;background-color:black">
+                  <div class="col"> <!-- translated text -->
+                    {% if phr_dict.transl_text or dest_text != 'default-auto' %}
+                    <div class="row">
+                      <div class="col-lg-10 col-md-10 col-sm-10 p-0">
+                        <p> {{ phr_dict.transl_text }} </p>
+                      </div>            
+                      <div class="col-1">                        
+                        <!-- Button trigger modal -->
+                        <button name="edit_phrase" type="button" rel="tooltip" title="{% trans "Edit text" %}" 
+                            class="btn btn_body" data-backdrop="static" data-toggle="modal" data-target="#{{ phr_dict.transl_editModal }}">
+                          <i class="bi bi-pencil"></i>
+                        </button>
+                        <!-- Modal -->
+                        <form method="post">
+                          {% csrf_token %}
+                          <div class="modal fade" id="{{ phr_dict.transl_editModal }}" > 
+                            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable"> 
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title">{% trans "Edit the translated text of the phrase" %} {{ phr_dict.id }}</h5>
+                                  <button type="button" class="close" data-dismiss="modal">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">        
+                                  <div class="form-group"> <!--  w-75 mb-4 -->
+                                    <!-- style="border: 1px solid #ba68c8" -->
+                                    <textarea  class="form-control" name="{{ phr_dict.transl_editModal }}" id="textArea" rows="8" >{{  phr_dict.transl_text  }}</textarea>
+                                  </div> 
+                                </div>
+                                <div class="modal-footer">
+                                  <button name="edit_transl_text" type="submit" class="btn confirm p-2"> {% trans "Apply" %} </button>
+                                  <button name="restore_transl_text" type="submit" rel="tooltip" class="btn confirm p-2"> 
+                                    <i class="bi bi-clock-history"></i> {% trans "Restore" %} 
+                                  </button>
+                                  <button type="button" class="btn confirm p-2" data-dismiss="modal">{% trans "Close" %}</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </form>                        
+                      </div> 
+                    </div>
+                    {% endif %}
+                  </div>
+                </div>
+                <div class="row ">
+                  <div class="col"> <!-- source text -->
+                    <div class="row" >
+                      <div class="col-md-auto mx-2 mb-2" style="border: 1px solid #CCCCCC;padding-right:5px;padding-left:5px;height:30px;"> 
+                        <span><b> {% trans "start" %} </b></span>
+                        <div class="time-display" id="phr_{{ phr_dict.id }}-st-time-source">
+                          <span id="hours">00</span>
+                          <span>:</span>
+                          <span id="minutes">00</span>
+                          <span>:</span>
+                          <span id="seconds">00</span>
+                        </div>
+                      </div>
+                      <div class="col-md-auto mx-2 mb-2"style="border: 1px solid #CCCCCC;padding-right:5px;padding-left:5px;height:30px;"> 
+                        <span><b> {% trans "end" %} </b></span>
+                        <div class="time-display" id="phr_{{ phr_dict.id }}-end-time-source">
+                          <span id="hours">00</span>
+                          <span>:</span>
+                          <span id="minutes">00</span>
+                          <span>:</span>
+                          <span id="seconds">00</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col"> <!-- translated text -->
+                    {% if phr_dict.transl_text or dest_text != 'default-auto' %}
+                    <div class="row">
+                      <div class="col-md-auto mx-2 mb-2" style="border: 1px solid #CCCCCC;padding-right:5px;padding-left:5px;height:30px;"> 
+                        <span><b> {% trans "start" %} </b></span>
+                        <div class="time-display" id="phr_{{ phr_dict.id }}-st-time-transl">
+                          <span id="hours">00</span>
+                          <span>:</span>
+                          <span id="minutes">00</span>
+                          <span>:</span>
+                          <span id="seconds">00</span>
+                        </div>
+                      </div>
+                      <div class="col-md-auto mx-2 mb-2"style="border: 1px solid #CCCCCC;padding-right:5px;padding-left:5px;height:30px;"> 
+                        <span><b> {% trans "end" %} </b></span>
+                        <div class="time-display" id="phr_{{ phr_dict.id }}-end-time-transl">
+                          <span id="hours">00</span>
+                          <span>:</span>
+                          <span id="minutes">00</span>
+                          <span>:</span>
+                          <span id="seconds">00</span>
+                        </div>
+                      </div>
+                    </div>
+                    {% endif %}
+                  </div>
+                  <hr style="height:2px;border-width:0;color:black;background-color:black">
+                </div>
+              {% endfor %}
+            {% endif %}
+            
+            <!-- Phrases Settings Modal -->
+            <form method="post"  id="phr_sett_form">
+              {% csrf_token %}
+              <div class="modal fade" id="phrModal" > 
+                <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable"> <!-- modal-lg  modal-dialog-centered role="document" -->
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">{% trans "Settings for the audio of each phrase" %}</h5>
+                      <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">  
+                      <div class="form-check form-switch ms-3">
+                        <input class="form-check-input" type="checkbox" id="keep_orig_sil-switch_1" name="keep_orig_sil-switch">
+                        <label class="form-check-label" for="keep_orig_sil-switch_1">{% trans "Keep orginal audio when no one is speaking" %}</label>
+                        <p style="font-size:14px;color:#969696;display:block;" id="keep_orig_sil-switch_1-off">{% trans "Switch on to use the sound in the original audio when no one is speaking." %}</p>
+                        <p style="font-size:14px;color:#969696;display:none;" id="keep_orig_sil-switch_1-on">{% trans "Switch off to use silences when no one is speaking." %}</p>
+                      </div>    
+                      <div class="form-check form-switch ms-3">
+                        <input class="form-check-input" type="checkbox" id="time-speed_switch" name="time-speed_switch">
+                        <label class="form-check-label" for="time-speed_switch">{% trans "Change settings parameters" %}</label>
+                        <p style="font-size:14px;color:#969696;display:block;" id="time-speed_switch-off">{% trans "Switch on to adjust phrases's audio by speed." %}</p>
+                        <p style="font-size:14px;color:#969696;display:none;" id="time-speed_switch-on">{% trans "Switch off to adjust phrases's audio by times." %}</p>
+                      </div>    
+                      <div class="row" id="sett_by_time" style="display:block;">
+                        <p style="font-size:13px;margin:2px;"><b>{% trans "Adjust time" %} : </b>                                        
+                          <i> {% trans "Adjust the time for the audio of each phrase. They cannot overlap." %} </i>
+                        </p>
+                        <p style="font-size:13px;margin:2px;"><b>{% trans "Adjust volume" %} : </b>                                       
+                          <i> {% trans "The volume of the audio goes up or down equal to the numeric value selected. On zero the volume is the original." %} </i>
+                        </p>                        
+                        <div class="row"> 
+                          <div class="col-5"></div>
+                          <div class="col-3"> 
+                              {% comment %} <div class="row"> {% endcomment %}
+                              <div class="text-center">
+                                  <p style="margin:2px;padding:0"><b>{% trans "Time" %}</b></p>                                        
+                              </div>  
+                          </div>
+                          <div class="col-4">
+                              {% comment %} <div class="row"> {% endcomment %}
+                              <div class="text-center">
+                                  <p style="margin:2px;padding:0"><b>{% trans "Volume" %}</b></p>                                        
+                              </div>      
+                          </div>
+                        </div>
+                        {% for phr_dict in phrases_dict %} 
+                        <hr class="hr-dark my-2" style="width:90%;margin:auto">
+                        <div class="row"> 
+                          <div class="col-5"> <b>{{ phr_dict.id }} : </b> {{ phr_dict.transl_text }} </div>
+                          <div class="col-3"> 
+                            <div class="col">
+                            <span><b> {% trans "start" %} </b></span>
+                            <div class="time-input" id="phr_{{ phr_dict.id }}-st-time-input">
+                              <input type="number" id="hours" name="{{ phr_dict.id }}-st-time-hours" min="0" value="0" placeholder="00">
+                              <span>:</span>
+                              <input type="number" id="minutes" name="{{ phr_dict.id }}-st-time-min" min="0" max="59" value="0" placeholder="00">
+                              <span>:</span>
+                              <input type="number" id="seconds" name="{{ phr_dict.id }}-st-time-sec" min="0" max="59" value="0" placeholder="00">
+                            </div>
+                            </div>
+                      
+                            <div class="col">
+                            <span><b> {% trans "end" %} </b></span>
+                            <div class="time-input" id="phr_{{ phr_dict.id }}-end-time-input">
+                              <input type="number" id="hours" name="{{ phr_dict.id }}-end-time-hours" min="0" value="0" placeholder="00">
+                              <span>:</span>
+                              <input type="number" id="minutes" name="{{ phr_dict.id }}-end-time-min" min="0" max="59" value="0" placeholder="00">
+                              <span>:</span>
+                              <input type="number" id="seconds" name="{{ phr_dict.id }}-end-time-sec" min="0" max="59" value="0" placeholder="00">
+                            </div>
+                            </div>
+                          </div>
+                          <div class="col-4">
+                            <input type="range" id="{{ phr_dict.phr_vol_name2 }}" name="{{ phr_dict.phr_vol_name2 }}" min="-50" max="50" value="{{ phr_dict.volume }}" step="5">
+                            <input type="number" id="{{ phr_dict.phr_vol_name }}" name="{{ phr_dict.phr_vol_name }}" min="-50" max="50" value="{{ phr_dict.volume }}" step="5"  style="width:4em;margin-left:10px"/>  
+                          </div>
+                        </div>
+                        {% endfor %}
+                      </div>
+                      <div class="row" id="sett_by_speed" style="display:none;">
+                        <p style="font-size:13px;margin:2px;"><b>{% trans "Adjust speed" %} : </b>                                        
+                            <i> {% trans "The audio is faster for values > 1.00 and slower for values < 1.00. On 1.00 the speed is the original." %} </i>
+                        </p>
+                        <p style="font-size:13px;margin:2px;"><b>{% trans "Adjust volume" %} : </b>                                       
+                            <i> {% trans "The volume of the audio goes up or down equal to the numeric value selected. On zero the volume is the original." %} </i>
+                        </p>
+                        {% for phr_dict in phrases_dict %}
+                        <hr class="hr-dark my-2" style="width:90%;margin:auto">
+                        <div class="row"> 
+                          <div class="col-1"></div>
+                          <div class="col-5">
+                            <div class="row">
+                              <label for="speed"><b>{% trans "Adjust audio speed for the phrase" %} {{ phr_dict.id }}</b></label>
+                            </div>
+                            <input type="range" id="2-{{ phr_dict.phr_spd_name2 }}" name="{{ phr_dict.phr_spd_name2 }}" min="0.70" max="1.40" value="{{ phr_dict.speed }}" step="0.10">
+                            <input type="number" id="2-{{ phr_dict.phr_spd_name }}" name="{{ phr_dict.phr_spd_name }}" min="0.70" max="1.40" value="{{ phr_dict.speed }}" step="0.10" style="width:5em;margin-left:5px"/>  
+                            {% comment %} <div class="row">
+                              <p style="font-size:14px;margin:8px"><i> {% trans "The audio is faster for values > 1.00 and slower for values < 1.00. On 1.00 the speed is the original." %}</i></p>
+                            </div> {% endcomment %}
+                          </div>
+                          <div class="col-1"></div>
+                          <div class="col-5">
+                            <div class="row">
+                                <label for="volumeBar"><b>{% trans "Adjust volume for the phrase" %} {{ phr_dict.id }}</b></label>                                        
+                            </div>
+                            <input type="range" id="2-{{ phr_dict.phr_vol_name2 }}" name="{{ phr_dict.phr_vol_name2 }}" min="-50" max="50" value="{{ phr_dict.volume }}" step="5">
+                            <input type="number" id="2-{{ phr_dict.phr_vol_name }}" name="{{ phr_dict.phr_vol_name }}" min="-50" max="50" value="{{ phr_dict.volume }}" step="5" style="width:4em;margin-left:5px"/>  
+                            {% comment %} <div class="row">
+                              <p style="font-size:14px;margin:8px"><i> {% trans "The volume of the audio goes up or down equal to the numeric value selected. On zero the volume is the original." %} </i></p>
+                            </div> {% endcomment %}
+                          </div>    
+                        </div>
+                        {% endfor %}
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn confirm p-2" data-dismiss="modal">{% trans "Close" %}</button>
+                      <button name="apply_sett_phr" id="apply_sett_phr_id" type="submit" value="apply" class="btn confirm p-2">
+                        {% trans "Apply" %}
+                      </button>       
+                      {% comment %} onclick="document.forms['phr_sett_form'].submit();" {% endcomment %}
+                      <button name="apply_gen_sett_phr" id="apply_gen_sett_phr_id" type="submit" value="apply_and_generate" class="btn confirm p-2" style="width:200px">
+                        {% trans "Apply and Generate" %}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+        </div>
+      </div>
+      <hr style="border:none; border-left:2px solid hsla(200, 1%, 10%,100); height:100%; width:2px;color:black;background-color:black">
+      <div class="editable_video col-4" id="video_div" style="display:none;">
+        <!-- VIDEO Column-->
+        <div class="scroll">
+            {% comment %} <div class="body-video row" style=""> {% endcomment %}
+                {% comment %} TODO <!-----------------------Vista movil-----------------------------> {% endcomment %}
+
+                {% comment %} <div class="body_video_movil">
+                    <img src="/static/assets/translation/img/play-YML.svg" alt="" style="">
+                </div> {% endcomment %}
+
+                {% comment %} <!-----------------------Vista movil----------------------------->  {% endcomment %}
+                
+          <!-- Original video -->
+          <div class="row">
+            <label class="mx-3 p-2"> {% trans "Original video" %}:</label>               
+            {% if video_path %}
+            <div class="body_video_web m-0" style="margin:auto;padding-top:59%; width:95%; height:0; position:relative;">
+              <video class="embed-responsive-item" style="margin:auto;width:100%; height:100%; position:absolute; top:0; left:0; right:0; bottom:0;" controls > <!--width='100%' height='200px'-->
+                <source src={% static video_path %} type="video/mp4"></source>
+                {% trans "Your browser does not support the video tag." %}
+              </video>
+            </div>
+            {% else %}
+            <div class="body_video_web m-0" style="margin:auto;padding-top:59%; width:95%; height:0; position:relative;">
+              <img src="/static/assets/translation/img/play-YML.svg" alt="" style="">
+            </div>
+            {% endif %}
+          </div> 
+          <!-- Generated video -->
+          <div class="row"> 
+            <label class="mx-3 p-2"> {% trans "Generated video" %}:</label>   
+            {% if gen_video != 'None' %}
+              <div class="body_video_web m-0" style="margin:auto;padding-top:59%; width:95%; height:0; position:relative;">
+                <video class="embed-responsive-item" style="width:100%; height:100%; position:absolute; top:0; left:0; right:0; bottom:0;" controls> 
+                  <source src={% static gen_video %} type="video/mp4"></source>
+                  {% trans "Your browser does not support the video tag." %}
+                </video>
+              </div>
+            {% else %}
+              <div class="body_video_web m-0" style="margin:auto;padding-top:59%; width:95%; height:0; position:relative;">
+                <img src="/static/assets/translation/img/play-YML.svg" alt="" style="margin:auto;width:auto; max-height: 22%; position:absolute; top:0; left:0; right:0; bottom:0;">
+              </div>
+            {% endif %}
+          </div>  
+          <!-- source languages-->
+          <div class="row my-3"> 
+            <label for="s_languages" class="mx-3 p-2"> {% trans "Language of the source video" %}:</label>                             
+            <form method="post" id="gen_text_form">
+              {% csrf_token %}
+              <div class="select">   
+                <select class="mx-3 p-2 mb-3" style="width:100px;"  name="source_lang" id="s_languages" required>       
+                  {% for l, il in source_languages %}
+                  <option value={{l}} {% if l == default_lang_source %} selected {% endif %} >{{il}}</option>
+                  {% endfor %}
+                </select>
+                <button name="gen_text" id="gen_text_id" style="width:150px;"  type="submit" class="btn btn_body m-0 p-1">{% trans "Generate text" %}</button>
+              </div>              
+            </form>     
+          </div>  
+          <hr style="height:2px;border-width:0;color:black;background-color:black">
+          <!-- translation languages + Generate video -->
+          <div class="row my-3"> 
+            {% if source_text != 'default-auto' %} 
+            <label for="t_languages" class="mx-3 p-2"> {% trans "Language for the translation" %}:</label> 
+            <form method="post" >
+              {% csrf_token %}
+              <div class="select">          
+                <select class="mx-3 p-2 mb-3" style="width:100px;"  name="dest_lang" id="t_languages" required>
+                  {% for l, il in tts_languages %}
+                  <option value={{l}} {% if l == default_lang_dest %} selected {% endif %} >{{il}}</option>
+                  {% endfor %}
+                </select>
+                <button name="transl_text" style="width:150px;"  type="submit" class="btn btn_body m-0 p-1">{% trans "Translate text" %}</button>
+              </div>
+              {% if changes_not_applied.changes_in_source_text %}  
+              <p style="font-size:12px;margin:2px;color:red"> 
+                {% trans "There are changes in the extracted text that have not been translated" %}.
+              </p>                            
+              {% endif %}       
+            </form>     
+            {% endif %}
+            <hr style="height:2px;border-width:0;color:gray;background-color:gray">
+            {% if dest_text != 'default-auto'%}
+              <form method="post">
+              {% csrf_token %}
+                <div class="text-center my-3">
+                  {% if changes_not_applied.changes_in_transl_text %}  
+                  <p style="font-size:12px;margin:2px;color:red"> 
+                    {% trans "There are changes in the translated text that have not been applied to the video" %}.
+                  </p>                            
+                  {% endif %} 
+                  {% comment %} <button name="generate_video" type="submit" class="btn btn_body m-0 px-3 py-1" style="background:rgb(160, 160, 160);" >
+                    {% trans "Generate video" %}
+                  </button {% endcomment %}
+                  <button type="button" id="gen_video_btn" class="btn btn_body m-0 px-3 py-1" data-backdrop="static" data-toggle="modal" data-target="#gen_video_modal" style="background:rgb(160, 160, 160);" >
+                    {% trans "Generate video" %}
+                  </button>
+                  {% if gen_video != 'None' %} 
+                    <!-- Button trigger modal -->
+                    <button name="phr_settings" id="phr_settings_btn" type="button" class="btn btn_body m-0 px-3 py-1" 
+                          data-backdrop="static" data-toggle="modal" data-target="#phrModal">
+                      <i class="bi bi-gear"></i>  {% trans "Phrases Settings" %}
+                    </button>
+                  {% endif %}
+                </div>  
+              </form>
+              <form method="post">
+                {% csrf_token %}
+                  <div class="modal fade" id="gen_video_modal" > 
+                    <div class="modal-dialog modal-dialog-scrollable" >
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h4 class="modal-title">{% trans "Settings to generate video"  %}</h4>
+                          <button type="button" class="close" data-dismiss="modal">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <div class="form-check form-switch ms-3">
+                            <input class="form-check-input" type="checkbox" id="keep_orig_sil-switch_2" name="keep_orig_sil-switch" checked>
+                            <label class="form-check-label" for="keep_orig_sil-switch_2">{% trans "Keep orginal audio when no one is speaking" %}</label>
+                            <p style="font-size:14px;color:#969696;display:none;" id="keep_orig_sil-switch_2-off">{% trans "Switch on to use the sound in the original audio when no one is speaking." %}</p>
+                            <p style="font-size:14px;color:#969696;display:block;" id="keep_orig_sil-switch_2-on">{% trans "Switch off to use silences when no one is speaking." %}</p>
+                          </div>    
+                            <div class="form-check form-switch ms-3" id="auto-detect-voices_form-check">
+                              <input class="form-check-input" type="checkbox" id="auto-detect-voices_switch" name="auto-detect-voices_switch">
+                              <label class="form-check-label" for="auto-detect-voices_switch">{% trans "Use the voices from the video" %}</label>
+                              <p style="font-size:14px;color:#969696;display:none;" id="auto-detect-voices_switch-off">{% trans "Switch on to use the voices from the video." %}</p>
+                              <p style="font-size:14px;color:#969696;display:block;" id="auto-detect-voices_switch-on">{% trans "Switch off to select another voice." %}</p>
+                            </div>
+                            <div class="form-check form-switch ms-3" id="auto-adjust_form-check">
+                                <input class="form-check-input" type="checkbox" id="auto_adjust" name="auto_adjust">
+                                <label class="form-check-label" for="auto_adjust">{% trans "Auto adjust speed" %}</label>
+                                <p style="font-size:14px;color:#969696;display:block;" id="auto_adjust-off">{% trans "Switch on to adjust the speed of each phrase automatically to match the original video time stamps." %}</p>
+                                <p style="font-size:14px;color:#969696;display:none;" id="auto_adjust-on">{% trans "Switch off to adjust the speed using the time stamps on the translated phrases." %}</p>
+                            </div>                            
+                            <div class="form-check form-switch ms-3" id="random-voice_form-check">
+                                <input class="form-check-input" type="checkbox" id="random_voice" name="random_voice">
+                                <label class="form-check-label" for="random_voice">{% trans "Random voice selection" %}</label>
+                                <p style="font-size:14px;color:#969696;display:block;" id="random_voice-off">{% trans "Switch on to generate video with default/selected settings." %}</p>
+                                <p style="font-size:14px;color:#969696;display:none;" id="random_voice-on">{% trans "Switch off to select voices for each speaker." %}</p>
+                            </div>
+                            <div class="row" id="spk_voices-gen" style="display:block;">
+                              {% for spk, spk_vol_name,spk_vol_name2, spk_spd_name,spk_spd_name2,spk_gender,spk_name  in speaker_list %}
+                                <hr class="hr-dark my-2" style="width:90%">
+                                <h5 style="font-size:20px;"><b>{% trans "Speaker" %} {{ spk }} </b></h5>  
+                                <div class="row">
+                                  <div class="col-4" style="margin:auto" >
+                                      <div class="form-check">
+                                      <input class="form-check-input" type="radio" name="voice_gender-{{ spk }}-gen" id="voice_gender_clone-{{ spk }}-gen" value="clone" 
+                                        {% if spk_gender ==  'clone'%} checked {% endif %}>
+                                      <label class="form-check-label" for="voice_gender_clone-{{ spk }}-gen">
+                                        {% trans "Custom voices" %}
+                                      </label>
+                                      </div>
+                                      <div class="form-check">
+                                      <input class="form-check-input" type="radio" name="voice_gender-{{ spk }}-gen" id="voice_gender_female-{{ spk }}-gen" value="female"
+                                        {% if spk_gender ==  'female'%} checked {% endif %}>
+                                      <label class="form-check-label" for="voice_gender_female-{{ spk }}-gen">
+                                        {% trans "FEMALE" %}
+                                      </label>
+                                      </div>
+                                      <div class="form-check">
+                                      <input class="form-check-input" type="radio" name="voice_gender-{{ spk }}-gen" id="voice_gender_male-{{ spk }}-gen" value="male"
+                                        {% if spk_gender ==  'male'%} checked {% endif %}>
+                                      <label class="form-check-label" for="voice_gender_male-{{ spk }}-gen">
+                                        {% trans "MALE" %}
+                                      </label>
+                                      </div>
+                                  </div>
+                                    
+                                  <div class="col" style="margin:auto" >
+                                    <div class="row" id="voice_gender-{{ spk }}-F-gen" style="display: none;"> 
+                                      {% comment %} <label for="voice"> {% trans "Select the voice for the speaker" %} {{ spk }}</label>  {% endcomment %}
+                                      <div class="select">          
+                                        <select class="mx-3 p-2"  name="voice-{{ spk }}-F-gen" id="voice">
+                                          {% for v in voices_f %}
+                                          <option value="{{ v }}" {% if v == spk_name and 'female' == spk_gender %} selected {% endif %}>{{ v }}</option>
+                                          {% endfor %}
+                                        </select>  
+                                      </div>
+                                    </div> 
+    
+                                    <div class="row" id="voice_gender-{{ spk }}-M-gen" style="display: none;"> 
+                                      {% comment %} <label for="voice"> {% trans "Select the voice for the speaker" %} {{ spk }}</label>  {% endcomment %}
+                                      <div class="select">          
+                                        <select class="mx-3 p-2"  name="voice-{{ spk }}-M-gen" id="voice">
+                                          {% for v in voices_m %}
+                                          <option value="{{ v }}" {% if v == spk_name and 'male' == spk_gender %} selected {% endif %}>{{ v }}</option>
+                                          {% endfor %}
+                                        </select>  
+                                      </div>
+                                    </div> 
+    
+                                    <div class="row" id="voice_gender-{{ spk }}-clone-gen" style="display: none;"> 
+                                      {% comment %} <label for="voice"> {% trans "Select the voice for the speaker" %} {{ spk }}</label>  {% endcomment %}
+                                      <div class="select">          
+                                        <select class="mx-3 p-2"  name="voice-{{ spk }}-clone-gen" id="voice">
+                                          {% for v in voices_clone %}
+                                          <option value="{{ v }}" {% if v == spk_name and 'clone' == spk_gender %} selected {% endif %}>{{ v }}</option>
+                                          {% endfor %}
+                                        </select>  
+                                      </div>
+                                    </div>    
+                                  </div>                  
+                                </div>
+                              {% endfor %}
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn confirm p-2" data-dismiss="modal">{% trans "Close" %}</button>  
+                          <button name="generate_video" type="submit" class="btn confirm p-2"> {% trans "Generate" %} </button>            
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+              </form> 
+            {% else %}
+              <div class="text-center">                            
+                <button type="button" class="btn btn_body m-0 px-3 py-1" data-bs-toggle="tooltip" data-bs-placement="top" title="{% trans "generate text before" %}" style="background:rgb(160, 160, 160);" >
+                  {% trans "Generate video" %}
+                </button>
+              </div>  
+            {% endif %}
+          </div>      
+        </div>
+      </div>
+    </div>
+  </div>
+</section> 
+<form method="post" id="empty_form">
+  {% csrf_token %}
+  <input type="hidden" name="empty_post">
+</form>
+<!-- JQuery -->
+  <script type="text/javascript" src="/static/assets/translation/js/jquery-3.2.1.min.js"></script>
+  <!-- Bootstrap tooltips -->
+  <script type="text/javascript" src="/static/assets/translation/js/popper.min.js"></script>
+  <!-- Bootstrap core JavaScript -->
+  <script type="text/javascript" src="/static/assets/translation/js/bootstrap.min.js"></script>
+  <!-- MDB core JavaScript -->
+  <script type="text/javascript" src="/static/assets/translation/js/mdb.min.js"></script>
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  <!-- /Fuentes-íconos -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+  <script src="/static/assets/translation/js/translation.js"></script>
+
+  <script>
+    // Animations initialization
+    new WOW().init();
+  </script>  
+  <!-- Loading -->
+  <script> 
+    {% if loading %}
+        var loading = true;
+        console.log("{{ loading }}");
+        // document.querySelector("#menu_lateral").style.display = "none";
+        document.querySelector("#body_nav_btns").style.display = "none";
+        document.querySelector("#text_div").style.display = "none";
+        document.querySelector("#video_div").style.display = "none";
+        document.querySelector("#loading-area").style.display = "block";
+    {% else %}
+      var loading = false;
+      console.log("{{ loading }}");
+      // document.querySelector("#menu_lateral").style.display = "block";
+      document.querySelector("#body_nav_btns").style.display = "flex";
+      document.querySelector("#text_div").style.display = "block";
+      document.querySelector("#video_div").style.display = "block";
+      document.querySelector("#loading-area").style.display = "none";
+    {% endif %}
+  </script>  
+  <!-- Time displays -->
+  <script>
+    {% if source_text != 'default-auto' %} 
+      //console.log("1");
+      let start_source;
+      let end_source;
+      let start_s_arr;
+      let end_s_arr;
+      let start_transl;
+      let end_transl;
+      let start_t_arr;
+      let end_t_arr;
+      {% for phr_dict in phrases_dict %}
+        start_source = document.querySelector("#phr_{{ phr_dict.id }}-st-time-source");
+        end_source = document.querySelector("#phr_{{ phr_dict.id }}-end-time-source");
+        start_s_arr = msToHMS({{ phr_dict.source_start }});
+        end_s_arr = msToHMS({{ phr_dict.source_end }});
+        //console.log("2");
+        updateTimeDisplay(start_s_arr[0],start_s_arr[1],start_s_arr[2], start_source);
+        updateTimeDisplay(end_s_arr[0],end_s_arr[1],end_s_arr[2], end_source);
+        
+        {% if phr_dict.transl_text or dest_text != 'default-auto' %}
+          start_transl = document.querySelector("#phr_{{ phr_dict.id }}-st-time-transl");
+          end_transl = document.querySelector("#phr_{{ phr_dict.id }}-end-time-transl");
+          start_t_arr = msToHMS({{ phr_dict.transl_start }});
+          end_t_arr = msToHMS({{ phr_dict.transl_end }});
+
+          updateTimeDisplay(start_t_arr[0],start_t_arr[1],start_t_arr[2], start_transl);
+          updateTimeDisplay(end_t_arr[0],end_t_arr[1],end_t_arr[2], end_transl);
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+  </script>
+  <!-- msToHMS + updateTimeInput + time validation -->
+  <script>
+    var startInputs = [];
+    var endInputs = [];
+    {% for phr_dict in phrases_dict %}
+        start_input = document.querySelector("#phr_{{ phr_dict.id }}-st-time-input");
+        end_input = document.querySelector("#phr_{{ phr_dict.id }}-end-time-input");
+        startInputs.push(start_input);
+        endInputs.push(end_input);
+    {% endfor %}
+
+    {% if gen_video != 'None' %} 
+      let phr_modal_btn = document.getElementById("phr_settings_btn");
+      phr_modal_btn.addEventListener('click', function(event){
+          bar_number_sync();
+          let start_input;
+          let end_input;
+          let start_arr;
+          let end_arr;
+          {% for phr_dict in phrases_dict %}
+              start_arr = msToHMS({{ phr_dict.transl_start }});
+              end_arr = msToHMS({{ phr_dict.transl_end }});
+              start_input = startInputs[{{ phr_dict.id }} - 1]
+              end_input = endInputs[{{ phr_dict.id }} - 1]
+              //console.log("2");
+              updateTimeInput(start_arr[0],start_arr[1],start_arr[2], start_input);
+              updateTimeInput(end_arr[0],end_arr[1],end_arr[2], end_input);
+              
+          {% endfor %}
+
+          // Add a change event listener to each end time input
+          // When changed fix following input pairs
+          endInputs.forEach((endInput, index) => {
+              endInput.addEventListener('change', () => {
+                  // Calculate the difference between the start and end time of the current element
+                  //index = index - 1; // don't know why js is making me do this
+                  const startInput = startInputs[index];
+                  let startTime = getTimeValue(startInput);
+                  let endTime = getTimeValue(endInput);
+              
+                  // Set the start time of the next element to the end time of the current element plus the difference
+                  while (index < startInputs.length - 1) {
+                      let nextStartInput = startInputs[index + 1];
+                      let nextEndInput = endInputs[index + 1];
+                      if (getTimeValue(nextStartInput) <= endTime){
+                          let duration = getTimeValue(nextEndInput) - getTimeValue(nextStartInput);
+                          let nextStartTime = endTime;
+                          if (startTime === endTime){
+                              nextStartTime = endTime + 1;
+                          }
+                          let nextEndTime = nextStartTime + duration;
+                          setTimeValue(nextStartInput, nextStartTime);
+                          setTimeValue(nextEndInput, nextEndTime);
+                      }
+                      else{return true;}
+                      index ++;
+                      startTime = getTimeValue(nextStartInput);
+                      endTime = getTimeValue(nextEndInput);
+                  }
+              });
+          });
+      });
+      const sett_phr = document.querySelector('#apply_sett_phr_id');
+      const sett_gen_phr = document.querySelector('#apply_gen_sett_phr_id');
+      sett_phr.addEventListener('click', validateInputs);
+      sett_gen_phr.addEventListener('click', validateInputs);
+      // Validate Inputs at submit
+      function validateInputs(event) {
+          //event.preventDefault(); // Prevent the form from submitting immediately
+          let isValid = true;
+      
+          for (let i = 0; i < startInputs.length; i++) {
+              const startInput = startInputs[i];
+              const endInput = endInputs[i];
+          
+              // Check if endTime[i] >= startTime[i]
+              if (getTimeValue(endInput) < getTimeValue(startInput)) {
+                  displayError(endInput, ` {% trans "Error" %}: {% trans "The phrase " %} ${i+1} {% trans "is ending before it begins" %} .`);
+                  isValid = false;
+                  event.preventDefault();
+                  continue;
+              }
+          
+              // Check if endInputs[i] <= startInputs[i+1]
+              if (i < startInputs.length - 1 && getTimeValue(endInput) > getTimeValue(startInputs[i+1])) {
+                  displayError(endInputs[i], ` {% trans "Error" %}: {% trans "The phrase " %} ${i+2} {% trans " must begin after the " %} ${i+1} {% trans "  phrase ends" %} .`);
+                  isValid = false;
+                  event.preventDefault();
+                  continue;
+              }
+
+              // Remove error message if input is valid
+              let error = startInput.parentNode.querySelector('.error');
+              if (error) {
+                error.remove();
+              }
+              error = endInput.parentNode.querySelector('.error');
+              if (error) {
+                error.remove();
+              }
+          }
+          //return isValid;
+          if (isValid) {
+              // Submit the form to the Django view
+              console.log("Is Valid");
+              document.querySelector('#phr_sett_form').submit();
+          } 
+          else{
+              event.preventDefault();
+              return false;
+          }
+      }
+    {% endif %}
+  </script>
+  <!-- display_voices -->
+  <script>
+    function display_voices() { 
+      let gender_gen;
+      {% for spk, spk_vol_name,spk_vol_name2, spk_spd_name,spk_spd_name2,spk_gender,spk_name  in speaker_list %}                      
+        if(document.getElementById('voice_gender_clone-{{ spk }}-gen').checked) {
+          gender_gen = "clone";
+        }
+        else if(document.getElementById('voice_gender_female-{{ spk }}-gen').checked) {
+          gender_gen = "female";
+        }
+        else if(document.getElementById('voice_gender_male-{{ spk }}-gen').checked) {
+          gender_gen = "male";
+        }            
+        console.log(gender_gen);
+        document.querySelector("#voice_gender-{{ spk }}-F-gen").style.display = gender_gen === 'female' ? 'block' : 'none';
+        document.querySelector("#voice_gender-{{ spk }}-M-gen").style.display = gender_gen === 'male' ? 'block' : 'none';
+        document.querySelector("#voice_gender-{{ spk }}-clone-gen").style.display = gender_gen === 'clone' ? 'block' : 'none';
+      {% endfor %}
+        
+    }    
+    // Voice gender selection
+    let gen_video_modal_btn = document.getElementById("gen_video_btn");
+    // Modal open
+    if (gen_video_modal_btn != null){
+      gen_video_modal_btn.addEventListener('click', function(event){
+        console.log("Modal open");
+        display_voices();
+      });
+    }
+    {% for spk, spk_vol_name,spk_vol_name2, spk_spd_name,spk_spd_name2,spk_gender,spk_name  in speaker_list %}
+      // Change voice gender
+      $('#voice_gender_clone-{{ spk }}-gen').change(function(event) {
+        if(event.target.checked) {
+          console.log("clone");
+          display_voices();
+        } 
+      });
+      $('#voice_gender_female-{{ spk }}-gen').change(function(event) {
+        if(event.target.checked) {
+          console.log("female");
+          display_voices();
+        } 
+      });
+      $('#voice_gender_male-{{ spk }}-gen').change(function(event) {
+        if(event.target.checked) {
+          console.log("male");
+          display_voices();
+        } 
+      });
+    {% endfor %}   
+  </script>
+  <!-- volume bar sync -->
+  <script>   
+    function bar_number_sync(){
+      //let volumeBar;
+      //let volumeInput;
+      {% for phr_dict in phrases_dict %} 
+        let volumeBar_{{phr_dict.id}} = document.getElementById('{{ phr_dict.phr_vol_name2 }}');
+        let volumeInput_{{phr_dict.id}} = document.getElementById('{{ phr_dict.phr_vol_name }}');
+
+        // Update the value of the input range when the input number is changed
+        volumeInput_{{phr_dict.id}}.addEventListener('input', () => {
+        const value = volumeInput_{{phr_dict.id}}.value;
+        volumeBar_{{phr_dict.id}}.value = value;
+        });
+
+        // Update the value of the input number when the input range is changed
+        volumeBar_{{phr_dict.id}}.addEventListener('input', () => {
+        const value = volumeBar_{{phr_dict.id}}.value;
+        volumeInput_{{phr_dict.id}}.value = value;
+        });
+
+        let volumeBar2_{{phr_dict.id}} = document.getElementById('2-{{ phr_dict.phr_vol_name2 }}');
+        let volumeInput2_{{phr_dict.id}} = document.getElementById('2-{{ phr_dict.phr_vol_name }}');
+
+        // Update the value of the input range when the input number is changed
+        volumeInput2_{{phr_dict.id}}.addEventListener('input', () => {
+        const value = volumeInput2_{{phr_dict.id}}.value;
+        volumeBar2_{{phr_dict.id}}.value = value;
+        });
+
+        // Update the value of the input number when the input range is changed
+        volumeBar2_{{phr_dict.id}}.addEventListener('input', () => {
+        const value = volumeBar2_{{phr_dict.id}}.value;
+        volumeInput2_{{phr_dict.id}}.value = value;
+        });
+        let speedBar2_{{phr_dict.id}} = document.getElementById('2-{{ phr_dict.phr_spd_name2 }}');
+        let speedInput2_{{phr_dict.id}} = document.getElementById('2-{{ phr_dict.phr_spd_name }}');
+
+        // Update the value of the input range when the input number is changed
+        speedInput2_{{phr_dict.id}}.addEventListener('input', () => {
+        const value = speedInput2_{{phr_dict.id}}.value;
+        speedBar2_{{phr_dict.id}}.value = value;
+        });
+
+        // Update the value of the input number when the input range is changed
+        speedBar2_{{phr_dict.id}}.addEventListener('input', () => {
+        const value = speedBar2_{{phr_dict.id}}.value;
+        speedInput2_{{phr_dict.id}}.value = value;
+        });
+      {% endfor %}
+    }
+  </script>
+  <!-- speakers_settings_2_id show voices by selected gender -->
+  <script> 
+      var gen_text_id = document.getElementById("gen_text_id");
+      gen_text_id.addEventListener('click',function(event) {
+              console.log("gen text clicked");
+              document.querySelector('#gen_text_form').submit();
+          });
+      var spk_stt_2_modal_btn = document.getElementById("speakers_settings_2_id");
+      if (spk_stt_2_modal_btn !== null){
+          spk_stt_2_modal_btn.addEventListener('click',function(event) {
+              //console.log("Modal open");
+              display_voices();
+          });
+          
+          {% for spk, spk_vol_name,spk_vol_name2, spk_spd_name,spk_spd_name2,spk_gender,spk_name  in speaker_list %}
+              // Change voice gender
+              $('#voice_gender_clone-{{ spk }}').change(function(event) {
+                  if(event.target.checked) {
+                      display_voices();
+                  } 
+              });
+              $('#voice_gender_female-{{ spk }}').change(function(event) {
+                  if(event.target.checked) {
+                      display_voices();
+                  } 
+              });
+              $('#voice_gender_male-{{ spk }}').change(function(event) {
+                  if(event.target.checked) {
+                      display_voices();
+                  } 
+              });
+          {% endfor %} 
+      }
+    
+  </script>
+
+</body>
+
+</html>

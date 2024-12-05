@@ -1,0 +1,53 @@
+    <div class="sidebar" data-color="purple" data-background-color="white" > <!-- data-image="/static/assets/img/sidebar-1.jpg"> -->
+      <div class="logo">
+        <a target="_blank" rel="noopener noreferrer" 
+           href="/" class="simple-text logo-normal">
+           YML-Multilanguage
+        </a>
+      </div>
+      
+      <div class="sidebar-wrapper">
+        <ul class="nav">
+        {% if request.user.is_authenticated %}
+
+          <li class="nav-item {% if 'index' in segment %} active {% endif %}">
+            <a class="nav-link" href="/">
+              <i class="material-icons">home</i>
+              <p>Home</p>
+            </a>
+          </li>
+
+          <li class="nav-item {% if 'page-user' in segment %} active {% endif %}">
+            <a class="nav-link" href="{% url 'user_page' %}">
+              <i class="material-icons">person</i>
+              <p>User Profile</p>
+            </a>
+          </li>
+
+          <li class="nav-item " > 
+            <a class="nav-link" href="{% url 'logout' %}" >
+              <i class="material-icons">directions_run</i>
+              <p>Logout</p>
+            </a>
+          </li> 
+
+        {% endif %}
+        {% if not request.user.is_authenticated %}
+          <li class="nav-item {% if 'index' in segment %} active {% endif %}">
+            <a class="nav-link" href="{% url 'home' %}">
+              <i class="material-icons">home</i>
+              <p>Home</p>
+            </a>
+          </li>
+
+          <li class="nav-item ">
+            <a class="nav-link" href="{% url 'login' %}">
+              <i class="material-icons">person</i>
+              <p>Login</p>
+            </a>
+          </li>
+        {% endif %}
+        </ul>
+      </div>
+
+    </div>

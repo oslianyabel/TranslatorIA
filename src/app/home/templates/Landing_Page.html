@@ -1,0 +1,790 @@
+{% load i18n %} 
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="keywords" content="Inteligencia Artificial, IA, traductor, video editor, editor de video, Translator">    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>YML-Multilanguage </title>
+    
+    <!-- Icono en la pestaña del navegador -->    
+    <link rel="icon" type="image/x-icon" href="/static/assets/img/ico-negro_02.png">
+    <!-- /Icono en la pestaña del navegador -->
+    
+    <!-- Fuentes-íconos -->   
+    <!-- Font Awesome -->
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <!-- /Fuentes-íconos -->
+     
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    
+    <!-- Material Design Bootstrap -->
+    <link href="/static/assets/css/mdb.min.css" rel="stylesheet">
+    <!-- Bootstrap core CSS -->
+    <link href="/static/assets/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Your custom styles (optional) -->
+    <link href="/static/assets/landing/css/Landing_Page.css" rel="stylesheet">
+</head>
+<body>
+
+<!-- Start your project here -->
+<!-- Main navigation -->
+<header>
+  <!--Navbar-->
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top scrolling-navbar">
+    <div class="container">
+      <a class="navbar-brand" href="#">
+       <img src="/static/assets/landing/img/ico-negro_01.png" alt="Logo"  height="40" class="d-inline-block align-text-top float-start pe-2">
+       {% comment %} YML Multilanguage 
+       <strong class="nombre_traslator pe-3">YML Multilanguage</strong> {% endcomment %}
+      </a>
+      {% comment %} <ul class="navbar-nav me-auto  mb-2 mb-lg-0">
+        <li class="nav-item pe-3"> {% endcomment %}
+          <p class="me-3 mb-2 mb-lg-0 pe-5" style="font-size:20px;color:#ffffff">YML Multilanguage</p>
+        {% comment %} </li>
+      </ul> {% endcomment %}
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-7" aria-controls="navbarSupportedContent-7" aria-expanded="false" aria-label="Toggle navigation">       
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      
+      <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent-7">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item active pe-3">
+            <a class="nav-link" href="#">{% trans "Home" %}
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item pe-3">
+            <a class="nav-link" href="#platform">{% trans "Platform" %}</a>
+          </li>
+          <li class="nav-item pe-3">
+            <a class="nav-link" href="#Skills">{% trans "Skills" %}</a>
+          </li>
+          <li class="nav-item pe-3">
+            <a class="nav-link" href="#plans">{% trans "Plans" %}</a>
+          </li>
+          <li class="nav-item pe-3">
+            <a class="nav-link" href="#subtile_11">{% trans "Subtitle" %}</a>
+          </li>
+          {% if not request.user.is_authenticated %}
+          <li class="nav-item pe-3">
+            <a class="login me-3 my-0" name="login_1" href="{% url 'login' %}" type="submit"> {% trans "Login" %} </a>       
+          </li>
+          <li class="nav-item pe-3">
+            <a class="sign_up me-3 my-0" name="sign_up_1" href="{% url 'register' %}" type="submit"><span class="span_sign_up">{% trans "Sign Up" %}</span></a>      
+          </li>
+          {% endif %}
+        </ul>
+        <ul class="navbar-nav d-flex flex-row me-1">
+          <li class="nav-item me-lg-0">
+            <a class="nav-link text-white" href="{% url 'activate_language' language_code="es" %}"> ESP</a>
+          </li>
+          <li class="nav-item"> <a class="nav-link text-white" > /</a> </li>
+          <li class="nav-item me-lg-0">
+            <a class="nav-link text-white" href="{% url 'activate_language' language_code="en" %}"> ENG</a>
+          </li>
+            {% comment %} <form action="{% url 'set_language' %}" method="post">
+              {% csrf_token %}
+              <input name="next" type="hidden" value="{{ redirect_to }}" />
+              <li class="nav-item pe-3">
+              <select name="language">
+                  <option value="en">English</option>
+                  <option value="es">Español</option>
+              </select>
+              <!-- ESP/ENG-->
+              <li class="nav-item pe-3">
+              <button class="btn" name="set_language" type="submit" >{% trans "Change" %}</button>  
+              </li>
+            </form> {% endcomment %}
+        
+          {% if request.user.is_authenticated %}
+          
+          <li class="nav-item pe-6 me-lg-0 dropdown">
+            <a class="nav-link dropdown-toggle" href="{% url 'user_projects' %}" id="navbarDropdownProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="bi bi-person-fill" style="height: 45px;"></i>
+              {% trans "Account" %}
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdownProfile">
+              <li>
+                <a class="dropdown-item" href="{% url 'user_projects' %}">{% trans "Projects" %}</a>
+              </li>
+              <li><hr class="dropdown-divider" /></li>
+              <li>
+                <a class="dropdown-item" href="{% url 'change_password' %}">{% trans "Change Password" %}</a>
+              </li>
+              <li><hr class="dropdown-divider" /></li>
+              <li>
+                <a class="dropdown-item" href="{% url 'logout' %}" method="post">{% trans "Log out" %}</a>
+              </li>
+            </ul>
+            {% comment %} <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownProfile">
+              <a class="dropdown-item" href="{% url 'user_projects' %}">{% trans "Projects" %}</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="{% url 'logout' %}" >{% trans "Log out" %}</a>
+            </div> {% endcomment %}
+          </li>
+          {% endif %}
+        </ul> 
+        
+      </div>         
+    </div>
+  </nav>
+  <!--/Navbar-->
+  
+  <!-- Full Page Intro -->
+  <div class="view" style="background-image: url('/static/assets/landing/img/fondo_3.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center center;">
+<!--     <div class="view" style="background-image: url('https://images.pexels.com/photos/1309766/pexels-photo-1309766.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'); background-repeat: no-repeat; background-size: cover; background-position: center center;">-->
+    <!-- Mask & flexbox options-->
+    <div class="mask rgba-gradient d-flex justify-content-center align-items-center">
+      <!-- Content -->
+      <div class="container">
+        <!--Grid row-->
+        <div class="row">
+          <div class="col-md-6 white-text text-center text-md-left mt-xl-5 mb-5 wow fadeInLeft " data-wow-delay="0.3s">
+            <h1 class="h1-responsive font-weight-bold my-5" id="text_header">{% trans "Multilanguage video editor and translator. Just with one click" %}</h1>
+            
+            <hr class="hr-light">
+            <h5 class="mb-5 mt-4">{% trans "Join 250,000+ creators to reach billions of people glob" %}</h5>
+            
+            <div class="row">
+              <label class="bmd-label-floating" style="font-weight:bold;">{% trans "E-Mail Address" %}</label>
+              <div class="input-box col-lg-8">
+                    <input type="text" required>
+                    <i class="bi bi-envelope-fill"></i>
+                </div>
+                <div class="col-lg-4">
+                    <button class="btn" name="started" href="{% url 'user_projects' %}" type="submit" id="started_1">{% trans "Get Started" %}</button>  
+                </div>
+            </div>
+            
+          </div>
+
+          <div class="col-md-5 col-xl-5 mt-xl-5 ms-5 wow fadeInRight" data-wow-delay="0.3s">
+            <img src="/static/assets/landing/img/android_1.png" alt="" class="img-fluid" id="img_fluid">
+          </div>
+          <!--Grid column-->
+        </div>
+        <!--Grid row-->
+      </div>
+      <!-- Content -->
+    </div>
+    <!-- Mask & flexbox options-->
+  </div>
+  <!-- Full Page Intro -->
+</header>
+<!-- Main navigation -->
+<section class="container py-4" id="platform">
+  {% if request.user.is_authenticated %}
+  <h4 > {% trans "Change your user type (Testing only)." %}</h4>  <!-- TODO remove-->
+  <form method="post">
+    {% csrf_token %}
+    {% if request.user.is_free %}
+    <p> {% trans "You are a FREE user now. Click to change to paid user." %}</p>
+    {% else %}
+    <p> {% trans "You are a PAID user now. Click to change to free user" %}</p>
+    {% endif %}
+    <button name="switch-user-type" type="submit" class="btn col-1"> {% trans "Switch" %}</button>
+  </form>
+  
+  {% endif %}
+</section>
+
+<!-- Section: 1 -->
+    <section class="container py-4" id="platform"> 
+      <!-- Section heading -->
+      <h1 class="h1-responsive font-weight-bold text-center mt-5 mb-3">{% trans "Why is it so great in YML Multilenguage?" %}</h1>
+      <!-- Section description -->
+      <p class="lead grey-text text-center w-responsive mx-auto mb-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+
+      <!-- Grid row -->
+      <div class="row">
+        <div class="col-md-4">
+          <div class="row mb-3">
+            <div class="col-2">
+              <i class="bi bi-database-fill-add" style="font-size: 25px; color: #c00029; "></i>
+            </div>
+
+            <div class="col-10">
+              <h5 class="font-weight-bold mb-3">{% trans "Multifunctional" %}</h5>
+              <p class="grey-text">{% trans "Platform that integrates several functions, taking you further and giving you a unique experience." %}</p>
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <div class="col-2">
+              <i class="bi bi-lightbulb-fill" style="font-size: 25px; color: #c00029; "></i>
+            </div>
+
+            <div class="col-10">
+              <h5 class="font-weight-bold mb-3">{% trans "Intuitive" %}</h5>
+              <p class="grey-text">{% trans "Ease and minimalist, with which you can interact without much complexity." %}</p>
+            </div>
+          </div>
+
+          <div class="row mb-md-0 mb-3">
+            <div class="col-2">
+              <i class="bi bi-lightning-fill" style="font-size: 25px; color: #c00029; "></i>
+            </div>
+
+            <div class="col-10">
+              <h5 class="font-weight-bold mb-3">{% trans "Real time response" %}</h5>
+              <p class="grey-text mb-md-0">{% trans "Data entered by the user is processed immediately to facilitate almost instant decision making." %}</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Grid column -->
+        <div class="col-md-4 text-center">
+          <img class="img-fluid" src="/static/assets/landing/img/android_2.png" alt="Sample image">
+        </div>
+
+        <div class="col-md-4">
+          <div class="row mb-3">
+            <div class="col-2">
+              <i class="bi bi-pass-fill" style="font-size: 25px; color: #c00029; "></i>
+            </div>
+     
+            <div class="col-10">
+              <h5 class="font-weight-bold mb-3">Lorem ipsum </h5>
+              <p class="grey-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit maiores nam.</p>
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <div class="col-2">
+              <i class="bi bi-pin-fill" style="font-size: 25px; color: #c00029; "></i>
+            </div>
+ 
+            <div class="col-10">
+              <h5 class="font-weight-bold mb-3">Lorem ipsum </h5>
+              <p class="grey-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit maiores nam.</p>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-2">
+              <i class="bi bi-rocket-takeoff-fill" style="font-size: 25px; color: #c00029; "></i>
+            </div>
+
+            <div class="col-10">
+              <h5 class="font-weight-bold mb-3">Lorem ipsum </h5>
+              <p class="grey-text mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit maiores nam.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+<!-- Section: 1 -->
+
+<!-- Section: 2 -->
+    <section class="features" id="Skills" style="background-image: url('/static/assets/landing/img/fondo_section_box.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center center;">
+				<div class="container">
+					<div class="row" id="section2_box">
+						<!-- Features Single -->
+						<div class="col-md-4 col-sm-4 col-xs-12 features-single" style="text-align: center" id="box_1">
+							<i class="bi bi-person-up col-3" style="font-size: 55px"></i>
+							<p class="mt-2">{% trans "Satisfied Clients" %}</p>
+							<h1>5085</h1>							
+						</div>
+						<!--/ End Features Single -->
+						<!-- Features Single -->
+						
+						<div class="col-md-4 col-sm-4 col-xs-12 features-single active" style="text-align: center" id="box_2">
+							<i class="bi bi-translate" style="font-size: 55px"></i>
+							<p class="mt-2">{% trans "Interaction Languages" %}</p>
+							<h1>53</h1>							
+						</div>
+						<!--/ End Features Single -->
+						<!-- Features Single -->
+						<div class="col-md-4 col-sm-4 col-xs-12 features-single" style="text-align: center" id="box_3">
+							<i class="bi bi-columns-gap" style="font-size: 55px"></i>
+							<p class="mt-2">{% trans "Template Styles" %}</p>
+							<h1>351</h1>							
+						</div>
+						<!--/ End Features Single -->
+					</div>
+				</div>
+			</section>
+<!-- Section: 2 -->  
+
+<!-- Section:3-PRECIOS -->  
+ <div class="pricing-section" id="plans">
+      <div class="container">
+        <div class="section-title text-center mt-3 mb-5" data-aos="fade-up" data-aos-delay="0">
+          <h2 class="h1-responsive font-weight-bold text-center mb-3">{% trans "Plans" %}</h2> 
+          <p class="lead grey-text text-center w-responsive mx-auto mb-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>         
+        </div>
+        
+
+        <div class="row">
+          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="0" id="free_plan">
+            <div class="pricing-item plans">
+              <h2>{% trans "Free Plan" %}</h2>
+              <div class="period-change mb-4 d-block">
+                <div class="price-wrap">
+                  <div class="price">
+                    <div>
+                      <div>$0</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="d-inline-flex align-items-center text-center period-wrap">
+                  <div class="d-inline-block mr-1">{% trans "Per" %}</div>
+                  <div class="d-block text-left period">
+                    <div>
+                      <div>{% trans "Month" %}</div>
+                    </div>
+                  </div>
+                </div>
+                <hr style="background: #c00029">
+              </div>
+              <ul class="list-unstyled mb-4">
+                <li class="d-flex"><span><h3 style="margin: 0px 0 8px 0;">{% trans "Features" %}</h3></span></li>              
+                
+                <!-- Lista de los planes -->  
+                <li class="d-flex">                
+                    <span class="bi bi-check mr-2" style="font-size: 20px; color:#d3002d"></span>
+                    <div class="container col-6" style="padding: 0px;">
+                        <span>{% trans "Video Translation" %}</span>
+                    </div>                
+                    <div class="container col-6 pe-4" style="text-align: right">
+                        <span style="text-align: right;">5 {% trans "Mins" %}</span>
+                    </div>
+                </li>
+                <!-- Lista de los planes -->
+                <li class="d-flex">                
+                    <span class="bi bi-check mr-2" style="font-size: 20px; color:#d3002d"></span>
+                    <div class="container col-6" style="padding: 0px;">
+                        <span>{% trans "Premium Voice" %}</span>
+                    </div>                
+                    <div class="container col-6 pe-4" style="text-align: right">
+                        <span style="text-align: right;">0 {% trans "Mins" %}</span>
+                    </div>
+                </li>
+                <!-- Lista de los planes -->  
+                <li class="d-flex">                
+                    <span class="bi bi-check mr-2" style="font-size: 20px; color:#d3002d"></span>
+                    <div class="container col-6" style="padding: 0px;">
+                        <span>{% trans "Subtitles" %}</span>
+                    </div>                
+                    <div class="container col-6 pe-4" style="text-align: right">
+                        <span style="text-align: right;">{% trans "Unlimited" %}</span>
+                    </div>
+                </li>
+                <!-- Lista de los planes -->  
+                <li class="d-flex">                
+                    <span class="bi bi-check mr-2" style="font-size: 20px; color:#d3002d"></span>
+                    <div class="container col-6" style="padding: 0px;">
+                        <span>{% trans "Storage" %}</span>
+                    </div>                
+                    <div class="container col-6 pe-4" style="text-align: right">
+                        <span style="text-align: right;">100 MB</span>
+                    </div>
+                </li>
+                <!-- Lista de los planes -->
+                <li class="d-flex">                
+                    <span class="bi bi-check mr-2" style="font-size: 20px; color:#d3002d"></span>
+                    <div class="container col-6" style="padding: 0px;">
+                        <span>{% trans "Max File Upload Length" %}</span>
+                    </div>                
+                    <div class="container col-6 pe-4" style="text-align: right">
+                        <span style="text-align: right;">5 {% trans "Mins" %}</span>
+                    </div>
+                </li>
+                <!-- Lista de los planes -->
+                <li class="d-flex">                
+                    <span class="bi bi-check mr-2" style="font-size: 20px; color:#d3002d"></span>
+                    <div class="container col-6" style="padding: 0px;">
+                        <span>{% trans "Max File Upload Size" %}</span>
+                    </div>                
+                    <div class="container col-6 pe-4" style="text-align: right">
+                        <span style="text-align: right;">100 MB</span>
+                    </div>
+                </li>
+                <!-- Lista de los planes -->
+                
+              </ul>
+              <div class="text-center" id="started_plans">
+                    <button class="btn col-12" name="started" href="{% url 'user_projects' %}" type="submit" id="started_1">{% trans "Get Started" %}</button>  
+             </div>    
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100" id="basic_plan">
+            <div class="pricing-item plans" id="plans"  style="">
+              <h2>{% trans "Basic Plan" %}</h2>
+              <div class="period-change mb-4 d-block">
+                <div class="price-wrap">
+                  <div class="price">
+                    <div>
+                      <div>$29</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="d-inline-flex align-items-center text-center period-wrap">
+                  <div class="d-inline-block mr-1">Per</div>
+                  <div class="d-block text-left period">
+                    <div>
+                      <div>{% trans "Month" %}</div>
+                    </div>
+                  </div>
+                </div>
+                <hr style="background: #c00029">
+              </div>
+              <ul class="list-unstyled mb-4">
+                <li class="d-flex"><span><h3 style="margin: 0px 0 8px 0;">{% trans "Features" %}</h3></span></li>
+                
+                <!-- Lista de los planes -->  
+                <li class="d-flex">                
+                    <span class="bi bi-check mr-2" style="font-size: 20px; color:#d3002d"></span>
+                    <div class="container col-6" style="padding: 0px;">
+                        <span>{% trans "Video Translation" %}</span>
+                    </div>                
+                    <div class="container col-6 pe-4" style="text-align: right">
+                        <span style="text-align: right;">20 {% trans "Mins" %}</span>
+                    </div>
+                </li>
+                <!-- Lista de los planes -->
+                <li class="d-flex">                
+                    <span class="bi bi-check mr-2" style="font-size: 20px; color:#d3002d"></span>
+                    <div class="container col-6" style="padding: 0px;">
+                        <span>{% trans "Premium Voice" %}</span>
+                    </div>                
+                    <div class="container col-6 pe-4" style="text-align: right">
+                        <span style="text-align: right;">0 {% trans "Mins" %}</span>
+                    </div>
+                </li>
+                <!-- Lista de los planes -->  
+                <li class="d-flex">                
+                    <span class="bi bi-check mr-2" style="font-size: 20px; color:#d3002d"></span>
+                    <div class="container col-6" style="padding: 0px;">
+                        <span>{% trans "Subtitles" %}</span>
+                    </div>                
+                    <div class="container col-6 pe-4" style="text-align: right">
+                        <span style="text-align: right;">{% trans "Unlimited" %}</span>
+                    </div>
+                </li>
+                <!-- Lista de los planes -->  
+                <li class="d-flex">                
+                    <span class="bi bi-check mr-2" style="font-size: 20px; color:#d3002d"></span>
+                    <div class="container col-6" style="padding: 0px;">
+                        <span>{% trans "Storage" %}</span>
+                    </div>                
+                    <div class="container col-6 pe-4" style="text-align: right">
+                        <span style="text-align: right;">5 GB</span>
+                    </div>
+                </li>
+                <!-- Lista de los planes -->
+                <li class="d-flex">                
+                    <span class="bi bi-check mr-2" style="font-size: 20px; color:#d3002d"></span>
+                    <div class="container col-6" style="padding: 0px;">
+                        <span>{% trans "Max File Upload Length" %}</span>
+                    </div>                
+                    <div class="container col-6 pe-4" style="text-align: right">
+                        <span style="text-align: right;">10 {% trans "Mins" %}</span>
+                    </div>
+                </li>
+                <!-- Lista de los planes -->
+                <li class="d-flex">                
+                    <span class="bi bi-check mr-2" style="font-size: 20px; color:#d3002d"></span>
+                    <div class="container col-6" style="padding: 0px;">
+                        <span>{% trans "Max File Upload Size" %}</span>
+                    </div>                
+                    <div class="container col-6 pe-4" style="text-align: right">
+                        <span style="text-align: right;">{% trans "Unlimited" %}</span>
+                    </div>
+                </li>
+                <!-- Lista de los planes -->
+                
+              </ul>
+              <div class="text-center" id="started_plans">
+                    <button class="btn col-12" name="started" href="{% url 'user_projects' %}" type="submit" id="started_1">{% trans "Get Started" %}</button>  
+             </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200" id="premium_plan">
+            <div class="pricing-item plans">
+              <h2>{% trans "Premium Plan" %}</h2>
+              <div class="period-change mb-4 d-block">
+                <div class="price-wrap">
+                  <div class="price">
+                    <div>
+                      <div>$297</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="d-inline-flex align-items-center text-center period-wrap">
+                  <div class="d-inline-block mr-1">{% trans "Per" %}</div>
+                  <div class="d-block text-left period">
+                    <div>
+                      <div>{% trans "Month" %}</div>
+                    </div>
+                  </div>
+                </div>
+                <hr style="background: #c00029">
+              </div>
+              <ul class="list-unstyled mb-4">
+                <li class="d-flex"><span><h3 style="margin: 0px 0 8px 0;">{% trans "Features" %}</h3></span></li>
+                
+                <!-- Lista de los planes -->  
+                <li class="d-flex">                
+                    <span class="bi bi-check mr-2" style="font-size: 20px; color:#d3002d"></span>
+                    <div class="container col-6" style="padding: 0px;">
+                        <span>{% trans "Video Translation" %}</span>
+                    </div>                
+                    <div class="container col-6 pe-4" style="text-align: right">
+                        <span style="text-align: right;">300 {% trans "Mins" %}</span>
+                    </div>
+                </li>
+                <!-- Lista de los planes -->
+                <li class="d-flex">                
+                    <span class="bi bi-check mr-2" style="font-size: 20px; color:#d3002d"></span>
+                    <div class="container col-6" style="padding: 0px;">
+                        <span>{% trans "Premium Voice" %}</span>
+                    </div>                
+                    <div class="container col-6 pe-4" style="text-align: right">
+                        <span style="text-align: right;">30 {% trans "Mins" %}</span>
+                    </div>
+                </li>
+                <!-- Lista de los planes -->  
+                <li class="d-flex">                
+                    <span class="bi bi-check mr-2" style="font-size: 20px; color:#d3002d"></span>
+                    <div class="container col-6" style="padding: 0px;">
+                        <span>{% trans "Subtitles" %}</span>
+                    </div>                
+                    <div class="container col-6 pe-4" style="text-align: right">
+                        <span style="text-align: right;">{% trans "Unlimited" %}</span>
+                    </div>
+                </li>
+                <!-- Lista de los planes -->  
+                <li class="d-flex">                
+                    <span class="bi bi-check mr-2" style="font-size: 20px; color:#d3002d"></span>
+                    <div class="container col-6" style="padding: 0px;">
+                        <span>{% trans "Storage" %}</span>
+                    </div>                
+                    <div class="container col-6 pe-4" style="text-align: right">
+                        <span style="text-align: right;">10 GB</span>
+                    </div>
+                </li>
+                <!-- Lista de los planes -->
+                <li class="d-flex">                
+                    <span class="bi bi-check mr-2" style="font-size: 20px; color:#d3002d"></span>
+                    <div class="container col-6" style="padding: 0px;">
+                        <span>{% trans "Max File Upload Length" %}</span>
+                    </div>                
+                    <div class="container col-6 pe-4" style="text-align: right">
+                        <span style="text-align: right;">10 {% trans "Mins" %}</span>
+                    </div>
+                </li>
+                <!-- Lista de los planes -->
+                <li class="d-flex">                
+                    <span class="bi bi-check mr-2" style="font-size: 20px; color:#d3002d"></span>
+                    <div class="container col-6" style="padding: 0px;">
+                        <span>{% trans "Max File Upload Size" %}</span>
+                    </div>                
+                    <div class="container col-6 pe-4" style="text-align: right">
+                        <span style="text-align: right;">{% trans "Unlimited" %}</span>
+                    </div>
+                </li>
+                <!-- Lista de los planes -->
+                  
+              </ul>
+              <div class="text-center" id="started_plans">
+                    <button class="btn col-12" name="started" href="{% url 'user_projects' %}" type="submit" id="started_1">{% trans "Get Started" %}</button>  
+             </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+<!-- Section:3-PRECIOS -->  
+        
+<!-- Section: 4 -->
+    <section class="features_2" id="Skills" style="background-image: url('/static/assets/landing/img/fondo_section4_box.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center center;">
+				<div class="container">
+					<div class="row" id="section4_box">
+						<!-- Features Single -->
+						<div class="col-12 features-single_2" style="text-align: center" id="box_4">
+						<h3><i class="bi bi-hourglass-split col-3" style="font-size: 35px;"></i>{% trans "Stop wasting weeks or months" %}</h3>	
+						<h1>{% trans "Translate & Subtitle videos 100x faster" %}</h1>
+                       
+                  <div class="text-center px-2">
+                      <button class="btn col-lg-4 col-md-4" name="started" href="{% url 'user_projects' %}" type="submit" id="started_1">{% trans "Get Started" %}</button>  
+                  </div>                        	
+													
+						</div>
+					</div>
+				</div>
+			</section>
+<!-- Section: 4 -->      
+    
+<!-- Section: 5-SUBTITLE -->  
+<section id="subtile_11">
+  <div class="container-fluid" >
+    <div class="container" id="subtitle">
+        <div class="row">
+            <div class="col-md-8 col-lg-6">
+                <div>
+                    <img src="/static/assets/landing/img/subtitle_400pxX355px.jpg" alt="#" class="img_subtitle">
+                </div>
+            </div>
+            <div class="col-md-4 col-lg-6 text_subtitle">
+                <h1 class="h1-responsive mb-4 font-weight-bold">{% trans "Unlimited FREE Subtitles" %}</h1>
+                <div class="lista ps-3">
+                    <p class="font-weight-bold" style="font-size: 25px;"><i class="bi bi-check-square-fill pe-3" style="font-size: 20px;  color: #ed0033"></i>{% trans "Animated Subtitles and Effects" %}</p>
+                    <p class="font-weight-bold" style="font-size: 25px;"><i class="bi bi-check-square-fill pe-3" style="font-size: 20px;  color: #ed0033"></i>{% trans "SRT and VTT Format Download" %}</p>
+                    <p class="font-weight-bold" style="font-size: 25px;"><i class="bi bi-check-square-fill pe-3" style="font-size: 20px;  color: #ed0033"></i>{% trans "Export Embedded Subtitles" %}</p>
+                    <p class="font-weight-bold" style="font-size: 25px;"><i class="bi bi-check-square-fill pe-3" style="font-size: 20px;  color: #ed0033"></i>{% trans "Enjoy everything with Voice Dubbing" %}</p>        
+                </div>
+            <button class="btn col-lg-6 col-md-6 mt-4" name="started" href="#" type="submit" id="started_1">{% trans "Start Creating Now" %}</button>  
+            </div> 
+        </div>
+    </div>
+  </div>
+</section>
+<!-- Section: 5-SUBTITLE -->  
+    
+<!-- FOOTER -->  
+<footer class="text-white pt-5 pb-4" style="background-image: url('/static/assets/landing/img/fondo_section_box.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center center;">
+    <div class="container text-center text-md-start footer_1">
+        <div class="row text-md-start">
+            
+            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto">
+                <hr class="mb-4" style="background: #fff;">
+                <h5 class="text-uppercase mb-4 font-weight-bold">{% trans "Products" %}</h5>
+                <hr class="mb-4" style="background: #fff;">
+                <p>
+                    <a href="{% url 'user_projects' %}" class="text-white">{% trans "Get Started" %}</a>
+                </p>
+                <p>
+                    <a href="#" class="text-white">{% trans "Sign In" %}</a>
+                </p>
+                <p>
+                    <a href="#" class="text-white">{% trans "Plans" %}</a>
+                </p>
+                <p>
+                    <a href="#" class="text-white">{% trans "Schedule a Free call" %}</a>
+                </p>
+                <p>
+                    <a href="#" class="text-white">{% trans "Become an affiliate" %}</a>
+                </p>
+            </div>
+            
+            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto">
+                <hr class="mb-4" style="background: #fff;">
+                <h5 class="text-uppercase mb-4 font-weight-bold">Blogs</h5>
+                <hr class="mb-4"  style="background: #fff;">
+                <p>
+                    <a href="#" class="text-white">Instagram</a>
+                </p>
+                <p>
+                    <a href="#" class="text-white">TikTok</a>
+                </p>
+                <p>
+                    <a href="#" class="text-white">Youtube</a>
+                </p>
+            </div>
+            
+            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto">
+                <hr class="mb-4" style="background: #fff;">
+                <h5 class="text-uppercase mb-4 font-weight-bold">{% trans "Terms" %}</h5>
+                <hr class="mb-4"  style="background: #fff;">
+                <p>
+                    <a href="#" class="text-white">{% trans "Privacy Policy" %}</a>
+                </p>
+                <p>
+                    <a href="#" class="text-white">{% trans "Terms & Conditions" %}</a>
+                </p>
+                <p>
+                    <a href="#" class="text-white">{% trans "Refund Policy" %}</a>
+                </p>
+            </div>
+                                
+            <div class="col-md-4 col-lg-4 col-xl-4 mx-auto">
+                <hr class="mb-4" style="background: #fff;">
+                <h5 class="text-uppercase mb-4 font-weight-bold">{% trans "Company" %}</h5>
+                <hr class="mb-4"  style="background: #fff;">
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. 
+                </p>
+                <div>
+                    <i class="bi bi-house-door-fill"></i>
+                    <span>Apex Future Labs Pvt. Ltd 4th Floor, Sanjay Nagar Main Rd, </span>
+                </div>   
+                <div>
+                    <i class="bi bi-telephone-fill"></i>
+                    <span>+00 5555 5562 </span>
+                </div> 
+                <div>
+                    <i class="bi bi-envelope-at-fill"></i>
+                    <a href="#" class="text-white ">contact@ymlmultilanguag.com</a> 
+                </div> 
+            </div>
+            
+        </div>
+    </div>
+    <div class="container-fluid footer_2 col-12">
+        <div class="container">
+            <div class="row">
+            <div class="container col-lg-3 col-md-4 text-center">
+                <a class="navbar-brand" href="#">
+                    <img src="/static/assets/landing/img/ico-negro_01.png" alt="Logo"  height="30" class="d-inline-block align-text-top float-start pe-2">
+                    <strong class="nombre_traslator">YML Multilanguage</strong>
+                </a>
+            </div>
+            <div class="container col-lg-7 col-md-6 text-center" style="font-size: 20px;">
+                <i class="bi bi-c-circle"></i>
+                <span>2023-24 YML Multilanguage</span>
+            </div> 
+            <div class="col-lg-2 col-md-2">
+                <div class="row">
+                    <a href="#" class="col-3 text-white  text-center " style="font-size: 20px;"><i class="bi bi-threads"></i></a>
+                    <a href="#" class="col-3 text-white text-center" style="font-size: 20px;"><i class="bi bi-youtube"></i></a>
+                    <a href="#" class="col-3 text-white text-center" style="font-size: 20px;"><i class="bi bi-instagram"></i></a>
+                    <a href="#" class="col-3 text-white  text-center" style="font-size: 20px;"><i class="bi bi-twitter-x"></i></a>
+            </div>
+            </div>
+        </div>   
+        </div>
+    </div>
+</footer>
+<!-- FOOTER --> 
+    
+    
+<!-- /Start your project here--------------------------------------------------------------------------->
+
+<!-- JQuery -->
+    <script type="text/javascript" src="/static/assets/landing/js/jquery-3.2.1.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="/static/assets/landing/js/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="/static/assets/landing/js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="/static/assets/landing/js/mdb.min.js"></script>
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <!-- /Fuentes-íconos -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    
+    
+
+    <script>
+         // Animations initialization
+        new WOW().init();
+    </script> 
+
+
+</body>
+
+</html>

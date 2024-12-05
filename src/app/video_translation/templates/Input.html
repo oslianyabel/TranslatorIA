@@ -1,0 +1,213 @@
+{% load i18n %} 
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="keywords" content="Inteligencia Artificial, IA, traductor, video editor, editor de video, Translator">    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>YML-Multilanguage </title>
+    
+    <!-- Icono en la pestaña del navegador -->    
+    <link rel="icon" type="image/x-icon" href="/static/assets/voice_clone/img/ico-blanco_02.png">
+    <!-- /Icono en la pestaña del navegador -->
+    
+    <!-- Fuentes-íconos -->   
+    <!-- Font Awesome -->
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <!-- /Fuentes-íconos -->
+     
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    
+    <!-- Material Design Bootstrap -->
+    <link href="/static/assets/css/mdb.min.css" rel="stylesheet">
+    <!-- Bootstrap core CSS -->
+    <link href="/static/assets/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Your custom styles (optional) -->
+    <link href="/static/assets/voice_clone/css/Input.css" rel="stylesheet">
+</head>
+
+<body>
+
+<!-- Start your project here -->
+<!-- Main navigation -->
+<header>
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="{% url 'landing' %}">
+        <img src="/static/assets/voice_clone/img/ico-blanco_01.png" alt="Logo"  height="40" class="d-inline-block align-text-top  pe-2">
+      </a>
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a href="{% url 'user_projects' %}" class="btn btn_header"><i class="bi bi-folder"></i>{% trans "My Projects" %}</a>
+        </li>
+      </ul>
+      <!-- to the right -->
+      <ul class="navbar-nav d-flex flex-row me-1">
+        <li class="nav-item">
+            <a class="nav-link menu_header text-white" href="{% url 'activate_language' language_code="es" %}"> ESP</a>
+        </li>
+        <li class="nav-item"> <a class="nav-link menu_header text-white" > /</a> </li>
+        <li class="nav-item">
+            <a class="nav-link menu_header text-white" href="{% url 'activate_language' language_code="en" %}"> ENG</a>
+        </li>
+        {% comment %} <form action="{% url 'set_language' %}" method="post">
+          {% csrf_token %}
+          <input name="next" type="hidden" value="{{ redirect_to }}" />
+          <select name="language">
+              <option value="en">English</option>
+              <option value="es">Español</option>
+          </select>
+          <button class="btn" name="set_language" type="submit" >{% trans "Change" %}</button>  
+        </form> {% endcomment %}
+      
+        {% comment %} <div class="col-1" style="">  TODO there's a need to set a profile pic?? 
+        <img src="/static/assets/user_projects/img/avatar1.jpg" alt="Logo"  height="45" class="float-end avatar" style="">       {% endcomment %}
+        <li class="nav-item dropdown me-6 me-lg-0">
+          <a class="nav-link dropdown-toggle text-white" href="{% url 'user_projects' %}" id="navbarDropdownProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="bi bi-person-fill" style="height: 45px;"></i>
+          {% trans "Account" %}
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownProfile">
+            <li>
+                <a class="dropdown-item" href="{% url 'user_projects' %}">{% trans "Projects" %}</a>
+            </li>
+            <li><hr class="dropdown-divider" /></li>
+            <li>
+              <a class="dropdown-item" href="{% url 'change_password' %}">{% trans "Change Password" %}</a>
+            </li>
+            <li><hr class="dropdown-divider" /></li>
+            <li>
+                <a class="dropdown-item" href="{% url 'logout' %}" >{% trans "Log out" %}</a>
+            </li>
+          </ul>
+        </li>
+      </ul>      
+    </div>
+  </nav>
+</header>
+{% comment %} <header>
+   <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container-fluid">
+      <div class="col-1">
+        <a class="navbar-brand" href="#">
+          <img src="/static/assets/voice_clone/img/ico-blanco_01.png" alt="Logo"  height="40" class="d-inline-block align-text-top  pe-2">
+        </a>
+      </div>
+      <div class="col-8">      
+        <a href="{% url 'user_projects' %}" class="btn btn_header"><i class="bi bi-folder"></i>{% trans "My Projects" %}</a>
+      </div>
+      <div class="col-2"> 
+        <form action="{% url 'set_language' %}" method="post">
+          {% csrf_token %}
+          <input name="next" type="hidden" value="{{ redirect_to }}" />
+          <select name="language">
+              <option value="en">English</option>
+              <option value="es">Español</option>
+          </select>
+          <button class="btn" name="set_language" type="submit" >{% trans "Change" %}</button>  
+        </form>
+      </div>
+      <div class="col-1" style="">
+         <img src="/static/assets/voice_clone/img/avatar1.jpg" alt="Logo"  height="45" class="float-end avatar" style="">      
+      </div>       
+    </div>
+  </nav>
+</header> {% endcomment %}
+
+<section>
+  <form id="voice_clone_form" onsubmit="return validateForm()" method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+    <div class="container add_audio">       
+      <section class="section_add_projects container-fluid row">
+        <h3 class="mb-4">
+          {% trans "Upload an audio sample with a duration between 3 - 10 seconds. The speech must be clear and with no background noices." %}
+        </h3> 
+        <div class="col-lg-5 col-md-6 col-sm-12 col-xs-12">
+          <div class="add_projects pt-5 pb-5" id="dropBox"  style="text-align: center" name="add_audio">
+            <i class="bi bi-plus-lg " style="font-size: 40px;"></i>
+            <h6>{% trans "Drag & Drop to Upload File"  %}</h6>
+          </div> 
+          <p class="pt-10 mb-0" style="text-align: center; color: gray; ">{% trans "or" %}</p>
+          <div class="form-group">
+            <label for="fileupload"><i class="bi bi-cloud-upload"></i> 
+              {% trans "Choose audio" %}
+            </label>
+            <input type="file" class="form-control" name="file" id="id_file" accept=".wav, .mp3">
+          </div>
+          <div id="uploaded_files"></div> <!-- Progress bar -->
+        </div> 
+      </section>  
+      <div class="col-md-6">
+        <label for="id_voice_name">{% trans "Voice name:" %}</label>
+        <input type="text" class="form-control"  name="voice_name" maxlength="200" required id="id_voice_name">
+        {% comment %} <div class="input-group mb-4">
+          <span class="input-group-text" id="basic-addon1"><i class="bi bi-floppy2-fill" style="color: #d3002d;"></i></span>
+          <input type="text" class="form-control" name="voice_name" maxlength="200" required id="id_voice_name" aria-label="Voice_name" aria-describedby="basic-addon1">
+        </div> {% endcomment %}
+        {% comment %} <label for="id_languages">{% trans "Languages:" %}</label>
+        <select class="form-select" name="languages" id="id_languages">
+            <option selected>{% trans "Select language" %}</option>             
+            <option value="cs">Czech</option> 
+            <option value="nl">Dutch</option>
+            <option value="en">English</option>
+            <option value="fr">French</option>
+            <option value="de">German</option>
+            <option value="it">Italian</option>
+            <option value="pl">Polish</option>
+            <option value="pt">Portuguese</option>
+            <option value="es">Spanish</option>
+        </select> {% endcomment %}
+                    
+        <button type="submit" id="upload_video_btn_id" onclick="document.forms['voice_clone_form'].submit();" class="btn save"  style="margin-top: 20px;">{% trans "Save" %}</button>
+      </div>  
+    </div>
+  </form>
+</section>
+
+<!-- /Start your project here--------------------------------------------------------------------------->
+
+<!-- JQuery -->
+    <script type="text/javascript" src="/static/assets/voice_clone/js/jquery-3.2.1.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="/static/assets/voice_clone/js/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="/static/assets/voice_clone/js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="/static/assets/voice_clone/js/mdb.min.js"></script>
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <!-- /Fuentes-íconos -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    
+    <script src="/static/assets/voice_clone/js/dragdrop_progressbar.js"></script>
+
+    <script>
+         // Animations initialization
+        new WOW().init();
+    </script>  
+    <script>
+      var post_form = document.getElementById("voice_clone_form");
+      var btn_post = document.getElementById("upload_video_btn_id");
+      console.log(post_form);
+      console.log(btn_post);
+      function submit_form(){
+        console.log(post_form);
+        console.log(btn_post);
+        post_form.submit();
+      }
+    </script> 
+
+
+</body>
+
+</html>

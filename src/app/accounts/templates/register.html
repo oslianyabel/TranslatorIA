@@ -1,0 +1,130 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Register {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+  <div class="row">
+    <div class="col-md-5">
+      <div class="card">
+        <div class="card-header card-header-primary">
+          <h4 class="card-title">
+            Create Account
+          </h4>
+        </div>
+        <div class="card-body">
+
+          <h6 class="card-category">
+              {% if msg %}
+                <span class="text-danger">{{ msg | safe }}</span>
+              {% else %}
+                Add your credentials
+              {% endif %}  
+          </h6>
+          
+          <br />
+
+          {% if success %}
+
+            <p class="">
+              Please <a href="{% url 'login' %}" class="text-black text-small">authenticate</a> using the new account.
+            </p>  
+
+          {% else %}
+            <form role="form" method="post" action="">
+                
+              {% csrf_token %} 
+
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label class="bmd-label-floating" style="font-weight:bold;">Username</label>
+                    {{ form.username }}
+                  </div>
+                </div>
+              </div>
+              <span class="text-danger">{{ form.username.errors }}</span>
+
+              <br />
+
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label class="bmd-label-floating" style="font-weight:bold;">Email</label>
+                    {{ form.email }}
+                  </div>
+                </div>
+              </div>
+              <span class="text-danger">{{ form.email.errors }}</span>
+
+              <br />
+
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label class="bmd-label-floating" style="font-weight:bold;">Password</label>
+                    {{ form.password1 }}
+                    <a class="ml-2 fa fa-eye" onclick="togglePassword1()"></a>
+                    <script>
+                      function togglePassword1() {
+                      var x = document.getElementById("id_password1");
+                      if (x.type === "password") {
+                        x.type = "text";
+                      } else {
+                        x.type = "password";
+                      }}
+                    </script> 
+                  </div>
+                </div>
+              </div>
+              <span class="text-danger">{{ form.password1.errors }}</span>
+
+              <br />
+
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label class="bmd-label-floating" style="font-weight:bold;">Password Check</label>
+                    {{ form.password2 }}
+                    <a class="ml-2 fa fa-eye" onclick="togglePassword2()"></a>
+                    <script>
+                      function togglePassword2() {
+                      var x = document.getElementById("id_password2");
+                      if (x.type === "password") {
+                        x.type = "text";
+                      } else {
+                        x.type = "password";
+                      }
+                    }
+                  </script> 
+                  </div>
+                </div>
+              </div>
+              <span class="text-danger">{{ form.password2.errors }}</span>
+
+              <br />
+
+              <button type="submit" name="register" class="btn btn-primary pull-left">Register</button>
+
+              &nbsp; &nbsp; 
+              <span class="pull-right">
+                Already have an account? <a href="{% url 'login' %}" class="text-primary">Login</a>
+              </span>
+
+              <div class="clearfix"></div>
+
+            </form>
+          {% endif %}
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

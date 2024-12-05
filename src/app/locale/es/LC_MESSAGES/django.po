@@ -1,0 +1,1173 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-06-09 14:13+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: accounts/templates/accounts/Login.html:99
+#: accounts/templates/accounts/Register.html:100
+#: accounts/templates/change_password.html:97
+#: accounts/templates/passwords/password_reset.html:98
+#: accounts/templates/passwords/password_reset_confirm.html:99
+msgid "AI TRANSLATOR"
+msgstr "TRADUCTOR VIDEO IA "
+
+#: accounts/templates/accounts/Login.html:100
+#: accounts/templates/accounts/Register.html:119
+#: accounts/templates/passwords/password_reset.html:101
+#: home/templates/Landing_Page.html:161
+msgid "E-Mail Address"
+msgstr "Dirección de correo"
+
+#: accounts/templates/accounts/Login.html:108
+#: accounts/templates/accounts/Register.html:141
+msgid "Password"
+msgstr "Contraseña"
+
+#: accounts/templates/accounts/Login.html:127
+msgid "Remember me"
+msgstr "Recuerdame"
+
+#: accounts/templates/accounts/Login.html:128
+msgid "Forgot password"
+msgstr "¿Has olvidado tu contraseña?"
+
+#: accounts/templates/accounts/Login.html:132
+msgid "LOGIN"
+msgstr "INICIAR SESIÓN"
+
+#: accounts/templates/accounts/Login.html:136
+msgid "Login with"
+msgstr "Iniciar Sesión con"
+
+#: accounts/templates/accounts/Login.html:157
+msgid "Don't have an account yet?"
+msgstr "¿Aún no tienes una cuenta?"
+
+#: accounts/templates/accounts/Login.html:157
+#: home/templates/Landing_Page.html:83
+msgid "Sign Up"
+msgstr "Registro"
+
+#: accounts/templates/accounts/Register.html:101
+msgid "Create an account"
+msgstr "Crea una cuenta"
+
+#: accounts/templates/accounts/Register.html:103
+msgid "First Name"
+msgstr "Nombre"
+
+#: accounts/templates/accounts/Register.html:111
+msgid "Last Name"
+msgstr "Apellidos"
+
+#: accounts/templates/accounts/Register.html:127
+msgid "Referral token (Optional)"
+msgstr "Token de referencia (Opcional)"
+
+#: accounts/templates/accounts/Register.html:136
+#: accounts/templates/change_password.html:117
+#: accounts/templates/passwords/password_reset_confirm.html:103
+msgid "Your password can't be too similar to your other personal information."
+msgstr "Su contraseña no puede ser muy similar a su otra información personal."
+
+#: accounts/templates/accounts/Register.html:137
+#: accounts/templates/change_password.html:118
+#: accounts/templates/passwords/password_reset_confirm.html:104
+msgid "Your password must contain at least 8 characters."
+msgstr "Su contraseña debe contener al menos 8 caracteres."
+
+#: accounts/templates/accounts/Register.html:138
+#: accounts/templates/change_password.html:119
+#: accounts/templates/passwords/password_reset_confirm.html:105
+msgid "Your password can't be a commonly used password."
+msgstr "Su contraseña no puede ser una contraseña común."
+
+#: accounts/templates/accounts/Register.html:139
+#: accounts/templates/change_password.html:120
+#: accounts/templates/passwords/password_reset_confirm.html:106
+msgid "Your password can't be entirely numeric."
+msgstr "Su contraseña no puede ser completamente numérica."
+
+#: accounts/templates/accounts/Register.html:149
+msgid "Password check"
+msgstr "Confirmación de contraseña"
+
+#: accounts/templates/accounts/Register.html:157
+msgid "REGISTER"
+msgstr "REGISTRO"
+
+#: accounts/templates/accounts/Register.html:163
+msgid "Sign Up with"
+msgstr "Registrarse con"
+
+#: accounts/templates/accounts/Register.html:174
+msgid "Do you already have an account?"
+msgstr "¿Ya tienes una cuenta?"
+
+#: accounts/templates/accounts/Register.html:174
+#: home/templates/Landing_Page.html:80
+msgid "Login"
+msgstr "Iniciar Sesión"
+
+#: accounts/templates/activate_account.html:4
+#: accounts/templates/passwords/request_password_reset.html:34
+msgid "Hello"
+msgstr "Hola"
+
+#: accounts/templates/activate_account.html:6
+msgid "Please click on the link below to confirm your registration:"
+msgstr ""
+
+#: accounts/templates/change_password.html:98
+msgid "Change password"
+msgstr "Cambiar la contraseña"
+
+#: accounts/templates/change_password.html:100
+msgid "Old Password"
+msgstr "Contraseña anterior"
+
+#: accounts/templates/change_password.html:108
+#: accounts/templates/passwords/password_reset_confirm.html:108
+msgid "New Password"
+msgstr "Nueva contraseña"
+
+#: accounts/templates/change_password.html:123
+#: accounts/templates/passwords/password_reset_confirm.html:116
+msgid "New Password check"
+msgstr "Confirmación de nueva contraseña"
+
+#: accounts/templates/change_password.html:131
+msgid "Change"
+msgstr "Modificar"
+
+#: accounts/templates/check_email.html:73
+msgid "Activate your account"
+msgstr "Activa tu cuenta"
+
+#: accounts/templates/check_email.html:76
+msgid "Please check your inbox and verify your email address."
+msgstr ""
+"Por favor revise su bandeja de entrada y verifique su dirección de correo "
+"electrónico."
+
+#: accounts/templates/password_change_done.html:72
+msgid "Password changed successfully"
+msgstr "Contraseña cambiada con éxito"
+
+#: accounts/templates/password_change_done.html:75
+msgid "Go"
+msgstr "Ir"
+
+#: accounts/templates/password_change_done.html:75
+msgid "Back"
+msgstr "Atrás"
+
+#: accounts/templates/passwords/password_reset.html:99
+msgid "Enter your email to reset password"
+msgstr "Ingresa tu correo electrónico para reestablecer su contraseña"
+
+#: accounts/templates/passwords/password_reset.html:107
+msgid "SEND"
+msgstr "ENVIAR"
+
+#: accounts/templates/passwords/password_reset_complete.html:41
+msgid "Password reset complete"
+msgstr "Restablecimiento de contraseña completado"
+
+#: accounts/templates/passwords/password_reset_complete.html:44
+msgid "Your new password has been set. You can log in now on the"
+msgstr ""
+"Su nueva contraseña ha sido establecida. Puedes iniciar sesión ahora en la"
+
+#: accounts/templates/passwords/password_reset_complete.html:44
+#: accounts/templates/success.html:69
+msgid "log in page"
+msgstr "página de inicio de sesión"
+
+#: accounts/templates/passwords/password_reset_confirm.html:100
+msgid "Set a new password!"
+msgstr "¡Establezca una nueva contraseña!"
+
+#: accounts/templates/passwords/password_reset_confirm.html:124
+msgid "CONFIRM"
+msgstr "CONFIRMAR"
+
+#: accounts/templates/passwords/password_reset_confirm.html:130
+msgid ""
+"The password reset link was invalid, possibly because it has already been "
+"used. Please request a new password reset."
+msgstr ""
+"El enlace para restablecer la contraseña no era válido, posiblemente porque "
+"ya había sido usado. Solicite un nuevo restablecimiento de contraseña."
+
+#: accounts/templates/passwords/password_reset_done.html:42
+msgid "Reset Password"
+msgstr "Restablecer la contraseña"
+
+#: accounts/templates/passwords/password_reset_done.html:45
+msgid ""
+"Please check your inbox and follow the instruction to reset your password."
+msgstr ""
+"Revise su bandeja de entrada y siga las instrucciones para restablecer su "
+"contraseña.."
+
+#: accounts/templates/passwords/request_password_reset.html:36
+msgid ""
+"We received a request to reset the password for your account for this email "
+"address. To initiate the password reset process for your account, click the "
+"link below."
+msgstr ""
+"Recibimos una solicitud para restablecer la contraseña de su cuenta para "
+"esta dirección de correo electrónico. Para iniciar el proceso de "
+"restablecimiento de contraseña para su cuenta, haga clic en el enlace a "
+"continuación."
+
+#: accounts/templates/passwords/request_password_reset.html:40
+msgid ""
+"This link can only be used once. If you need to reset your password again, "
+"please visit"
+msgstr ""
+"Este enlace sólo se puede utilizar una vez. Si necesita restablecer su "
+"contraseña nuevamente, visite"
+
+#: accounts/templates/passwords/request_password_reset.html:40
+msgid "and request another reset."
+msgstr "y haga otra solicitud."
+
+#: accounts/templates/passwords/request_password_reset.html:42
+msgid "If you did not make this request, you can simply ignore this email."
+msgstr ""
+"Si no realizó esta solicitud, simplemente puede ignorar este correo "
+"electrónico."
+
+#: accounts/templates/success.html:66
+msgid "Congrats! you just verified your account"
+msgstr "¡Felicitaciones! acabas de verificar tu cuenta"
+
+#: accounts/templates/success.html:69
+msgid "You can log in now on the"
+msgstr "Puedes iniciar sesión ahora en la"
+
+#: accounts/views.py:287
+msgid "Dear"
+msgstr "Estimada(o)"
+
+#: accounts/views.py:287
+msgid "please go to you email"
+msgstr "vaya a la bandeja de entrada de su correo electrónico"
+
+#: accounts/views.py:288
+msgid ""
+"inbox and click on received activation link to confirm and complete the "
+"registration."
+msgstr "y haga clic en el enlace de activación recibido para confirmar y completar el registro."
+
+#: accounts/views.py:289
+msgid "Note:"
+msgstr "Nota:"
+
+#: accounts/views.py:289
+msgid "Check your spam folder."
+msgstr "Revise su carpeta de spam."
+
+#: home/templates/Landing_Page.html:62
+msgid "Home"
+msgstr "Inicio"
+
+#: home/templates/Landing_Page.html:67
+msgid "Platform"
+msgstr "Plataforma"
+
+#: home/templates/Landing_Page.html:70
+msgid "Skills"
+msgstr "Habilidades"
+
+#: home/templates/Landing_Page.html:73 home/templates/Landing_Page.html:325
+#: home/templates/Landing_Page.html:675
+msgid "Plans"
+msgstr "Planes"
+
+#: home/templates/Landing_Page.html:76
+msgid "Subtitle"
+msgstr "Subtítulos"
+
+#: home/templates/Landing_Page.html:115 home/templates/user_projects.html:81
+#: video_translation/templates/Input.html:76
+#: video_translation/templates/translation.html:185
+msgid "Account"
+msgstr "Cuenta"
+
+#: home/templates/Landing_Page.html:119 home/templates/user_projects.html:85
+#: video_translation/templates/Input.html:80
+#: video_translation/templates/translation.html:189
+msgid "Projects"
+msgstr "Proyectos"
+
+#: home/templates/Landing_Page.html:123 home/templates/user_projects.html:89
+#: video_translation/templates/Input.html:84
+#: video_translation/templates/translation.html:193
+msgid "Change Password"
+msgstr "Cambiar Contraseña"
+
+#: home/templates/Landing_Page.html:127 home/templates/user_projects.html:93
+#: video_translation/templates/Input.html:88
+#: video_translation/templates/translation.html:197
+msgid "Log out"
+msgstr "Cerrar sesión"
+
+#: home/templates/Landing_Page.html:155
+msgid "Multilanguage video editor and translator. Just with one click"
+msgstr "Editor y traductor de vídeo multilenguaje. Solo con un clic"
+
+#: home/templates/Landing_Page.html:158
+msgid "Join 250,000+ creators to reach billions of people glob"
+msgstr ""
+"Únase a los 250 000+ creadores para llegar a miles de millones de personas "
+"en todo el mundo"
+
+#: home/templates/Landing_Page.html:167 home/templates/Landing_Page.html:419
+#: home/templates/Landing_Page.html:512 home/templates/Landing_Page.html:605
+#: home/templates/Landing_Page.html:624 home/templates/Landing_Page.html:669
+msgid "Get Started"
+msgstr "Comenzar"
+
+#: home/templates/Landing_Page.html:189
+msgid "Change your user type (Testing only)."
+msgstr "Cambie su tipo de usuario (PRUEBA)."
+
+#: home/templates/Landing_Page.html:193
+msgid "You are a FREE user now. Click to change to paid user."
+msgstr ""
+"Eres un usuario GRATIS ahora. Haga clic para cambiar a usuario de pago."
+
+#: home/templates/Landing_Page.html:195
+msgid "You are a PAID user now. Click to change to free user"
+msgstr "Eres un usuario de PAGO ahora. Haga clic para cambiar a usuario gratis"
+
+#: home/templates/Landing_Page.html:197
+msgid "Switch"
+msgstr "Cambiar"
+
+#: home/templates/Landing_Page.html:206
+msgid "Why is it so great in YML Multilenguage?"
+msgstr "¿Por qué es tan bueno YML Multilenguage?"
+
+#: home/templates/Landing_Page.html:219
+msgid "Multifunctional"
+msgstr "Multifuncional"
+
+#: home/templates/Landing_Page.html:220
+msgid ""
+"Platform that integrates several functions, taking you further and giving "
+"you a unique experience."
+msgstr ""
+"Plataforma que integra varias funciones, llevándote más lejos y brindándote "
+"una experiencia única."
+
+#: home/templates/Landing_Page.html:230
+msgid "Intuitive"
+msgstr "Intuitivo"
+
+#: home/templates/Landing_Page.html:231
+msgid ""
+"Ease and minimalist, with which you can interact without much complexity."
+msgstr ""
+"Sencillo y minimalista, con lo que podrás interactuar sin mucha complejidad."
+
+#: home/templates/Landing_Page.html:241
+msgid "Real time response"
+msgstr "Respuesta en tiempo real"
+
+#: home/templates/Landing_Page.html:242
+msgid ""
+"Data entered by the user is processed immediately to facilitate almost "
+"instant decision making."
+msgstr ""
+"Los datos introducidos por el usuario se procesan inmediatamente para "
+"facilitar la toma de decisiones casi instantánea."
+
+#: home/templates/Landing_Page.html:297
+msgid "Satisfied Clients"
+msgstr "Clientes satisfechos"
+
+#: home/templates/Landing_Page.html:305
+msgid "Interaction Languages"
+msgstr "Idiomas de interacción"
+
+#: home/templates/Landing_Page.html:312
+msgid "Template Styles"
+msgstr "Estilos de plantilla"
+
+#: home/templates/Landing_Page.html:333
+msgid "Free Plan"
+msgstr "Plan gratuito"
+
+#: home/templates/Landing_Page.html:343 home/templates/Landing_Page.html:529
+msgid "Per"
+msgstr "Por"
+
+#: home/templates/Landing_Page.html:346 home/templates/Landing_Page.html:439
+#: home/templates/Landing_Page.html:532
+msgid "Month"
+msgstr "Mes"
+
+#: home/templates/Landing_Page.html:353 home/templates/Landing_Page.html:446
+#: home/templates/Landing_Page.html:539
+msgid "Features"
+msgstr "Prestaciones"
+
+#: home/templates/Landing_Page.html:359 home/templates/Landing_Page.html:452
+#: home/templates/Landing_Page.html:545
+msgid "Video Translation"
+msgstr "Traducción de vídeos"
+
+#: home/templates/Landing_Page.html:362 home/templates/Landing_Page.html:372
+#: home/templates/Landing_Page.html:402 home/templates/Landing_Page.html:455
+#: home/templates/Landing_Page.html:465 home/templates/Landing_Page.html:495
+#: home/templates/Landing_Page.html:548 home/templates/Landing_Page.html:558
+#: home/templates/Landing_Page.html:588
+msgid "Mins"
+msgstr "Minutos"
+
+#: home/templates/Landing_Page.html:369 home/templates/Landing_Page.html:462
+#: home/templates/Landing_Page.html:555
+msgid "Premium Voice"
+msgstr "Voz Premium"
+
+#: home/templates/Landing_Page.html:379 home/templates/Landing_Page.html:472
+#: home/templates/Landing_Page.html:565
+msgid "Subtitles"
+msgstr "Subtítulos"
+
+#: home/templates/Landing_Page.html:382 home/templates/Landing_Page.html:475
+#: home/templates/Landing_Page.html:505 home/templates/Landing_Page.html:568
+#: home/templates/Landing_Page.html:598
+msgid "Unlimited"
+msgstr "Ilimitado"
+
+#: home/templates/Landing_Page.html:389 home/templates/Landing_Page.html:482
+#: home/templates/Landing_Page.html:575
+msgid "Storage"
+msgstr "Almacenamiento"
+
+#: home/templates/Landing_Page.html:399 home/templates/Landing_Page.html:492
+#: home/templates/Landing_Page.html:585
+msgid "Max File Upload Length"
+msgstr "Longitud máxima de archivos"
+
+#: home/templates/Landing_Page.html:409 home/templates/Landing_Page.html:502
+#: home/templates/Landing_Page.html:595
+msgid "Max File Upload Size"
+msgstr "Tamaño máximo de archivos"
+
+#: home/templates/Landing_Page.html:426
+msgid "Basic Plan"
+msgstr "Plan Básico"
+
+#: home/templates/Landing_Page.html:519
+msgid "Premium Plan"
+msgstr "Plan Premium"
+
+#: home/templates/Landing_Page.html:620
+msgid "Stop wasting weeks or months"
+msgstr "Deja de perder semanas o meses"
+
+#: home/templates/Landing_Page.html:621
+msgid "Translate & Subtitle videos 100x faster"
+msgstr "Traduce & Subtitula vídeos 100x más rápido"
+
+#: home/templates/Landing_Page.html:644
+msgid "Unlimited FREE Subtitles"
+msgstr "Subtítulos GRATIS ilimitados"
+
+#: home/templates/Landing_Page.html:646
+msgid "Animated Subtitles and Effects"
+msgstr "Subtítulos y efectos animados"
+
+#: home/templates/Landing_Page.html:647
+msgid "SRT and VTT Format Download"
+msgstr "Descarga de formato SRT y VTT"
+
+#: home/templates/Landing_Page.html:648
+msgid "Export Embedded Subtitles"
+msgstr "Exportar subtítulos "
+
+#: home/templates/Landing_Page.html:649
+msgid "Enjoy everything with Voice Dubbing"
+msgstr "Disfruta de todo con el Doblaje de Voz"
+
+#: home/templates/Landing_Page.html:651
+msgid "Start Creating Now"
+msgstr "Comience a crear ahora"
+
+#: home/templates/Landing_Page.html:666
+msgid "Products"
+msgstr "Productos"
+
+#: home/templates/Landing_Page.html:672
+msgid "Sign In"
+msgstr "Iniciar sesión"
+
+#: home/templates/Landing_Page.html:678
+msgid "Schedule a Free call"
+msgstr "Programe una llamada gratuita"
+
+#: home/templates/Landing_Page.html:681
+msgid "Become an affiliate"
+msgstr "Conviértete en afiliado"
+
+#: home/templates/Landing_Page.html:702
+msgid "Terms"
+msgstr "Términos"
+
+#: home/templates/Landing_Page.html:705
+msgid "Privacy Policy"
+msgstr "Política de Privacidad"
+
+#: home/templates/Landing_Page.html:708
+msgid "Terms & Conditions"
+msgstr "Términos & Condiciones"
+
+#: home/templates/Landing_Page.html:711
+msgid "Refund Policy"
+msgstr "Politica de Reembolso"
+
+#: home/templates/Landing_Page.html:717
+msgid "Company"
+msgstr "Compañía"
+
+#: home/templates/user_projects.html:62
+msgid "Voice Generation"
+msgstr "Generación de voz"
+
+#: home/templates/user_projects.html:150
+msgid "Time used"
+msgstr "Tiempo utilizado"
+
+#: home/templates/user_projects.html:150 home/templates/user_projects.html:151
+msgid "seconds"
+msgstr "segundos"
+
+#: home/templates/user_projects.html:151
+msgid "Time left"
+msgstr "Tiempo restante"
+
+#: home/templates/user_projects.html:164
+msgid "Storage used"
+msgstr "Almacenamiento uttilizado"
+
+#: home/templates/user_projects.html:165
+msgid "Storage left"
+msgstr "Almacenamiento restante"
+
+#: home/templates/user_projects.html:180
+msgid "Upgrade"
+msgstr "Actualizar"
+
+#: home/templates/user_projects.html:192
+msgid "My projects"
+msgstr "Mis proyectos"
+
+#: home/templates/user_projects.html:193
+msgid "Welcome to your workspace!"
+msgstr "¡Bienvenido a tu espacio de trabajo!"
+
+#: home/templates/user_projects.html:208
+msgid "New Project"
+msgstr "Nuevo proyecto"
+
+#: home/templates/user_projects.html:216
+msgid "Upload a video and continue to edit it"
+msgstr "Sube un vídeo y continúa editándolo."
+
+#: home/templates/user_projects.html:226
+#: video_translation/templates/translation.html:852
+msgid "Use the voices from the video"
+msgstr "Usar las voces del video"
+
+#: home/templates/user_projects.html:227
+#: video_translation/templates/translation.html:853
+msgid "Switch on to use the voices from the video."
+msgstr "Activar para usar las voces del vídeo."
+
+#: home/templates/user_projects.html:228
+#: video_translation/templates/translation.html:854
+msgid "Switch off to select another voice."
+msgstr "Desactivar para seleccionar otra voz."
+
+#: home/templates/user_projects.html:238
+#: video_translation/templates/Input.html:137
+msgid "Drag & Drop to Upload File"
+msgstr "Arrastrar y soltar para subir archivo"
+
+#: home/templates/user_projects.html:243
+msgid "Choose video"
+msgstr "Elige el vídeo"
+
+#: home/templates/user_projects.html:252
+#: video_translation/templates/translation.html:146
+msgid "Project Name"
+msgstr "Nombre del proyecto"
+
+#: home/templates/user_projects.html:265
+msgid "Language of the video"
+msgstr "Idioma del vídeo"
+
+#: home/templates/user_projects.html:270
+#: video_translation/templates/translation.html:788
+msgid "Language for the translation"
+msgstr "Idioma para la traducción"
+
+#: home/templates/user_projects.html:305
+msgid "Voice gender"
+msgstr "Género de la voz"
+
+#: home/templates/user_projects.html:310
+msgid "Select the voice"
+msgstr "Seleccione la voz"
+
+#: home/templates/user_projects.html:319
+#: video_translation/templates/translation.html:886
+msgid "FEMALE"
+msgstr "FEMENINA"
+
+#: home/templates/user_projects.html:325
+#: video_translation/templates/translation.html:893
+msgid "MALE"
+msgstr "MASCULINA"
+
+#: home/templates/user_projects.html:331
+#: video_translation/templates/translation.html:879
+msgid "Custom voices"
+msgstr "Voces personalizadas"
+
+#: home/templates/user_projects.html:380
+msgid "Continue"
+msgstr "Continuar"
+
+#: home/templates/user_projects.html:383
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: home/templates/user_projects.html:424 home/templates/user_projects.html:492
+msgid "Confirm Delete"
+msgstr "Confirmar Eliminación"
+
+#: home/templates/user_projects.html:428
+msgid "Project : "
+msgstr "Proyecto : "
+
+#: home/templates/user_projects.html:429
+msgid "Are you sure you want to delete the project?"
+msgstr "¿Estás seguro de que deseas eliminar el proyecto?"
+
+#: home/templates/user_projects.html:433 home/templates/user_projects.html:500
+msgid "NO"
+msgstr "NO"
+
+#: home/templates/user_projects.html:434 home/templates/user_projects.html:501
+msgid "YES"
+msgstr "SI"
+
+#: home/templates/user_projects.html:452
+msgid "My voices"
+msgstr "Mis voces"
+
+#: home/templates/user_projects.html:453
+msgid "Create new voices"
+msgstr "Crea nuevas voces"
+
+#: home/templates/user_projects.html:468
+msgid "Name"
+msgstr "Nombre"
+
+#: home/templates/user_projects.html:496
+msgid "Voice : "
+msgstr "Voz : "
+
+#: home/templates/user_projects.html:497
+msgid "Are you sure you want to delete the voice?"
+msgstr "¿Está segura/o de que quiere eliminar la voz?"
+
+#: home/views.py:177
+msgid "File not valid error. Try again"
+msgstr "Archivo no válido. Intente de nuevo"
+
+#: home/views.py:191
+msgid "Project Name required"
+msgstr "Se requiere Nombre del Proyecto"
+
+#: video_translation/templates/Input.html:47
+#: video_translation/templates/translation.html:155
+msgid "My Projects"
+msgstr "Mis Proyectos"
+
+#: video_translation/templates/Input.html:132
+msgid ""
+"Upload an audio sample with a duration between 3 - 10 seconds. The speech "
+"must be clear and with no background noices."
+msgstr ""
+"Sube una muestra de audio con una duración de entre 3 y 10 segundos. La voz "
+"debe ser clara y sin ruidos de fondo."
+
+#: video_translation/templates/Input.html:139
+msgid "or"
+msgstr "o"
+
+#: video_translation/templates/Input.html:142
+msgid "Choose audio"
+msgstr "Elige el audio"
+
+#: video_translation/templates/Input.html:150
+msgid "Voice name:"
+msgstr "Nombre de la voz:"
+
+#: video_translation/templates/Input.html:172
+msgid "Save"
+msgstr "Guardar"
+
+#: video_translation/templates/translation.html:158
+msgid "Invite"
+msgstr "Invitar"
+
+#: video_translation/templates/translation.html:324
+msgid "not saved!"
+msgstr "¡no guardado!"
+
+#: video_translation/templates/translation.html:331
+msgid "Save Project"
+msgstr "Guardar proyecto"
+
+#: video_translation/templates/translation.html:337
+msgid "Export"
+msgstr "Exportar"
+
+#: video_translation/templates/translation.html:358
+msgid "Loading..."
+msgstr "Cargando..."
+
+#: video_translation/templates/translation.html:375
+msgid "Extracted Text"
+msgstr "Texto Extraído"
+
+#: video_translation/templates/translation.html:378
+msgid "Translated Text"
+msgstr "Texto Traducido"
+
+#: video_translation/templates/translation.html:384
+msgid "Select the language of the video to generate the text"
+msgstr "Selecciona el idioma del vídeo para generar el texto"
+
+#: video_translation/templates/translation.html:387
+msgid "Select a language to generate translation"
+msgstr "Seleccione un idioma para generar la traducción"
+
+#: video_translation/templates/translation.html:396
+msgid "Phrase"
+msgstr "Frase"
+
+#: video_translation/templates/translation.html:397
+#: video_translation/templates/translation.html:872
+msgid "Speaker"
+msgstr "Hablante"
+
+#: video_translation/templates/translation.html:410
+#: video_translation/templates/translation.html:456
+msgid "Edit text"
+msgstr "Editar texto"
+
+#: video_translation/templates/translation.html:421
+msgid "Edit the text of the phrase"
+msgstr "Editar el texto de la frase"
+
+#: video_translation/templates/translation.html:434
+#: video_translation/templates/translation.html:479
+#: video_translation/templates/translation.html:723
+msgid "Apply"
+msgstr "Aplicar"
+
+#: video_translation/templates/translation.html:436
+#: video_translation/templates/translation.html:481
+msgid "Restore"
+msgstr "Restaurar"
+
+#: video_translation/templates/translation.html:438
+#: video_translation/templates/translation.html:483
+#: video_translation/templates/translation.html:721
+#: video_translation/templates/translation.html:940
+msgid "Close"
+msgstr "Cerrar"
+
+#: video_translation/templates/translation.html:467
+msgid "Edit the translated text of the phrase"
+msgstr "Editar el texto traducido de la frase"
+
+#: video_translation/templates/translation.html:547
+#: video_translation/templates/translation.html:572
+#: video_translation/templates/translation.html:654
+msgid "start"
+msgstr "inicio"
+
+#: video_translation/templates/translation.html:557
+#: video_translation/templates/translation.html:582
+#: video_translation/templates/translation.html:665
+msgid "end"
+msgstr "final"
+
+#: video_translation/templates/translation.html:606
+msgid "Settings for the audio of each phrase"
+msgstr "Configuraciones para el audio de cada frase"
+
+#: video_translation/templates/translation.html:614
+#: video_translation/templates/translation.html:846
+msgid "Keep orginal audio when no one is speaking"
+msgstr "Mantener el audio original cuando nadie esté hablando."
+
+#: video_translation/templates/translation.html:615
+#: video_translation/templates/translation.html:847
+msgid ""
+"Switch on to use the sound in the original audio when no one is speaking."
+msgstr "Activar para usar el sonido del audio original cuando nadie esté hablando."
+
+#: video_translation/templates/translation.html:616
+#: video_translation/templates/translation.html:848
+msgid "Switch off to use silences when no one is speaking."
+msgstr "Desactivar para usar silencios cuando nadie esté hablando."
+
+#: video_translation/templates/translation.html:620
+msgid "Change settings parameters"
+msgstr "Cambiar parámetros de configuración"
+
+#: video_translation/templates/translation.html:621
+msgid "Switch on to adjust phrases's audio by speed."
+msgstr "Activar para ajustar el audio de las frases por velocidad."
+
+#: video_translation/templates/translation.html:622
+msgid "Switch off to adjust phrases's audio by times."
+msgstr "Desactivar para ajustar el audio de las frases por tiempos."
+
+#: video_translation/templates/translation.html:625
+msgid "Adjust time"
+msgstr "Ajustar el tiempo"
+
+#: video_translation/templates/translation.html:626
+msgid "Adjust the time for the audio of each phrase. They cannot overlap."
+msgstr "Ajuste el tiempo del audio de cada frase. No pueden superponerse."
+
+#: video_translation/templates/translation.html:628
+#: video_translation/templates/translation.html:686
+msgid "Adjust volume"
+msgstr "Ajustar el volumen"
+
+#: video_translation/templates/translation.html:629
+#: video_translation/templates/translation.html:687
+msgid ""
+"The volume of the audio goes up or down equal to the numeric value selected. "
+"On zero the volume is the original."
+msgstr ""
+"El volumen del audio sube o baja igual al valor numérico seleccionado. En "
+"cero el volumen es el original"
+
+#: video_translation/templates/translation.html:637
+msgid "Time"
+msgstr "Tiempo"
+
+#: video_translation/templates/translation.html:644
+msgid "Volume"
+msgstr "Volumen"
+
+#: video_translation/templates/translation.html:683
+msgid "Adjust speed"
+msgstr "Ajustar la velocidad"
+
+#: video_translation/templates/translation.html:684
+msgid ""
+"The audio is faster for values > 1.00 and slower for values < 1.00. On 1.00 "
+"the speed is the original."
+msgstr ""
+"El audio es más rápido para valores > 1.00 y más lento para valores < 1.00. "
+"En 1.00 la velocidad es la original."
+
+#: video_translation/templates/translation.html:695
+msgid "Adjust audio speed for the phrase"
+msgstr "Ajustar la velocidad del audio para la frase"
+
+#: video_translation/templates/translation.html:707
+msgid "Adjust volume for the phrase"
+msgstr "Ajustar el volumen de la frase"
+
+#: video_translation/templates/translation.html:728
+msgid "Apply and Generate"
+msgstr "Aplicar y Generar"
+
+#: video_translation/templates/translation.html:760
+#: video_translation/templates/translation.html:961
+msgid "Your browser does not support the video tag."
+msgstr "Su navegador no soporta la etiqueta de vídeo."
+
+#: video_translation/templates/translation.html:771
+msgid "Language of the source video"
+msgstr "Idioma del vídeo original"
+
+#: video_translation/templates/translation.html:780
+msgid "Generate text"
+msgstr "Generar texto"
+
+#: video_translation/templates/translation.html:797
+msgid "Translate text"
+msgstr "Traducir texto"
+
+#: video_translation/templates/translation.html:801
+msgid "There are changes in the extracted text that have not been translated"
+msgstr "Hay cambios en el texto extraído que no han sido traducidos."
+
+#: video_translation/templates/translation.html:813
+msgid ""
+"There are changes in the translated text that have not been applied to the "
+"video"
+msgstr "Hay cambios en el texto traducido que no se han aplicado al vídeo."
+
+#: video_translation/templates/translation.html:821
+#: video_translation/templates/translation.html:950
+msgid "Generate video"
+msgstr "Generar vídeo"
+
+#: video_translation/templates/translation.html:827
+msgid "Phrases Settings"
+msgstr "Configuración de Frases"
+
+#: video_translation/templates/translation.html:838
+msgid "Settings to generate video"
+msgstr "Configuraciones para generar el vídeo"
+
+#: video_translation/templates/translation.html:858
+msgid "Auto adjust speed"
+msgstr "Ajustar la velocidad automático"
+
+#: video_translation/templates/translation.html:859
+msgid ""
+"Switch on to adjust the speed of each phrase automatically to match the "
+"original video time stamps."
+msgstr ""
+"Activar para ajustar la velocidad de cada frase automáticamente para que "
+"coincida con las marcas de tiempo del video original."
+
+#: video_translation/templates/translation.html:860
+msgid ""
+"Switch off to adjust the speed using the time stamps on the translated "
+"phrases."
+msgstr ""
+"Desactivar para ajustar la velocidad usando las marcas de tiempo en las "
+"frases traducidas."
+
+#: video_translation/templates/translation.html:865
+msgid "Random voice selection"
+msgstr "Selección de voces aleatorias"
+
+#: video_translation/templates/translation.html:866
+msgid "Switch on to generate video with default/selected settings."
+msgstr ""
+"Activar para generar el video con la configuración predeterminada/"
+"seleccionada."
+
+#: video_translation/templates/translation.html:867
+msgid "Switch off to select voices for each speaker."
+msgstr "Desactivar para seleccionar voces para cada hablante."
+
+#: video_translation/templates/translation.html:941
+msgid "Generate"
+msgstr "Generar"
+
+#: video_translation/templates/translation.html:949
+msgid "generate text before"
+msgstr "genere el texto antes"
+
+#: video_translation/templates/translation.html:1132
+#: video_translation/templates/translation.html:1140
+msgid "Error"
+msgstr "Error"
+
+#: video_translation/templates/translation.html:1132
+#: video_translation/templates/translation.html:1140
+msgid "The phrase "
+msgstr "La frase "
+
+#: video_translation/templates/translation.html:1132
+msgid "is ending before it begins"
+msgstr "está terminando antes de comenzar"
+
+#: video_translation/templates/translation.html:1140
+msgid " must begin after the "
+msgstr " debe comenzar después de que la "
+
+#: video_translation/templates/translation.html:1140
+msgid "  phrase ends"
+msgstr " frase termine"
+
+#: video_translation/views.py:384
+msgid "Error while generating text from source video"
+msgstr "Error al generar texto a partir del vídeo original"
+
+#: video_translation/views.py:435
+msgid "Error while translating text"
+msgstr "Error al traducir texto"
+
+#: video_translation/views.py:464
+msgid "Error while editing source text"
+msgstr "Error al editar el texto fuente"
+
+#: video_translation/views.py:496
+msgid "Error while editing translated text"
+msgstr "Error al editar el texto traducido"
+
+#: video_translation/views.py:524
+msgid "Error while restoring source text"
+msgstr "Error al restaurar el texto original"
+
+#: video_translation/views.py:553
+msgid "Error while restoring translated text"
+msgstr "Error al restaurar el texto traducido"
+
+#: video_translation/views.py:580
+msgid "Error while applying phrases settings. Generate video first"
+msgstr "Error al aplicar la configuración de frases. Genere el video primero"
+
+#: video_translation/views.py:685
+msgid "Error while applying phrases settings"
+msgstr "Error al aplicar la configuración de frases"
+
+#: video_translation/views.py:714
+msgid "Error while applying speakers settings. Generate video first"
+msgstr ""
+"Error al aplicar las configuraciones por hablantes. Genere el video primero"
+
+#: video_translation/views.py:742
+msgid "Error while applying speakers settings"
+msgstr "Error al aplicar las configuraciones por hablantes"
+
+#: video_translation/views.py:805
+msgid "Error while downloading video"
+msgstr "Error al descargar vídeo"
+
+#: video_translation/views.py:823
+msgid "The user is free, can't save data"
+msgstr "El usuario gratis, no se pueden guardar datos."
+
+#: video_translation/views.py:861
+msgid "The user storage space has been used up"
+msgstr "El espacio de almacenamiento del usuario se ha agotado."
+
+#: video_translation/views.py:912
+msgid "Error while applying voices settings. No gender or voice selected"
+msgstr ""
+"Error al aplicar las configuraciones de voces. No se seleccionó el género de "
+"la voz o alguna voz"
+
+#: video_translation/views.py:943
+msgid "Error while generating translated video"
+msgstr "Error al generar el video traducido"
+
+#~ msgid "Free Upload Limit"
+#~ msgstr "Límite de subida gratuita"
+
+#~ msgid "You have used 0 of 60 mins"
+#~ msgstr "Has usado 0 de 60 minutos"
+
+#~ msgid "Error while applying voices settings. Generate video first"
+#~ msgstr ""
+#~ "Error al aplicar las configuraciones de voces. Genere el video primero"
+
+#~ msgid "Error while applying voices settings"
+#~ msgstr "Error al aplicar las configuraciones de voces"
+
+#~ msgid "New Folder"
+#~ msgstr "Nueva carpeta"
+
+#~ msgid "Apply changes"
+#~ msgstr "Aplicar cambios"
+
+#~ msgid "Settings by speakers"
+#~ msgstr "Configuraciones por hablantes"
+
+#~ msgid ""
+#~ "To configure the volume and speed for all the phrases of a speaker "
+#~ "simultaneously, modify the values in the next button, and apply changes."
+#~ msgstr ""
+#~ "Para configurar el volumen y la velocidad de todas las frases de un "
+#~ "hablante simultáneamente, modifica los valores en el siguiente botón y "
+#~ "aplica los cambios."
+
+#~ msgid "General Configurations"
+#~ msgstr "Configuraciones Generales"
+
+#~ msgid "Configurations by speakers"
+#~ msgstr "Configuraciones por hablantes"
+
+#~ msgid "Warning!!"
+#~ msgstr "¡¡Advertencia!!"
+
+#~ msgid ""
+#~ "If you set a configuration for a speaker here, and apply changes; the "
+#~ "configuration for all the phrases of said speaker will be overwritten."
+#~ msgstr ""
+#~ "Si establece una configuración para un hablante aquí y aplica los "
+#~ "cambios; se sobrescribirá la configuración de todas las frases de dicho "
+#~ "hablante."
+
+#~ msgid "Adjust audio volume for the speaker"
+#~ msgstr "Ajustar el volumen para el hablante"
+
+#~ msgid "Adjust audio speed for the speaker"
+#~ msgstr "Ajustar la velocidad del audio para el hablante"
+
+#~ msgid "Voices by speakers"
+#~ msgstr "Voces por hablante"
+
+#~ msgid ""
+#~ "To change the voice for each speaker, modify the values after clicking "
+#~ "the next button, and apply changes."
+#~ msgstr ""
+#~ "Para cambiar la voz de cada hablante, modifique los valores después de "
+#~ "hacer click en el botón siguiente y aplique los cambios."
+
+#~ msgid "Voices Configurations"
+#~ msgstr "Configuraciones de voces"
+
+#~ msgid "Translation"
+#~ msgstr "Traducción"
+
+#~ msgid "Language"
+#~ msgstr "Idioma"
+
+#~ msgid "Add an audio file"
+#~ msgstr "Añadir un archivo de audio"
+
+#~ msgid "Audio file"
+#~ msgstr "Archivo de audio"
+
+#~ msgid "Languages:"
+#~ msgstr "Idiomas:"
+
+#~ msgid "Create Clip"
+#~ msgstr "Crear clip"
+
+#~ msgid "Name the new project"
+#~ msgstr "Nombra el nuevo proyecto"
+
+#~ msgid "Continue with Google"
+#~ msgstr "Continuar con Google"

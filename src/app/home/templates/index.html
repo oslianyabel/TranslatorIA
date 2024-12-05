@@ -1,0 +1,82 @@
+{% extends "layouts/base.html" %}
+
+{% comment %} {% block title %} Dashboard {% endblock %}  {% endcomment %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %} {% endblock stylesheets %}
+
+{% block content %}
+  <body>  
+    <div class="row">
+      <div class="col-lg-2 col-md-4 col-sm-4">
+        <div class="card card-primary" >
+          <img class="card-img-top" src="/static/assets/img/upload-video-card.jpg"  >
+          <div class="card-body">
+            <h4 class="card-title">Upload your video for translation.</h4>            
+          </div>
+          <div class="card-footer">
+            <form method="post" enctype="multipart/form-data">
+              {% csrf_token %}
+              {{ form.as_p }}
+              <button type="submit" class="btn btn-primary">Upload</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-lg-2 col-md-4 col-sm-4">
+        <div class="card card-stats">
+          <img class="card-img-top" src="/static/assets/img/voice-clone-card.jpg"  >
+          <div class="card-body">
+            <h4 class="card-title">Create a new voice to use in your videos.</h4>  
+          </div>        
+          <div class="card-footer">
+            <a href="{% url 'voice-generation' %}" class="btn btn-primary">Voice Generation</a>
+          </div>
+        </div>
+      </div>
+      {% if request.user.is_authenticated %}
+      <div class="col-lg-2 col-md-4 col-sm-4">
+        <div class="card card-stats">
+          <img class="card-img-top" src="/static/assets/img/upload-video-card2.jpg"  >
+          <div class="card-body">
+            <h4 class="card-title">Change your user type (Testing only).</h4>  <!-- TODO remove-->
+          </div>        
+          <div class="card-footer">
+            
+            <form method="post">
+              {% csrf_token %}
+              {% if request.user.is_free %}
+              <p> You are a FREE user now. Click to change to paid user.</p>
+              {% else %}
+              <p> You are a PAID user now. Click to change to free user</p>
+              {% endif %}
+              <button name="switch-user-type" type="submit" class="btn btn-primary">Switch</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+
+    </div>
+
+    
+  </body>
+
+    
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+    $('.overlay').on('click', function(e) {
+      if (e.target !== this) {
+        return;
+      }
+      $('.overlay').hide();
+    });
+  </script>
+
+{% endblock javascripts %}

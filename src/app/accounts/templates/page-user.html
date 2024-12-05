@@ -1,0 +1,112 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Page User {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="row">
+  <div class="col-md-4">
+    <div class="card card-profile">
+      {% comment %} <div class="card-avatar">
+        <a href="#pablo">
+          <img class="img" src="/static/assets/img/faces/marc.jpg" />
+        </a>
+      </div> {% endcomment %}
+      <div class="card-body">
+        <h6 class="card-category text-gray">
+          {{ request.user.firstname }} {{ request.user.lastname }}
+        </h6>
+        <h4 class="card-title">
+          {{ request.user.email }}
+        </h4>
+        <p class="card-description">
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% if translations != 'None' %}
+<!-- translations view -->
+  <h3>Translations saved</h3>
+<div class="row mx-3 p-2">
+  {% for tr in translations %}
+    <div class="col-lg-3 col-md-4 col-sm-4"> 
+        <div class="card card-primary">
+            <div class="card-header card-header-primary">
+                <h3 class="card-title"> {{ tr.transl_name }} </h3>
+            </div> 
+        
+            <div class="card-body">
+
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">
+                    <p><b> Source Language: </b> {{ tr.translation_info.source_language_sel }} </p>
+                    </li>
+                  <li class="list-group-item">
+                    <p><b> Translated Language: </b> {{ tr.translation_info.translated_language_sel }} </p></li>
+                  {% comment %} {% url '<url path name>' <view_function_arguments> %} {% endcomment %}
+                  <li class="list-group-item"><a href="{% url 'translation' tr.pk %}" class="btn btn-primary"> 
+                    Go to translation </a></li>
+                  <li class="list-group-item"> <button name="delete_transl" class="btn btn-primary" type="button" rel="tooltip"{% comment %} class="btn btn-outline-dark btn-link btn-sm" data-toggle="modal" data-target="#{{editModal}}"{% endcomment %}> 
+                    Delete translation
+                  </button></li>
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+  {% endfor %}
+</div>
+{% endif %}
+
+{% if cloned_voices != 'None' %}
+<div class="row mx-3 p-2">
+  <div class="col-lg-5 col-md-5 col-sm-5"> 
+    <h3> Cloned voices </h3>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Language</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for voice_name, language in cloned_voices %}
+      <tr>
+        <td>{{ voice_name }}</td>
+        <td>{{ language }}</td>
+        <td>
+          <button name="delete_voice"  rel="tooltip" title="Delete voice" > 
+        <i class="material-icons" style="font-size: 30px;"> delete_outline </i>
+      </button>
+    </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% comment %} <div class="list-group">
+    <a href="#" class="list-group-item list-group-item-action active">
+      Cloned voices
+    </a>
+    {% for voice in cloned_voices %}
+    <a href="#" class="list-group-item list-group-item-action">
+      Name: {{ voice.voice_name }}. {{voice.language}} 
+      <button name="delete_voice" type="button" rel="tooltip" title="Delete voice" class="btn btn-outline-dark btn-link btn-sm" data-toggle="modal" data-target="#{{editModal}}"> 
+        <i class="material-icons" style="font-size: 30px;"> delete-outline </i>
+      </button>
+    </a>
+      
+    {% endfor %}
+  </div> {% endcomment %}
+  </div>
+</div>
+{% endif %}
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

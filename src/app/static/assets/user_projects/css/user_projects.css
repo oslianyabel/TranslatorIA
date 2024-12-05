@@ -1,0 +1,218 @@
+html,
+header,
+.view {
+  height: 100%;
+}
+
+.navbar{
+    background-color: #c00029!important;
+}  
+
+.avatar{
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid #ffff; 
+}
+
+body{
+    height: 13%;
+}
+
+.my_projects h2{
+    color: #ED0034;
+}
+
+#uploadProgress {
+    width: 100%;
+}
+#uploaded_files {
+    margin-top: 25px;
+    display: flex;
+}
+label {
+    font-weight: bold;
+}
+.file-icon i {
+    font-size: 60px;
+    color: rgb(0, 0, 0);
+}
+.file-details {
+    margin-top: -2px;
+    padding-left: 10px;
+    width: 100%;
+}
+.file-details p {
+    margin-bottom: -7px;
+}
+
+.dropzone{
+    width: 90%; 
+    height: 200px; 
+    border: 4px dashed gray;
+    color:gray;
+    text-align:center;
+ 
+}
+.dropzone.dragover{
+    border-color:#000;
+    color:#000;
+}
+
+
+/***************boton NEW FOLDER*****************/
+
+.btn_newFolder{
+    margin-top: 0px;
+    width: 100%;
+    height: 45px;
+    border-radius: 40px;
+    background-color: #d3002d;
+    color: #fff;
+    cursor: pointer;
+    transition: .3s; 
+    margin-top: 25px;
+}
+
+
+#new_folder:hover{
+    color: #d3002d; 
+    background-color:#000;   
+}
+
+#new_folder:active{
+    transform: scale(0.9);
+}
+
+.icon_new_folder{
+   font-size: 20px;
+}
+
+/***************boton NEW FOLDER*****************/
+
+/***************menu upload_limit*****************/
+.card_upload_limit{
+    
+    border-radius: 20px; 
+    height: 95%;
+    border: 3px solid #d3002d; 
+    margin: 3px 0;
+}
+
+.percent{
+    margin: 15px 0;
+    cursor: pointer;
+    width: 55px;
+      
+}
+
+
+.btn_Upgrade{
+    /* margin-top: 0px; */
+    /* width: 100%; */
+    /* height: 45px; */
+    border-radius: 40px;
+    background-color: #fff;
+    color: #d3002d;
+    cursor: pointer;
+    transition: .3s; 
+}
+
+#Upgrade:hover{
+    color: #d3002d; 
+    background-color:#000;  
+}
+
+#Upgrade:active{
+    transform: scale(0.9);
+}
+
+/***************menu upload_limit*****************/
+
+/***************ADD A PROJEcT*****************/
+.add_projects{    
+    border-radius: 20px; 
+    height: 150px;
+    width: 220px;
+    border: 3px solid #d3002d; 
+    margin: 10px 0;
+    background: #000;
+    color: #d3002d;
+}
+
+.add_projects:hover{
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .3);
+}
+.projectsGrid{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 250px);
+}
+
+/*
+#addP_2 p{
+    text-align: left !important;
+    padding: 15px;
+    margin: 0;
+}
+*/
+
+#text_video{
+    text-align: left !important;
+    padding: 0 10px;
+    margin: 0;
+    font-size: 10px;
+}
+
+#h6_add{    
+    padding: 0px;
+    margin: 0;
+}
+
+
+/*************** voice button *****************/
+
+
+.btn_header{
+    color: #fff;
+    padding: 10px 27px;
+    margin: 2px;
+}
+
+.btn_header:hover{
+    background: rgb(255,255,255, 0.2);
+    border-radius: 40px;
+    color: #fff;
+    padding: 10px 27px;
+    cursor: pointer;
+    transition: .3s; 
+    text-decoration: none;
+}
+
+.btn_header:active{transform: scale(0.9);}
+/*************** base button *****************/
+.btn_base{
+    margin: 2px;
+    padding: 10px 27px;
+    background-color: #fff;
+    color: #000;
+    cursor: pointer;
+    transition: .3s; 
+} 
+.btn_base:hover{
+    color: #000; 
+    background-color:#d3002d;  
+}
+.btn_base:active{
+    transform: scale(0.9);
+}
+
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+    background-color: #d3002d !important;
+}
+
+
+
+
+
+
+/***************ADD A PROJEcT*****************/

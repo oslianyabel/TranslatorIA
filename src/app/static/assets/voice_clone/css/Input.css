@@ -1,0 +1,132 @@
+html,
+header,
+.view {
+  height: 100%;
+}
+
+.navbar{
+    background-color: #c00029!important;
+}  
+
+.avatar{
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid #ffff; 
+}
+
+body{
+    height: 13%;
+}
+
+.save{
+    background: #d3002d;
+    border-radius: 40px;
+    width: 150px;
+    height: 45px;
+}
+
+.save:hover{
+    background: #000;
+    color: #fff;
+    border-radius: 40px;
+    width: 150px;
+    height: 45px;
+}
+
+.add_audio{
+    width: 45%;
+}
+
+/***************ADD A PROJEcT*****************/
+.add_projects{    
+    border-radius: 20px; 
+    height: 180px;
+    border: 3px dashed #d3002d; 
+    margin: 10px 0 25px 0;
+    background: #000;
+    color: #d3002d;
+}
+
+.add_projects:hover{
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .3);
+}
+
+
+#h6_add{    
+    padding: 0px;
+    margin: 0;
+}
+/***************ADD A PROJEcT*****************/
+
+
+
+@media (min-width: 1101px)and (max-width: 1490px)  {
+   .add_audio{width: 70%;}
+}
+
+@media (max-width: 1100px) {
+  .add_audio{width: 100%;}
+}
+
+
+
+
+
+.btn_header{
+    /* color:#000; */
+    color: #fff;
+    padding: 10px 27px;
+    margin: 2px;
+}
+
+.btn_header:hover{
+    /* background: rgb(192,0,41, 0.1); */
+    background: rgb(255,255,255, 0.2);
+    border-radius: 40px;
+    /* color: #000; */
+    color: #fff;
+    padding: 10px 27px;
+    cursor: pointer;
+    transition: .3s; 
+    text-decoration: none;
+}
+
+.btn_header:active{transform: scale(0.9);}
+
+
+#uploadProgress {
+    width: 100%;
+}
+#uploaded_files {
+    margin-top: 25px;
+    display: flex;
+}
+label {
+    font-weight: bold;
+}
+.file-icon i {
+    font-size: 60px;
+    color: rgb(0, 0, 0);
+}
+.file-details {
+    margin-top: -2px;
+    padding-left: 10px;
+    width: 100%;
+}
+.file-details p {
+    margin-bottom: -7px;
+}
+
+.dropzone{
+    width: 90%; 
+    height: 200px; 
+    border: 4px dashed gray;
+    color:gray;
+    text-align:center;
+ 
+}
+.dropzone.dragover{
+    border-color:#000;
+    color:#000;
+}
